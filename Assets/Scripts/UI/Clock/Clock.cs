@@ -1,11 +1,13 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour
 {
-    private const float realSecondsPerIngameDay = 600f;         //Allow to change the real seconds (in real life) as in game day time
+    private const float realSecondsPerIngameDay = 60f;        //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
@@ -34,5 +36,15 @@ public class Clock : MonoBehaviour
         string minutesString = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHour).ToString("00");
 
         timeText.text = hoursString + ":" + minutesString;
+
+        TimerIsOver();
+    }
+
+    private void TimerIsOver()
+    {
+        if (day >= 1f)
+        {
+            SceneManager.LoadScene("LukaTestScene");
+        }
     }
 }
