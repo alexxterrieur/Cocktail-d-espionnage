@@ -59,7 +59,7 @@ public class S_Cinematic : MonoBehaviour
         }
     }
 
-    //Use this outside the class to start the coroutine
+    //Use this to start the coroutine
     public void StartTimerTransition()
     {
         if (transitionCoroutine == null)
@@ -67,7 +67,8 @@ public class S_Cinematic : MonoBehaviour
             currentImage = images[0];
             UpdateImage(currentImage);
             imageObject.SetActive(true);
-            transitionCoroutine = StartCoroutine(ImageTimerTransition());
+
+            transitionCoroutine = StartCoroutine(ImageTimerTransition()); //Set the coroutine variable
         }
         else
         {
@@ -79,7 +80,7 @@ public class S_Cinematic : MonoBehaviour
     {
         int frameIndex = 0;
 
-        while (frameIndex < images.Count) //No idea why the coroutine never end even if frameIndex get higher
+        while (frameIndex < images.Count)
         {
             frameTimer += Time.deltaTime;
 
@@ -88,13 +89,7 @@ public class S_Cinematic : MonoBehaviour
                 frameIndex++;
                 frameTimer = 0;
 
-                if (frameIndex >= images.Count) //Because the coroutine never ended I checked again here the frameIndex
-                {
-                    imageObject.SetActive(false);
-                    transitionCoroutine = null; //We reset the coroutine because it stopped running at this point
-                    yield break;
-                }
-                else
+                if (frameIndex < images.Count)
                 {
                     currentImage = images[frameIndex];
                     UpdateImage(currentImage);
@@ -102,6 +97,7 @@ public class S_Cinematic : MonoBehaviour
             }
             yield return null;
         }
-        transitionCoroutine = null;
+        imageObject.SetActive(false);
+        transitionCoroutine = null; //Set the coroutine variable to null because it's not running anymore
     }
 }
