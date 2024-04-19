@@ -4,7 +4,7 @@ public class S_Interactable : MonoBehaviour
 {
     [SerializeField] private S_InteractableData interactableData;
 
-    public void Interact()
+    public void Interact(JournalManager journalManager)
     {
         foreach (string description in interactableData.interactableDescription)
         {
@@ -19,6 +19,19 @@ public class S_Interactable : MonoBehaviour
             }
 
             Debug.Log("Vous récupérez : " + interactableData.item.itemName);
+
+            journalManager.AddItem(interactableData.item);
+
+            interactableData.hasItem = false;
         }
+        else
+        {
+            Debug.Log("Vous ne trouvez rien.");
+        }
+    }
+
+    public S_InteractableData GetInteractableData()
+    {
+        return interactableData;
     }
 }

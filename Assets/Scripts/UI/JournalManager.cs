@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,16 @@ public class JournalManager : MonoBehaviour
     [SerializeField] GameObject cluesPanel;
     [SerializeField] GameObject objectsPanel;
     [SerializeField] GameObject historyPanel;
-    [SerializeField] Image[] cluesIcones;
-    [SerializeField] Sprite[] cluesSprites;
+    [SerializeField] Image[] itemIcones;
+
+    //private List<S_ItemData> items;
+    private S_ItemData[] items;
+    private int itemIndex = 0;
+
+    private void Start()
+    {
+        items = new S_ItemData[itemIcones.Length];
+    }
 
     public void OpenJournal()
     {
@@ -48,18 +57,19 @@ public class JournalManager : MonoBehaviour
     }
 
     //Update icones sprite in objectPanel
-    public void UpdateCluesIcones(int cluesIndex)
+    public void UpdateItemsIcones(int cluesIndex)
     {
-        //call the function when a new clue is find
-        cluesIcones[cluesIndex].sprite = cluesSprites[cluesIndex];
+        //call the function when a new item is find
+        itemIcones[cluesIndex].sprite = items[cluesIndex].itemSprite;
     }
 
-    public void Update()
+    public void AddItem(S_ItemData item)
     {
-        //test
-        if(Input.GetKeyDown(KeyCode.A)) { UpdateCluesIcones(0); print("A"); }
-        if(Input.GetKeyDown(KeyCode.Z)) { UpdateCluesIcones(1); print("Z"); }
-        if(Input.GetKeyDown(KeyCode.E)) { UpdateCluesIcones(2); print("E"); }
-        if(Input.GetKeyDown(KeyCode.R)) { UpdateCluesIcones(3); print("R"); }
+        if (itemIndex < itemIcones.Length)
+        {
+            items[itemIndex] = item;
+            UpdateItemsIcones(itemIndex);
+            itemIndex++;
+        }
     }
 }

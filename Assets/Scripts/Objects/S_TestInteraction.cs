@@ -5,6 +5,8 @@ using UnityEngine;
 public class S_TestInteraction : MonoBehaviour
 {
     public LayerMask layer; //interactable layer
+
+    [SerializeField] private JournalManager journalManager;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -15,7 +17,7 @@ public class S_TestInteraction : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent(out S_Interactable interactable))
                 {
-                    interactable.Interact();
+                    interactable.Interact(journalManager);
                 }
             }
         }
