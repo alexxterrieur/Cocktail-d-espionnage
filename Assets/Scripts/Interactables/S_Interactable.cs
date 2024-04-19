@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class S_Interactable : MonoBehaviour
 {
@@ -8,17 +9,42 @@ public class S_Interactable : MonoBehaviour
 
     private void Start()
     {
-        //if (PlayerPrefs.HasKey(gameObject.name))
-        //{
-        //    PlayerPrefs.DeleteKey(gameObject.name);
-        //}
-        //else
-        //{
-        //    PlayerPrefs.
-        //}
+        hasItem = BoolInitialization(hasItem, nameof(hasItem));
+        hasClue = BoolInitialization(hasClue, nameof(hasClue));
     }
 
-    public void Interact(JournalManager journalManager)
+    private void OnDisable()
+    {
+        if (Application.isEditor) //Only when playing on the editor we delete the playerpref data for the booleans
+        {
+            DeleteSaveData();
+        }
+    }
+
+    //Check if the boolean is already saved in the Playerpref, so we can keep data between scenes
+    private bool BoolInitialization(bool value, string valueName)
+    {
+        string key = gameObject.name + valueName;
+
+        if (PlayerPrefs.HasKey(key))
+        {
+            Debug.Log("haskey");
+            value = PlayerPrefs.GetInt(key) == 1;
+        }
+        
+        return value;
+    }
+
+    //Save the boolean into the PlayerPrefs
+    private void BoolUpdate(bool value, string valueName /* put the name of the variable here */)
+    {
+        string key = gameObject.name + valueName;
+
+        PlayerPrefs.SetInt(key, value ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public virtual void Interact(JournalManager journalManager)
     {
         foreach (string description in interactableData.interactableDescription)
         {
@@ -58,9 +84,11 @@ public class S_Interactable : MonoBehaviour
             Debug.Log(description);
         }
 
+        Debug.Log("Vous avez ramassé : " + item.itemName);
         journalManager.AddItem(item);
 
         hasItem = false;
+        BoolUpdate(hasItem, nameof(hasItem));
     }
 
     public void FoundClue(JournalManager journalManager, S_ClueData clue)
@@ -73,13 +101,17 @@ public class S_Interactable : MonoBehaviour
         journalManager.AddClue(clue);
 
         hasClue = false;
+        BoolUpdate(hasClue, nameof(hasClue));
     }
 
-    private int ToBool(bool value)
+    public void DeleteSaveData() //We should call this everytime we want to delete the data : when returning on the main menu and exiting the game.
     {
-        if (value)
-            return 1;
-        else
-            return 0;
+        PlayerPrefs.DeleteKey(gameObject.name + nameof(hasItem));
+        PlayerPrefs.DeleteKey(gameObject.name + nameof(hasClue));
+    }
+
+    private void OnApplicationQuit()
+    {
+        DeleteSaveData();
     }
 }
