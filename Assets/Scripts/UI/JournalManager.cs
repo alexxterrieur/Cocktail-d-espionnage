@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +9,24 @@ public class JournalManager : MonoBehaviour
     [SerializeField] GameObject historyPanel;
     [SerializeField] Image[] itemIcones;
 
+    private Sprite lockedIcon;
+
     //private List<S_ItemData> items;
     private S_ItemData[] items;
     private int itemIndex = 0;
 
     private void Start()
     {
+        lockedIcon = itemIcones[0].GetComponent<Image>().sprite; //keep in memory the locked sprite
         items = new S_ItemData[itemIcones.Length];
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            RemoveItem(items[0]);
+        }
     }
 
     public void OpenJournal()
@@ -63,6 +71,7 @@ public class JournalManager : MonoBehaviour
         itemIcones[cluesIndex].sprite = items[cluesIndex].itemSprite;
     }
 
+    //Add item to inventory
     public void AddItem(S_ItemData item)
     {
         if (itemIndex < itemIcones.Length)
@@ -70,6 +79,19 @@ public class JournalManager : MonoBehaviour
             items[itemIndex] = item;
             UpdateItemsIcones(itemIndex);
             itemIndex++;
+        }
+    }
+
+    //Remove item from inventory
+    public void RemoveItem(S_ItemData item)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == item)
+            {
+                items[i] = null;
+                itemIcones[i].sprite = lockedIcon;
+            }
         }
     }
 }

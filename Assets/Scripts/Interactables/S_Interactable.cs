@@ -3,6 +3,19 @@ using UnityEngine;
 public class S_Interactable : MonoBehaviour
 {
     [SerializeField] private S_InteractableData interactableData;
+    public bool hasItem;
+
+    private void Start()
+    {
+        //if (PlayerPrefs.HasKey(gameObject.name))
+        //{
+        //    PlayerPrefs.DeleteKey(gameObject.name);
+        //}
+        //else
+        //{
+        //    PlayerPrefs.
+        //}
+    }
 
     public void Interact(JournalManager journalManager)
     {
@@ -11,7 +24,7 @@ public class S_Interactable : MonoBehaviour
             Debug.Log(description);
         }
 
-        if (interactableData.hasItem)
+        if (hasItem)
         {
             foreach (string description in interactableData.itemFoundDescription)
             {
@@ -22,7 +35,7 @@ public class S_Interactable : MonoBehaviour
 
             journalManager.AddItem(interactableData.item);
 
-            interactableData.hasItem = false;
+            hasItem = false;
         }
         else
         {
@@ -33,5 +46,13 @@ public class S_Interactable : MonoBehaviour
     public S_InteractableData GetInteractableData()
     {
         return interactableData;
+    }
+
+    private int ToBool(bool value)
+    {
+        if (value)
+            return 1;
+        else
+            return 0;
     }
 }

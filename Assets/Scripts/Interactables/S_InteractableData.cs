@@ -10,7 +10,6 @@ public class S_InteractableData : ScriptableObject
     [field: TextArea]
     public string[] interactableDescription;
 
-    public bool hasItem; 
     public S_ItemData item;
 
     [field: TextArea]

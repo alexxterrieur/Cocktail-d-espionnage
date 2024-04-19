@@ -3442,7 +3442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1419577326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3802,6 +3802,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 512
+  journalManager: {fileID: 1458180566}
 --- !u!114 &1454922100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4029,17 +4030,12 @@ MonoBehaviour:
   cluesPanel: {fileID: 990399853}
   objectsPanel: {fileID: 1092271133}
   historyPanel: {fileID: 214834536}
-  cluesIcones:
+  itemIcones:
   - {fileID: 605610784}
   - {fileID: 2145344176}
   - {fileID: 1972830662}
   - {fileID: 1616450785}
   - {fileID: 638562930}
-  cluesSprites:
-  - {fileID: 21300000, guid: 80882e14e918f1a49a47c5df2a284758, type: 3}
-  - {fileID: 21300000, guid: e1e70ade13e9c52438d663892a92aef7, type: 3}
-  - {fileID: 21300000, guid: ddea3b2b6721545459266397ed696a26, type: 3}
-  - {fileID: 21300000, guid: 168ec0cddb5ff6b489d1a74a58200db9, type: 3}
 --- !u!114 &1458180567
 MonoBehaviour:
   m_ObjectHideFlags: 0
