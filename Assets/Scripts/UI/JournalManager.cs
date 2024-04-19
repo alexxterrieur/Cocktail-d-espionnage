@@ -38,7 +38,7 @@ public class JournalManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.C)) //Test the item removing
+        if (Input.GetKeyUp(KeyCode.C)) //TODO: remove this when you don't need to test the removal of an item
         {
             RemoveItem(items[0]);
         }
@@ -103,8 +103,8 @@ public class JournalManager : MonoBehaviour
         }
     }
 
-    //Remove item from inventory
-    public void RemoveItem(S_ItemData item)
+    //Remove item from inventory, maybe we don't need it
+    public void RemoveItem(S_ItemData item) //or use index ?
     {
         for (int i = 0; i < items.Length; i++)
         {
@@ -112,6 +112,7 @@ public class JournalManager : MonoBehaviour
             {
                 items[i] = null;
                 itemIcones[i].sprite = lockedIcon;
+                break;
             }
         }
     }
