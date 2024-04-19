@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour
 {
-    private const float realSecondsPerIngameDay = 60f;        //Allow to change the real seconds (in real life) as in game day time
+    private const float realSecondsPerIngameDay = 600f;        //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
