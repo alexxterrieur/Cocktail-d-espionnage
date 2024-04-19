@@ -13,16 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float castDistance;
     [SerializeField] private LayerMask obstacleLayer;
 
-    void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         if (!IsObstacle())
