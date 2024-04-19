@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour
 {
+    public bool onPause = false;
+
     private const float realSecondsPerIngameDay = 600f;        //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
@@ -22,22 +24,25 @@ public class Clock : MonoBehaviour
 
     private void Update()
     {
-        day += Time.deltaTime / realSecondsPerIngameDay;
+        if (!onPause)
+        {
+            day += Time.deltaTime / realSecondsPerIngameDay;
 
-        float dayNormalized = day % 1f;
-        float rotationDegreesPerDay = 360f;
-        clockHourHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * 2);
+            float dayNormalized = day % 1f;
+            float rotationDegreesPerDay = 360f;
+            clockHourHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * 2);
 
-        float hoursPerDay = 24f;
-        clockMinuteHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * hoursPerDay);
+            float hoursPerDay = 24f;
+            clockMinuteHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * hoursPerDay);
 
-        string hoursString = Mathf.Floor(dayNormalized * hoursPerDay).ToString("00");
-        float minutesPerHour = 60f;
-        string minutesString = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHour).ToString("00");
+            string hoursString = Mathf.Floor(dayNormalized * hoursPerDay).ToString("00");
+            float minutesPerHour = 60f;
+            string minutesString = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHour).ToString("00");
 
-        timeText.text = hoursString + ":" + minutesString;
+            timeText.text = hoursString + ":" + minutesString;
 
-        TimerIsOver();
+            TimerIsOver();
+        }
     }
 
     private void TimerIsOver()
@@ -46,5 +51,10 @@ public class Clock : MonoBehaviour
         {
             SceneManager.LoadScene("LukaTestScene");
         }
+    }
+
+    public void SetPause(bool pause)
+    {
+        onPause = pause;
     }
 }
