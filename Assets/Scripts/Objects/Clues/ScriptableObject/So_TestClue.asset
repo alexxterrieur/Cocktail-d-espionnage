@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12fb2a27671fbd44babe5eaf075f1ccf, type: 3}
-  m_Name: So_ChewingGum
+  m_Script: {fileID: 11500000, guid: eac13f48c109342458c713f69062f34d, type: 3}
+  m_Name: So_TestClue
   m_EditorClassIdentifier: 
-  itemName: Chewing-gum
-  itemSprite: {fileID: 21300000, guid: 42ab8294334c4ec4b9a05e1349cd5979, type: 3}
-  itemDescription: "C'est un chewing-gum \xE0 la fraise d\xE9j\xE0 m\xE2ch\xE9."
+  clueFinding:
+  - Vous trouvez un code !
+  - 911 422 42 34 69
+  clueDescription: "- C'est un code, mais vous ne savez pas \xE0 quoi il sert : 911
+    422 42 34 69"

@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class JournalManager : MonoBehaviour
 {
@@ -8,6 +10,9 @@ public class JournalManager : MonoBehaviour
     [SerializeField] GameObject objectsPanel;
     [SerializeField] GameObject historyPanel;
     [SerializeField] Image[] itemIcones;
+    [SerializeField] TextMeshProUGUI descriptionTMP;
+
+    public int clueNb = 10;
 
     private Sprite lockedIcon;
 
@@ -15,15 +20,25 @@ public class JournalManager : MonoBehaviour
     private S_ItemData[] items;
     private int itemIndex = 0;
 
+    private S_ClueData[] clues;
+    private int clueIndex = 0;
+
+    private string description;
+
     private void Start()
     {
         lockedIcon = itemIcones[0].GetComponent<Image>().sprite; //keep in memory the locked sprite
+
         items = new S_ItemData[itemIcones.Length];
+        clues = new S_ClueData[clueNb];
+
+        descriptionTMP.SetText("Vous n'avez pas encore trouvé d'indice.");
+        description = "";
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C)) //Test the item removing
         {
             RemoveItem(items[0]);
         }
@@ -71,6 +86,12 @@ public class JournalManager : MonoBehaviour
         itemIcones[cluesIndex].sprite = items[cluesIndex].itemSprite;
     }
 
+    public void UpdateClues(string clueDescription)
+    {
+        description = description + clueDescription + "\r\n";
+        descriptionTMP.text = description;
+    }
+
     //Add item to inventory
     public void AddItem(S_ItemData item)
     {
@@ -94,4 +115,17 @@ public class JournalManager : MonoBehaviour
             }
         }
     }
+
+    //Add the clue as a text in the description
+    public void AddClue(S_ClueData clue)
+    {
+        if (clueIndex < clueNb)
+        {
+            clues[clueIndex] = clue;
+            UpdateClues(clue.clueDescription);
+            clueIndex++;
+        }
+    }
+
+    //No clue removal needed ?
 }

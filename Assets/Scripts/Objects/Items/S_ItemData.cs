@@ -7,5 +7,8 @@ public class S_ItemData : ScriptableObject
     public Sprite itemSprite;
 
     [field: TextArea]
+    public string[] itemFinding;
+
+    [field: TextArea]
     public string itemDescription;
 }
