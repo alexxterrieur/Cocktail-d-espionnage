@@ -11,11 +11,18 @@ public class JournalManager : MonoBehaviour
     [SerializeField] GameObject historyPanel;
     [SerializeField] Image[] cluesIcones;
     [SerializeField] Sprite[] cluesSprites;
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
 
     public void OpenJournal()
     {
         openButton.gameObject.SetActive(false);
         cluesPanel.SetActive(true);
+        player.GetComponent<PlayerMovement>().enabled = false;
     }
 
     public void CloseJournal()
@@ -24,6 +31,7 @@ public class JournalManager : MonoBehaviour
         objectsPanel.SetActive(false);
         historyPanel.SetActive(false);
         openButton.gameObject.SetActive(true);
+        player.GetComponent<PlayerMovement>().enabled = true;
     }
 
     public void OpenCluesPanel()
