@@ -46,17 +46,28 @@ public class Clock : MonoBehaviour
 
             timeText.text = minutesString + ":" + secondsString;
 
-            /*TimerIsOver();*/
+            TimerIsOver();
         }
     }
 
-/*    private void TimerIsOver()
+    private void TimerIsOver()
     {
         if (remainingSeconds <= 0f)
         {
-            SceneManager.LoadScene("LukaTestScene");
+            if(scene.name == "Office")
+            {
+                Debug.Log("GameOverOffice");
+            }
+            else if (scene.name == "BossHouse")
+            {
+                Debug.Log("GameOverBossHouse");
+            }
+            else if (scene.name == "SecretBase")
+            {
+                Debug.Log("GameOverSecretBase");
+            }
         }
-    }*/
+    }
 
     public void SetPause(bool pause)
     {
