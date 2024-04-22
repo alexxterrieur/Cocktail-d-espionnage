@@ -9,15 +9,17 @@ public class Clock : MonoBehaviour
 {
     public bool onPause = false;
 
+    private Scene scene;
     private const float realSecondsPerIngameDay = 86400f;       //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
-    private float day = 0f;                                 //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
-    private float remainingSeconds = 600f;
+    private float day = 0f;                                     //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
+    public float remainingSeconds;
 
     private void Awake()
     {
+        scene = SceneManager.GetActiveScene();
         clockHourHandTransform = transform.Find("HourHand");
         clockMinuteHandTransform = transform.Find("MinuteHand");
         timeText = transform.Find("TimeText").GetComponent<TextMeshProUGUI>();
@@ -25,7 +27,7 @@ public class Clock : MonoBehaviour
 
     private void Update()
     {
-        if (!onPause)
+        if (!onPause || scene.name == "PlayerHouse")
         {
             day += Time.deltaTime / realSecondsPerIngameDay;
             remainingSeconds -= Time.deltaTime;
@@ -44,17 +46,17 @@ public class Clock : MonoBehaviour
 
             timeText.text = minutesString + ":" + secondsString;
 
-            TimerIsOver();
+            /*TimerIsOver();*/
         }
     }
 
-    private void TimerIsOver()
+/*    private void TimerIsOver()
     {
         if (remainingSeconds <= 0f)
         {
             SceneManager.LoadScene("LukaTestScene");
         }
-    }
+    }*/
 
     public void SetPause(bool pause)
     {
