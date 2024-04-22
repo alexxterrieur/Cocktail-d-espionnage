@@ -325,6 +325,7 @@ MonoBehaviour:
   interactableStruct:
     HasItem: 1
     HasClue: 1
+    HasProof: 0
 --- !u!212 &108634164
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1466,7 +1467,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Histoire Acquise
+  m_text: Preuves Acquises
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2238,7 +2239,8 @@ MonoBehaviour:
   interactableData: {fileID: 11400000, guid: addb8a66b79abd642b6bdefba1b8b534, type: 2}
   interactableStruct:
     HasItem: 0
-    HasClue: 1
+    HasClue: 0
+    HasProof: 1
 --- !u!212 &857399813
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2702,7 +2704,7 @@ GameObject:
   - component: {fileID: 1043757212}
   - component: {fileID: 1043757211}
   m_Layer: 5
-  m_Name: HistoireAcquiseButton
+  m_Name: PreuvesAcquiseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3181,7 +3183,7 @@ GameObject:
   - component: {fileID: 1329621335}
   - component: {fileID: 1329621334}
   m_Layer: 5
-  m_Name: HistoireAcquiseButton
+  m_Name: PreuvesAcquiseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4176,7 +4178,8 @@ MonoBehaviour:
   - {fileID: 1972830662}
   - {fileID: 1616450785}
   - {fileID: 638562930}
-  descriptionTMP: {fileID: 876939110}
+  clueDescriptionTMP: {fileID: 876939110}
+  proofDescriptionTMP: {fileID: 1809001986}
   clueNb: 10
 --- !u!114 &1458180567
 MonoBehaviour:
@@ -4400,7 +4403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Histoire Acquise
+  m_text: Preuves Acquises
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4932,8 +4935,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4988,7 +4991,7 @@ GameObject:
   - component: {fileID: 1841102818}
   - component: {fileID: 1841102817}
   m_Layer: 5
-  m_Name: HistoireAcquiseButton
+  m_Name: PreuvesAcquisesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5165,7 +5168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Histoire Acquise
+  m_text: Preuves Acquises
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,8 @@ public class JournalManager : MonoBehaviour
     [SerializeField] GameObject objectsPanel;
     [SerializeField] GameObject historyPanel;
     [SerializeField] Image[] itemIcones;
-    [SerializeField] TextMeshProUGUI descriptionTMP;
+    [SerializeField] TextMeshProUGUI clueDescriptionTMP;
+    [SerializeField] TextMeshProUGUI proofDescriptionTMP;
 
     public int clueNb = 10;
 
@@ -23,9 +25,11 @@ public class JournalManager : MonoBehaviour
 
         journal.Items = new S_ItemData[itemIcones.Length];
         journal.Clues = new S_ClueData[clueNb];
+        journal.Proofs = new S_ClueData[clueNb];
         journal.ItemIndex = 0;
         journal.ClueIndex = 0;
-        journal.Description = "";
+        journal.ClueDescription = string.Empty;
+        journal.ProofDescription = string.Empty;
 
         journal = S_SaveDataExternal.LoadJournalData(journal);
 
@@ -84,13 +88,13 @@ public class JournalManager : MonoBehaviour
             }
         }
 
-        descriptionTMP.text = journal.Description;
+        clueDescriptionTMP.text = journal.ClueDescription;
+        proofDescriptionTMP.text = journal.ProofDescription;
     }
 
-    public void UpdateClues(string clueDescription)
+    public void UpdateClues(TextMeshProUGUI tmp, string description)
     {
-        journal.Description = journal.Description + clueDescription + "\r\n";
-        descriptionTMP.text = journal.Description;
+        tmp.text = description;
     }
 
     //Add item to inventory
@@ -128,7 +132,9 @@ public class JournalManager : MonoBehaviour
         if (journal.ClueIndex < clueNb)
         {
             journal.Clues[journal.ClueIndex] = clue;
-            UpdateClues(clue.clueDescription);
+            journal.ClueDescription = journal.ClueDescription + clue.clueDescription + "\r\n";
+
+            UpdateClues(clueDescriptionTMP, journal.ClueDescription);
             journal.ClueIndex++;
 
             S_SaveDataExternal.SaveJournalData(journal);
@@ -136,4 +142,18 @@ public class JournalManager : MonoBehaviour
     }
 
     //No clue removal needed ?
+
+    public void AddProof(S_ClueData proof)
+    {
+        if (journal.ClueIndex < clueNb)
+        {
+            journal.Proofs[journal.ProofIndex] = proof;
+            journal.ProofDescription = journal.ProofDescription + proof.clueDescription + "\r\n";
+
+            UpdateClues(proofDescriptionTMP, journal.ProofDescription);
+            journal.ProofIndex++;
+
+            S_SaveDataExternal.SaveJournalData(journal);
+        }
+    }
 }

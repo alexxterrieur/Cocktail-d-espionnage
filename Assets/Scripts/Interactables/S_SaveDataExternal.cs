@@ -10,6 +10,7 @@ public static class S_SaveDataExternal
     {
         public bool HasItem;
         public bool HasClue;
+        public bool HasProof;
     }
 
     public struct Journal
@@ -20,10 +21,14 @@ public static class S_SaveDataExternal
         public S_ClueData[] Clues;
         public int ClueIndex;
 
-        public string Description;
+        public S_ClueData[] Proofs;
+        public int ProofIndex;
+
+        public string ClueDescription;
+        public string ProofDescription;
     }
 
-    public static Dictionary<string, Interactable> InteractableMap = new Dictionary<string, Interactable>();
+    public static Dictionary<string, Interactable> InteractableMap = new Dictionary<string, Interactable>(); //Store the state of every interactable in the game
 
     public static Journal JournalData;
     public static bool IsJournalDataInit = false;
