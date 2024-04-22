@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Anais.unity
     guid: 6d65b717008c9434d92dd6ac884fd95f
+  - enabled: 1
+    path: Assets/Scenes/Anais 1.unity
+    guid: e104d42411e13a34399e4c211f4214ec
   m_configObjects: {}
