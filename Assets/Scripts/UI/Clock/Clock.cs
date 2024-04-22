@@ -9,11 +9,12 @@ public class Clock : MonoBehaviour
 {
     public bool onPause = false;
 
-    private const float realSecondsPerIngameDay = 600f;        //Allow to change the real seconds (in real life) as in game day time
+    private const float realSecondsPerIngameDay = 86400f;       //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
-    private float day = 0.625f;                                 //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
+    private float day = 0f;                                 //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
+    private float remainingSeconds = 600f;
 
     private void Awake()
     {
@@ -27,19 +28,21 @@ public class Clock : MonoBehaviour
         if (!onPause)
         {
             day += Time.deltaTime / realSecondsPerIngameDay;
+            remainingSeconds -= Time.deltaTime;
 
             float dayNormalized = day % 1f;
             float rotationDegreesPerDay = 360f;
-            clockHourHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * 2);
+            clockHourHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * 2f);                                                //Rotation HourClock hand ( *2 to make a 12h clock)
 
             float hoursPerDay = 24f;
-            clockMinuteHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * hoursPerDay);
+            clockMinuteHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * hoursPerDay);                                     //Rotation MinuteClock hand
 
-            string hoursString = Mathf.Floor(dayNormalized * hoursPerDay).ToString("00");
             float minutesPerHour = 60f;
-            string minutesString = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHour).ToString("00");
+            string minutesString = Mathf.Floor(remainingSeconds / minutesPerHour).ToString("00");                                                               //Display the minutes left of the timer
+            float secondsPerMinutes = 60f;
+            string secondsString = Mathf.Floor(remainingSeconds % secondsPerMinutes).ToString("00");                                                            //Display the seconds left of the timer
 
-            timeText.text = hoursString + ":" + minutesString;
+            timeText.text = minutesString + ":" + secondsString;
 
             TimerIsOver();
         }
@@ -47,7 +50,7 @@ public class Clock : MonoBehaviour
 
     private void TimerIsOver()
     {
-        if (day >= 1f)
+        if (remainingSeconds <= 0f)
         {
             SceneManager.LoadScene("LukaTestScene");
         }
