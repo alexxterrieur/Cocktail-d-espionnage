@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 /* This static class is used to save the state of 
  * an Interactable item so it's not reinitialized at every scene change */
-public static class S_InteractableSaveData
+public static class S_SaveDataExternal
 {
     [Serializable]
     public struct Interactable
@@ -12,9 +12,23 @@ public static class S_InteractableSaveData
         public bool HasClue;
     }
 
+    public struct Journal
+    {
+        public S_ItemData[] Items;
+        public int ItemIndex;
+
+        public S_ClueData[] Clues;
+        public int ClueIndex;
+
+        public string Description;
+    }
+
     public static Dictionary<string, Interactable> InteractableMap = new Dictionary<string, Interactable>();
 
-    //Use this method everytime a change has been made inside an Interactable
+    public static Journal JournalData;
+    public static bool IsJournalDataInit = false;
+
+    //Use this method everytime a change has been made inside an Interactable or the Journal.
     public static void SaveData(string key, Interactable value)
     {
         if (!InteractableMap.ContainsKey(key))
@@ -40,5 +54,23 @@ public static class S_InteractableSaveData
         }
 
         return value;
+    }
+
+    public static void SaveJournalData(Journal journal)
+    {
+        JournalData = journal;
+    }
+
+    public static Journal LoadJournalData(Journal journal)
+    {
+        if (!IsJournalDataInit)
+        {
+            SaveJournalData(journal);
+            IsJournalDataInit = true;
+
+            return journal;
+        }
+
+        return JournalData;
     }
 }

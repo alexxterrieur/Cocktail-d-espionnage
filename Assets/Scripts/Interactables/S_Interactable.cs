@@ -7,14 +7,14 @@ public class S_Interactable : MonoBehaviour
 
     private string interactableName; //Do not give an already existing name of an Interactible (or the SaveData won't work !)
 
-    public S_InteractableSaveData.Interactable interactableStruct; //The two booleans became a structure to simplify the data saving
+    public S_SaveDataExternal.Interactable interactableStruct; //The two booleans became a structure to simplify the data saving
 
     private void Start()
     {
         interactableName = interactableData.interactableName;
 
         //Initialization of the boolean at every scene change
-        interactableStruct = S_InteractableSaveData.LoadData(interactableName, interactableStruct);
+        interactableStruct = S_SaveDataExternal.LoadData(interactableName, interactableStruct);
     }
 
     private void Update()
@@ -71,7 +71,7 @@ public class S_Interactable : MonoBehaviour
         interactableStruct.HasItem = false;
 
         //We save the boolean at every change
-        S_InteractableSaveData.SaveData(interactableName, interactableStruct);
+        S_SaveDataExternal.SaveData(interactableName, interactableStruct);
     }
 
     public void FoundClue(JournalManager journalManager, S_ClueData clue)
@@ -86,6 +86,6 @@ public class S_Interactable : MonoBehaviour
         interactableStruct.HasClue = false;
 
         //We save the boolean at every change
-        S_InteractableSaveData.SaveData(interactableName, interactableStruct);
+        S_SaveDataExternal.SaveData(interactableName, interactableStruct);
     }
 }

@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class JournalManager : MonoBehaviour
 {
@@ -16,32 +15,21 @@ public class JournalManager : MonoBehaviour
 
     private Sprite lockedIcon;
 
-    //private List<S_ItemData> items;
-    private S_ItemData[] items;
-    private int itemIndex = 0;
-
-    private S_ClueData[] clues;
-    private int clueIndex = 0;
-
-    private string description;
+    private S_SaveDataExternal.Journal journal;
 
     private void Start()
     {
         lockedIcon = itemIcones[0].GetComponent<Image>().sprite; //keep in memory the locked sprite
 
-        items = new S_ItemData[itemIcones.Length];
-        clues = new S_ClueData[clueNb];
+        journal.Items = new S_ItemData[itemIcones.Length];
+        journal.Clues = new S_ClueData[clueNb];
+        journal.ItemIndex = 0;
+        journal.ClueIndex = 0;
+        journal.Description = "";
 
-        descriptionTMP.SetText("Vous n'avez pas encore trouvé d'indice.");
-        description = "";
-    }
+        journal = S_SaveDataExternal.LoadJournalData(journal);
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.C)) //TODO: remove this when you don't need to test the removal of an item
-        {
-            RemoveItem(items[0]);
-        }
+        RefreshJournal(); //Refresh the visuals at every scene start
     }
 
     public void OpenJournal()
@@ -83,35 +71,52 @@ public class JournalManager : MonoBehaviour
     public void UpdateItemsIcones(int cluesIndex)
     {
         //call the function when a new item is find
-        itemIcones[cluesIndex].sprite = items[cluesIndex].itemSprite;
+        itemIcones[cluesIndex].sprite = journal.Items[cluesIndex].itemSprite;
+    }
+
+    public void RefreshJournal()
+    {
+        for (int i = 0; i < itemIcones.Length; i++)
+        {
+            if (journal.Items[i] != null)
+            {
+                itemIcones[i].sprite = journal.Items[i].itemSprite;
+            }
+        }
+
+        descriptionTMP.text = journal.Description;
     }
 
     public void UpdateClues(string clueDescription)
     {
-        description = description + clueDescription + "\r\n";
-        descriptionTMP.text = description;
+        journal.Description = journal.Description + clueDescription + "\r\n";
+        descriptionTMP.text = journal.Description;
     }
 
     //Add item to inventory
     public void AddItem(S_ItemData item)
     {
-        if (itemIndex < itemIcones.Length)
+        if (journal.ItemIndex < itemIcones.Length)
         {
-            items[itemIndex] = item;
-            UpdateItemsIcones(itemIndex);
-            itemIndex++;
+            journal.Items[journal.ItemIndex] = item;
+            UpdateItemsIcones(journal.ItemIndex);
+            journal.ItemIndex++;
+
+            S_SaveDataExternal.SaveJournalData(journal);
         }
     }
 
     //Remove item from inventory, maybe we don't need it
     public void RemoveItem(S_ItemData item) //or use index ?
     {
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < journal.Items.Length; i++)
         {
-            if (items[i] == item)
+            if (journal.Items[i] == item)
             {
-                items[i] = null;
+                journal.Items[i] = null;
                 itemIcones[i].sprite = lockedIcon;
+
+                S_SaveDataExternal.SaveJournalData(journal);
                 break;
             }
         }
@@ -120,11 +125,13 @@ public class JournalManager : MonoBehaviour
     //Add the clue as a text in the description
     public void AddClue(S_ClueData clue)
     {
-        if (clueIndex < clueNb)
+        if (journal.ClueIndex < clueNb)
         {
-            clues[clueIndex] = clue;
+            journal.Clues[journal.ClueIndex] = clue;
             UpdateClues(clue.clueDescription);
-            clueIndex++;
+            journal.ClueIndex++;
+
+            S_SaveDataExternal.SaveJournalData(journal);
         }
     }
 

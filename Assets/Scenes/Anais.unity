@@ -322,8 +322,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: f7fff6f1d67b0284a9a89cb14058b5ed, type: 2}
-  hasItem: 1
-  hasClue: 1
+  interactableStruct:
+    HasItem: 1
+    HasClue: 1
 --- !u!212 &108634164
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2235,8 +2236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: addb8a66b79abd642b6bdefba1b8b534, type: 2}
-  hasItem: 0
-  hasClue: 1
+  interactableStruct:
+    HasItem: 0
+    HasClue: 1
 --- !u!212 &857399813
 SpriteRenderer:
   m_ObjectHideFlags: 0
