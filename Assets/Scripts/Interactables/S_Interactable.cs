@@ -13,6 +13,19 @@ public class S_Interactable : MonoBehaviour
     {
         interactableName = interactableData.interactableName;
 
+        if (interactableData.item != null )
+        {
+            interactableStruct.HasItem = true;
+        }
+        if ( interactableData.clue != null )
+        {
+            interactableStruct.HasClue = true;
+        }
+        if ( interactableData.proof != null )
+        {
+            interactableStruct.HasProof = true;
+        }
+
         //Initialization of the boolean at every scene change
         interactableStruct = S_SaveDataExternal.LoadData(interactableName, interactableStruct);
     }

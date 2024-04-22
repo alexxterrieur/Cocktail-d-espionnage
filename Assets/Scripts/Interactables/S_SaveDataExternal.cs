@@ -5,7 +5,6 @@ using System.Collections.Generic;
  * an Interactable item so it's not reinitialized at every scene change */
 public static class S_SaveDataExternal
 {
-    [Serializable]
     public struct Interactable
     {
         public bool HasItem;
