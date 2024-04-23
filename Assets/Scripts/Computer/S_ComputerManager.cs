@@ -9,7 +9,6 @@ public class S_ComputerManager : MonoBehaviour
     [SerializeField] GameObject lockedPanel;
     [SerializeField] GameObject wrongPasswordPanel;
     [SerializeField] GameObject webPanel;
-    [SerializeField] GameObject icone;
 
     [SerializeField] string correctPassword;
     [SerializeField] TMP_InputField passwordInputField;
@@ -46,7 +45,6 @@ public class S_ComputerManager : MonoBehaviour
         {
             Debug.Log("Mot de passe correct !");
             lockedPanel.SetActive(false);
-            icone.SetActive(false);
             webPanel.SetActive(true);
         }
         else

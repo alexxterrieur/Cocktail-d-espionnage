@@ -40,6 +40,7 @@ public class JournalManager : MonoBehaviour
     {
         openButton.gameObject.SetActive(false);
         cluesPanel.SetActive(true);
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
     }
 
     public void CloseJournal()
@@ -48,6 +49,7 @@ public class JournalManager : MonoBehaviour
         objectsPanel.SetActive(false);
         historyPanel.SetActive(false);
         openButton.gameObject.SetActive(true);
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
     }
 
     public void OpenCluesPanel()

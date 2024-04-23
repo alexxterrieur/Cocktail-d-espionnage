@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class S_CameraFollow : MonoBehaviour
 {
     [SerializeField] private GameObject playerRef;
     private Vector3 cameraPos = Vector3.zero;
