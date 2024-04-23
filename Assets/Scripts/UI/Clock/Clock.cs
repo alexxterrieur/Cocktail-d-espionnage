@@ -7,14 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour
 {
-    private const float realSecondsPerIngameDay = 600f;        //Allow to change the real seconds (in real life) as in game day time
+    public bool onPause = false;
+
+    private Scene scene;
+    private const float realSecondsPerIngameDay = 86400f;       //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
-    private float day = 0.625f;                                 //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
+    private float day = 0f;                                     //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
+    public float remainingSeconds;
 
     private void Awake()
     {
+        scene = SceneManager.GetActiveScene();
         clockHourHandTransform = transform.Find("HourHand");
         clockMinuteHandTransform = transform.Find("MinuteHand");
         timeText = transform.Find("TimeText").GetComponent<TextMeshProUGUI>();
@@ -22,29 +27,50 @@ public class Clock : MonoBehaviour
 
     private void Update()
     {
-        day += Time.deltaTime / realSecondsPerIngameDay;
+        if (!onPause || scene.name == "PlayerHouse")
+        {
+            day += Time.deltaTime / realSecondsPerIngameDay;
+            remainingSeconds -= Time.deltaTime;
 
-        float dayNormalized = day % 1f;
-        float rotationDegreesPerDay = 360f;
-        clockHourHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * 2);
+            float dayNormalized = day % 1f;
+            float rotationDegreesPerDay = 360f;
+            clockHourHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * 2f);                                                //Rotation HourClock hand ( *2 to make a 12h clock)
 
-        float hoursPerDay = 24f;
-        clockMinuteHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * hoursPerDay);
+            float hoursPerDay = 24f;
+            clockMinuteHandTransform.eulerAngles = new Vector3(0, 0, -dayNormalized * rotationDegreesPerDay * hoursPerDay);                                     //Rotation MinuteClock hand
 
-        string hoursString = Mathf.Floor(dayNormalized * hoursPerDay).ToString("00");
-        float minutesPerHour = 60f;
-        string minutesString = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHour).ToString("00");
+            float minutesPerHour = 60f;
+            string minutesString = Mathf.Floor(remainingSeconds / minutesPerHour).ToString("00");                                                               //Display the minutes left of the timer
+            float secondsPerMinutes = 60f;
+            string secondsString = Mathf.Floor(remainingSeconds % secondsPerMinutes).ToString("00");                                                            //Display the seconds left of the timer
 
-        timeText.text = hoursString + ":" + minutesString;
+            timeText.text = minutesString + ":" + secondsString;
 
-        TimerIsOver();
+            TimerIsOver();
+        }
     }
 
     private void TimerIsOver()
     {
-        if (day >= 1f)
+        if (remainingSeconds <= 0f)
         {
-            SceneManager.LoadScene("LukaTestScene");
+            if(scene.name == "Office")
+            {
+                Debug.Log("GameOverOffice");
+            }
+            else if (scene.name == "BossHouse")
+            {
+                Debug.Log("GameOverBossHouse");
+            }
+            else if (scene.name == "SecretBase")
+            {
+                Debug.Log("GameOverSecretBase");
+            }
         }
+    }
+
+    public void SetPause(bool pause)
+    {
+        onPause = pause;
     }
 }
