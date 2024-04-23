@@ -1,9 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class S_Interactable : MonoBehaviour
 {
     [SerializeField] private S_InteractableData interactableData;
+    [SerializeField] private GameObject popUp;
+
+    private Vector2 popUpPos;
 
     private string interactableName; //Do not give an already existing name of an Interactible (or the SaveData won't work !)
 
@@ -28,6 +30,8 @@ public class S_Interactable : MonoBehaviour
 
         //Initialization of the boolean at every scene change
         interactableStruct = S_SaveDataExternal.LoadData(interactableName, interactableStruct);
+
+        popUpPos = transform.position + (Vector3.up * GetComponent<SpriteRenderer>().bounds.size.y);
     }
 
     public virtual void Interact(JournalManager journalManager)
@@ -99,5 +103,11 @@ public class S_Interactable : MonoBehaviour
 
         //We save the boolean at every change
         S_SaveDataExternal.SaveData(interactableName, interactableStruct);
+    }
+
+    public void DisplayPopup(bool isDisplayed)
+    {
+        popUp.SetActive(isDisplayed);
+        popUp.transform.position = popUpPos;
     }
 }
