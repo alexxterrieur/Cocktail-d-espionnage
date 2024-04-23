@@ -3,11 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Collections;
 using System;
+using System.Collections.Generic;
 
-public class testClient : MonoBehaviour
+public class TCP_Client : MonoBehaviour
 {
     private TcpClient client;
     private NetworkStream stream;
@@ -17,10 +16,13 @@ public class testClient : MonoBehaviour
     private Thread discoveryThread;
     private Thread connectionThread;
     private string hostIP;
+    private Dictionary<string, Action> functionMap = new Dictionary<string, Action>();
+
 
 
     private void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         discoveryThread = new Thread(new ThreadStart(StartDiscovery));
         discoveryThread.Start();
     }
@@ -67,7 +69,7 @@ public class testClient : MonoBehaviour
         client = new TcpClient();
         client.Connect(hostIP, discoveryPort);
         stream = client.GetStream();
-
+        
         Debug.Log("Connecté au serveur !");
 
         // Envoi de données au serveur
@@ -117,7 +119,29 @@ public class testClient : MonoBehaviour
         Debug.Log("Connexion au serveur fermée. Arrêt de l'écoute.");
     }
 
+    public void Interpreter(string commande)
+    {
+        string[] parts = commande.Split(':');
+        if(parts[0] == "FUNCTION_NAME" && functionMap.ContainsKey(parts[1]))
+        {
+            functionMap[parts[1]].Invoke();
+        }
+    }
 
+    public void SenderCallFunction(string functionName)
+    {
+        if (stream != null && client != null && client.Connected)
+        {
+            string message = "FUNCTION_NAME:";
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message+functionName);
+            stream.Write(messageBytes, 0, messageBytes.Length);
+            Debug.Log("Message envoyé au client : " + message+functionName);
+        }
+        else
+        {
+            Debug.LogWarning("Impossible d'envoyer le message. La connexion client est fermée.");
+        }
+    }
 
     void OnDestroy()
     {
