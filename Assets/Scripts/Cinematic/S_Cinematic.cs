@@ -7,6 +7,7 @@ public class S_Cinematic : MonoBehaviour
 {
     [SerializeField] private List<Sprite> images = new List<Sprite>();
     [SerializeField] private GameObject imageObject;
+    [SerializeField] private Clock clock;
     private Sprite currentImage;
 
     private const float frameDuration = 4f;
@@ -64,6 +65,7 @@ public class S_Cinematic : MonoBehaviour
     {
         if (transitionCoroutine == null)
         {
+            clock.SetPause(true);
             currentImage = images[0];
             UpdateImage(currentImage);
             imageObject.SetActive(true);
@@ -99,5 +101,6 @@ public class S_Cinematic : MonoBehaviour
         }
         imageObject.SetActive(false);
         transitionCoroutine = null; //Set the coroutine variable to null because it's not running anymore
+        clock.SetPause(false);
     }
 }
