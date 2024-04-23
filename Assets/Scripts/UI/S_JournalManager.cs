@@ -76,8 +76,12 @@ public class JournalManager : MonoBehaviour
     //Update icones sprite in objectPanel
     public void UpdateItemsIcones(int cluesIndex)
     {
+        S_ItemDescription itemIcon = itemIcones[cluesIndex].GetComponent<S_ItemDescription>();
+
         //call the function when a new item is find
         itemIcones[cluesIndex].sprite = journal.Items[cluesIndex].itemSprite;
+        itemIcon.SetIsEmpty(false);
+        itemIcon.SetItemData(journal.Items[cluesIndex]);
     }
 
     public void RefreshJournal()

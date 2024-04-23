@@ -30,14 +30,6 @@ public class S_Interactable : MonoBehaviour
         interactableStruct = S_SaveDataExternal.LoadData(interactableName, interactableStruct);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.X)) //for testing data saved
-        {
-            SceneManager.LoadScene("Anais");
-        }
-    }
-
     public virtual void Interact(JournalManager journalManager)
     {
         S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);

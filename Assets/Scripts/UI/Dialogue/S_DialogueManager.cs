@@ -43,6 +43,7 @@ public class S_DialogueManager : MonoBehaviour
 
     private void Update()
     {
+        //TODO REMOVE THIS AND ADD AN INPUT WITH THE NEW INPUT SYSTEM
         if (Input.GetKeyDown(KeyCode.Space) && isDialogueActive)
         {
             currentCharPerSec = maxCharPerSec;
@@ -117,5 +118,18 @@ public class S_DialogueManager : MonoBehaviour
     public bool GetIsDialogueActive()
     {
         return isDialogueActive;
+    }
+
+    //Use this with the new input system to change text speed
+    public void ChangeTextSpeed(bool isSped)
+    {
+        if (isSped)
+        {
+            currentCharPerSec = maxCharPerSec;
+        }
+        else
+        {
+            currentCharPerSec = characterPerSeconds;
+        }
     }
 }
