@@ -1,0 +1,86 @@
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class S_ComputerManager : MonoBehaviour
+{
+    [SerializeField] List<GameObject> activatedObjects;
+    [SerializeField] GameObject computerPanel;
+    [SerializeField] GameObject lockedPanel;
+    [SerializeField] GameObject wrongPasswordPanel;
+    [SerializeField] GameObject webPanel;
+    [SerializeField] GameObject icone;
+
+    [SerializeField] string correctPassword;
+    [SerializeField] TMP_InputField passwordInputField;
+    private int remainingPasswordAttemps = 3;
+    public TMP_Text remainingAttemps;
+
+    public void OpenComputer()
+    {
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+
+        foreach (GameObject obj in activatedObjects) 
+        {
+            obj.SetActive(false);
+        }
+
+        computerPanel.SetActive(true);
+    }
+
+    public void CloseComputer()
+    {
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+
+        foreach (GameObject obj in activatedObjects)
+        {
+            obj.SetActive(true);
+        }
+
+        computerPanel.SetActive(false);
+    }
+
+    public void CheckPassword()
+    {
+        if (passwordInputField.text == correctPassword)
+        {
+            Debug.Log("Mot de passe correct !");
+            lockedPanel.SetActive(false);
+            icone.SetActive(false);
+            webPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Mot de passe incorrect !");
+            wrongPasswordPanel.SetActive(true);
+            remainingPasswordAttemps -= 1;
+            CheckComputerLock();
+        }
+    }
+
+    public void CloseWrongPasswordPanel()
+    {
+        wrongPasswordPanel.SetActive(false);
+    }
+
+    public void CheckComputerLock()
+    {
+        remainingAttemps.text = "Tentatives restantes: " + remainingPasswordAttemps;
+
+        if (remainingPasswordAttemps <= 0)
+        {
+            Debug.Log("computer locked");
+        }
+    }
+
+    //open yotube
+    public void OpenLink(string url)
+    {
+        Application.OpenURL(url);
+    }
+
+
+
+
+    //boite mail
+}

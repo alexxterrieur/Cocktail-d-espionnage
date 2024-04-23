@@ -83,6 +83,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Enter",
+            "id": "c304bf0c-9505-4454-b4af-80b63b048c1c",
+            "actions": [
+                {
+                    "name": "Enter",
+                    "type": "Button",
+                    "id": "dd4d210a-367e-4bad-9f5e-30fd1aa853e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dda75d9f-ebce-445c-b992-900dfee9b810",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
