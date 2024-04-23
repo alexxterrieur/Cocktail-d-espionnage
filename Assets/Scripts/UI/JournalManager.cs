@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +9,32 @@ public class JournalManager : MonoBehaviour
     [SerializeField] GameObject cluesPanel;
     [SerializeField] GameObject objectsPanel;
     [SerializeField] GameObject historyPanel;
-    [SerializeField] Image[] cluesIcones;
-    [SerializeField] Sprite[] cluesSprites;
+    [SerializeField] Image[] itemIcones;
+    [SerializeField] TextMeshProUGUI clueDescriptionTMP;
+    [SerializeField] TextMeshProUGUI proofDescriptionTMP;
+
+    public int clueNb = 10;
+
+    private Sprite lockedIcon;
+
+    private S_SaveDataExternal.Journal journal;
+
+    private void Start()
+    {
+        lockedIcon = itemIcones[0].GetComponent<Image>().sprite; //keep in memory the locked sprite
+
+        journal.Items = new S_ItemData[itemIcones.Length];
+        journal.Clues = new S_ClueData[clueNb];
+        journal.Proofs = new S_ClueData[clueNb];
+        journal.ItemIndex = 0;
+        journal.ClueIndex = 0;
+        journal.ClueDescription = string.Empty;
+        journal.ProofDescription = string.Empty;
+
+        journal = S_SaveDataExternal.LoadJournalData(journal);
+
+        RefreshJournal(); //Refresh the visuals at every scene start
+    }
 
     public void OpenJournal()
     {
@@ -48,18 +72,88 @@ public class JournalManager : MonoBehaviour
     }
 
     //Update icones sprite in objectPanel
-    public void UpdateCluesIcones(int cluesIndex)
+    public void UpdateItemsIcones(int cluesIndex)
     {
-        //call the function when a new clue is find
-        cluesIcones[cluesIndex].sprite = cluesSprites[cluesIndex];
+        //call the function when a new item is find
+        itemIcones[cluesIndex].sprite = journal.Items[cluesIndex].itemSprite;
     }
 
-    public void Update()
+    public void RefreshJournal()
     {
-        //test
-        if(Input.GetKeyDown(KeyCode.A)) { UpdateCluesIcones(0); print("A"); }
-        if(Input.GetKeyDown(KeyCode.Z)) { UpdateCluesIcones(1); print("Z"); }
-        if(Input.GetKeyDown(KeyCode.E)) { UpdateCluesIcones(2); print("E"); }
-        if(Input.GetKeyDown(KeyCode.R)) { UpdateCluesIcones(3); print("R"); }
+        for (int i = 0; i < itemIcones.Length; i++)
+        {
+            if (journal.Items[i] != null)
+            {
+                itemIcones[i].sprite = journal.Items[i].itemSprite;
+            }
+        }
+
+        clueDescriptionTMP.text = journal.ClueDescription;
+        proofDescriptionTMP.text = journal.ProofDescription;
+    }
+
+    public void UpdateClues(TextMeshProUGUI tmp, string description)
+    {
+        tmp.text = description;
+    }
+
+    //Add item to inventory
+    public void AddItem(S_ItemData item)
+    {
+        if (journal.ItemIndex < itemIcones.Length)
+        {
+            journal.Items[journal.ItemIndex] = item;
+            UpdateItemsIcones(journal.ItemIndex);
+            journal.ItemIndex++;
+
+            S_SaveDataExternal.SaveJournalData(journal);
+        }
+    }
+
+    //Remove item from inventory, maybe we don't need it
+    public void RemoveItem(S_ItemData item) //or use index ?
+    {
+        for (int i = 0; i < journal.Items.Length; i++)
+        {
+            if (journal.Items[i] == item)
+            {
+                journal.Items[i] = null;
+                itemIcones[i].sprite = lockedIcon;
+
+                S_SaveDataExternal.SaveJournalData(journal);
+                break;
+            }
+        }
+    }
+
+    //Add the clue as a text in the description
+    public void AddClue(S_ClueData clue)
+    {
+        if (journal.ClueIndex < clueNb)
+        {
+            journal.Clues[journal.ClueIndex] = clue;
+            journal.ClueDescription = journal.ClueDescription + clue.clueDescription + "\r\n";
+
+            UpdateClues(clueDescriptionTMP, journal.ClueDescription);
+            journal.ClueIndex++;
+
+            S_SaveDataExternal.SaveJournalData(journal);
+        }
+    }
+
+    //No clue removal needed ?
+
+    public void AddProof(S_ClueData proof)
+    {
+        if (journal.ClueIndex < clueNb)
+        {
+            journal.Proofs[journal.ProofIndex] = proof;
+            journal.ProofDescription = journal.ProofDescription + proof.clueDescription + "\r\n";
+
+            UpdateClues(proofDescriptionTMP, journal.ProofDescription);
+            journal.ProofIndex++;
+
+            S_SaveDataExternal.SaveJournalData(journal);
+        }
     }
 }

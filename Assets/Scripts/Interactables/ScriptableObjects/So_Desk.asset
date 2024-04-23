@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_Trashcan
+  m_Name: So_Desk
   m_EditorClassIdentifier: 
-  interactableName: Trashcan
+  interactableName: Bureau
   interactableDescription:
-  - C'est une poubelle.
-  - "Elle ne sent pas tr\xE8s bon..."
-  item: {fileID: 11400000, guid: 6bec903f442df3b48a41ee2dceb7e0ce, type: 2}
-  clue: {fileID: 11400000, guid: 572854cff49fcd8409cdc86bcbdc2f19, type: 2}
+  - C'est un bureau.
+  - "Il y a beaucoup de documents \xE9parpill\xE9s."
+  item: {fileID: 0}
+  clue: {fileID: 0}
+  proof: {fileID: 11400000, guid: 4a2131e637b94e24db049baab6464c7d, type: 2}
