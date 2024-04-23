@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clueFinding:
   - '"Cher journal : aujourd''hui mon groupe ne travaille pas beaucoup...'
-  - "Je vais devoir les punir \xE0 coup de fouet."
+  - "\"Je vais devoir les punir \xE0 coup de fouet.\""
   - "Sign\xE9 Hugo."
   clueDescription: "- Hugo a pr\xE9vu de punir son groupe."

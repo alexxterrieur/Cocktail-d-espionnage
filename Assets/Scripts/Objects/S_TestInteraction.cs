@@ -17,7 +17,10 @@ public class S_TestInteraction : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent(out S_Interactable interactable))
                 {
-                    interactable.Interact(journalManager);
+                    if (!S_DialogueManager.Instance.GetIsDialogueActive())
+                    {
+                        interactable.Interact(journalManager);
+                    }
                 }
             }
         }
