@@ -162,4 +162,16 @@ public class JournalManager : MonoBehaviour
             S_SaveDataExternal.SaveJournalData(journal);
         }
     }
+
+    public bool SearchKey(S_ItemData key)
+    {
+        for(int i = 0; i < journal.Items.Length; i++)
+        {
+            if (journal.Items[i] == key)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

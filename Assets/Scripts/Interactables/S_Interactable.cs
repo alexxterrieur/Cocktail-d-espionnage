@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class S_Interactable : MonoBehaviour
 {
-    [SerializeField] private S_InteractableData interactableData;
+    [SerializeField] protected S_InteractableData interactableData;
     [SerializeField] private GameObject popUp;
 
-    private Vector2 popUpPos;
+    protected Vector2 popUpPos;
 
-    private string interactableName; //Do not give an already existing name of an Interactible (or the SaveData won't work !)
+    protected string interactableName; //Do not give an already existing name of an Interactible (or the SaveData won't work !)
 
     public S_SaveDataExternal.Interactable interactableStruct; //The two booleans became a structure to simplify the data saving
 
-    private void Start()
+    protected virtual void Start()
     {
         interactableName = interactableData.interactableName;
 
@@ -27,6 +27,10 @@ public class S_Interactable : MonoBehaviour
         {
             interactableStruct.HasProof = true;
         }
+        if ( interactableData.key != null)
+        {
+            interactableStruct.isLocked = true;
+        }
 
         //Initialization of the boolean at every scene change
         interactableStruct = S_SaveDataExternal.LoadData(interactableName, interactableStruct);
@@ -37,31 +41,38 @@ public class S_Interactable : MonoBehaviour
     public virtual void Interact(JournalManager journalManager)
     {
         S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
-
-        if (interactableStruct.HasItem)
+        if (!interactableStruct.isLocked)
         {
-            if (interactableData.item != null)
-                FoundItem(journalManager, interactableData.item);
-            else
-                Debug.LogWarning("No item has been referenced in this interactable !"); //error warning
+            if (interactableStruct.HasItem)
+            {
+                if (interactableData.item != null)
+                    FoundItem(journalManager, interactableData.item);
+                else
+                    Debug.LogWarning("No item has been referenced in this interactable !"); //error warning
+            }
+
+            if (interactableStruct.HasClue)
+            {
+                if (interactableData.clue != null)
+                    FoundClue(journalManager, interactableData.clue);
+                else
+                    Debug.LogWarning("No clue has been referenced in this interactable !");
+            }
+
+            if (interactableStruct.HasProof)
+            {
+                if (interactableData.proof != null)
+                    FoundProof(journalManager, interactableData.proof);
+                else
+                    Debug.LogWarning("No proof has been referenced in this interactable !");
+            }
         }
-
-        if (interactableStruct.HasClue)
+        else
         {
-            if (interactableData.clue != null)
-                FoundClue(journalManager, interactableData.clue);
-            else
-                Debug.LogWarning("No clue has been referenced in this interactable !");
-        }
-
-        if (interactableStruct.HasProof)
-        {
-            if (interactableData.proof != null)
-                FoundProof(journalManager, interactableData.proof);
-            else
-                Debug.LogWarning("No proof has been referenced in this interactable !");
+            Unlock(journalManager, interactableData.key);
         }
     }
+
 
     public S_InteractableData GetInteractableData()
     {
@@ -103,6 +114,18 @@ public class S_Interactable : MonoBehaviour
 
         //We save the boolean at every change
         S_SaveDataExternal.SaveData(interactableName, interactableStruct);
+    }
+
+    public virtual void Unlock(JournalManager journalManager, S_ItemData key)
+    {
+        S_DialogueManager.Instance.StartDialogue(interactableData.lockedInteractableDescription);
+        if (journalManager.SearchKey(key))
+        {
+            S_DialogueManager.Instance.StartDialogue("Vous déverrouillez la porte avec : " + key.itemName);
+            S_DialogueManager.Instance.StartDialogue(interactableData.unlockedInteractableDescription);
+            interactableStruct.isLocked = false;
+            S_SaveDataExternal.SaveData(interactableName, interactableStruct);
+        }
     }
 
     public void DisplayPopup(bool isDisplayed)
