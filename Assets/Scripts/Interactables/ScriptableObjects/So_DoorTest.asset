@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: So_DoorTest
   m_EditorClassIdentifier: 
   interactableName: 
-  interactableDescription: []
-  lockedInteractableDescription: []
-  unlockedInteractableDescription: []
+  interactableDescription:
+  - 'test
+
+'
+  lockedInteractableDescription:
+  - "Cette porte est ferm\xE9."
+  unlockedInteractableDescription:
+  - Cool la porte est ouverte
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
-  key: {fileID: 0}
+  key: {fileID: 11400000, guid: 6bec903f442df3b48a41ee2dceb7e0ce, type: 2}

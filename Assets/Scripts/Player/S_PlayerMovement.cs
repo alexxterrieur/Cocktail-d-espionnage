@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 boxSize;
     [SerializeField] private float castDistance;
     [SerializeField] private LayerMask obstacleLayer;
+    private CircleCollider2D playerCollider;
     private Rigidbody2D rb2D;
     private Animator animator;
 
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
+        playerCollider = GetComponent<CircleCollider2D>();
     }
 
     void FixedUpdate()
@@ -83,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsObstacle()
     {
-        if (Physics2D.BoxCast(transform.position, boxSize, 0, mouvementInput, castDistance, obstacleLayer))
+        if (Physics2D.BoxCast(playerCollider.bounds.center, boxSize, 0, mouvementInput, castDistance, obstacleLayer))
         {
             return true;
         }
@@ -103,8 +105,8 @@ public class PlayerMovement : MonoBehaviour
         this.canMove = canMove;
     }
 
-    /*private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position + (Vector3) mouvementInput * castDistance, boxSize);
-    }*/
+        Gizmos.DrawWireCube(playerCollider.bounds.center + (Vector3) mouvementInput * castDistance, boxSize);
+    }
 }

@@ -7,6 +7,7 @@ public class S_PlayerAction : MonoBehaviour
     public LayerMask layer; //interactable layer
     public float range = 0.5f;
     private S_Interactable lastHitInteractable;
+    private CircleCollider2D playerCollider;
 
     [SerializeField] private JournalManager journalManager;
 
@@ -15,6 +16,7 @@ public class S_PlayerAction : MonoBehaviour
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        playerCollider = GetComponent<CircleCollider2D>();
     }
 
     private void Update()
@@ -28,7 +30,7 @@ public class S_PlayerAction : MonoBehaviour
         {
             Vector2 direction = playerMovement.GetDirection();
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, range, layer);
+            RaycastHit2D hit = Physics2D.Raycast(playerCollider.bounds.center, direction, range, layer);
 
             if (hit.collider != null)
             {
@@ -59,7 +61,7 @@ public class S_PlayerAction : MonoBehaviour
     public void LookAtInteractable()
     {
         Vector2 direction = playerMovement.GetDirection();
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, range, layer);
+        RaycastHit2D hit = Physics2D.Raycast(playerCollider.bounds.center, direction, range, layer);
 
         if (hit.collider != null)
         {
