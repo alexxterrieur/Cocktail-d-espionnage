@@ -9,6 +9,7 @@ public static class S_SaveDataExternal
         public bool HasItem;
         public bool HasClue;
         public bool HasProof;
+        public bool isLocked;
     }
 
     public struct Journal
