@@ -1,9 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class S_Interactable : MonoBehaviour
 {
     [SerializeField] private S_InteractableData interactableData;
+    [SerializeField] private GameObject popUp;
+
+    private Vector2 popUpPos;
 
     private string interactableName; //Do not give an already existing name of an Interactible (or the SaveData won't work !)
 
@@ -28,22 +30,13 @@ public class S_Interactable : MonoBehaviour
 
         //Initialization of the boolean at every scene change
         interactableStruct = S_SaveDataExternal.LoadData(interactableName, interactableStruct);
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.X)) //for testing data saved
-        {
-            SceneManager.LoadScene("Anais");
-        }
+        popUpPos = transform.position + (Vector3.up * GetComponent<SpriteRenderer>().bounds.size.y);
     }
 
     public virtual void Interact(JournalManager journalManager)
     {
-        foreach (string description in interactableData.interactableDescription)
-        {
-            Debug.Log(description);
-        }
+        S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
 
         if (interactableStruct.HasItem)
         {
@@ -77,12 +70,9 @@ public class S_Interactable : MonoBehaviour
 
     public void FoundItem(JournalManager journalManager, S_ItemData item)
     {
-        foreach (string description in item.itemFinding)
-        {
-            Debug.Log(description);
-        }
+        S_DialogueManager.Instance.StartDialogue(item.itemFinding);
+        S_DialogueManager.Instance.StartDialogue("Vous avez ramassé : " + item.itemName);
 
-        Debug.Log("Vous avez ramassé : " + item.itemName);
         journalManager.AddItem(item);
 
         interactableStruct.HasItem = false;
@@ -93,12 +83,8 @@ public class S_Interactable : MonoBehaviour
 
     public void FoundClue(JournalManager journalManager, S_ClueData clue)
     {
-        foreach (string description in clue.clueFinding)
-        {
-            Debug.Log(description);
-        }
-
-        Debug.Log("Un indice à été ajouté au journal.");
+        S_DialogueManager.Instance.StartDialogue(clue.clueFinding);
+        S_DialogueManager.Instance.StartDialogue("Un indice à été ajouté au journal.");
         journalManager.AddClue(clue);
 
         interactableStruct.HasClue = false;
@@ -109,17 +95,19 @@ public class S_Interactable : MonoBehaviour
 
     public void FoundProof(JournalManager journalManager, S_ClueData proof)
     {
-        foreach (string description in  proof.clueFinding)
-        {
-            Debug.Log(description);
-        }
-
-        Debug.Log("Vous avez trouvé une preuve !");
+        S_DialogueManager.Instance.StartDialogue(proof.clueFinding);
+        S_DialogueManager.Instance.StartDialogue("Vous avez trouvé une preuve !");
         journalManager.AddProof(proof);
 
         interactableStruct.HasProof = false;
 
         //We save the boolean at every change
         S_SaveDataExternal.SaveData(interactableName, interactableStruct);
+    }
+
+    public void DisplayPopup(bool isDisplayed)
+    {
+        popUp.SetActive(isDisplayed);
+        popUp.transform.position = popUpPos;
     }
 }
