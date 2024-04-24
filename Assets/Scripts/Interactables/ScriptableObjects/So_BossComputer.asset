@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_BossComputer
   m_EditorClassIdentifier: 
-  interactableName: 
+  interactableName: Boss Computer
   interactableDescription:
   - "C'\xE9tait int\xE9ressant.\r"
   item: {fileID: 0}
