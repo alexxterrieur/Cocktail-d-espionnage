@@ -22,6 +22,7 @@ public class S_TestInteraction : MonoBehaviour
                     if (!S_DialogueManager.Instance.GetIsDialogueActive())
                     {
                         interactable.Interact(journalManager);
+                        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
                     }
                 }
             }

@@ -78,6 +78,7 @@ public class S_DialogueManager : MonoBehaviour
         dialogueTxt.text = null;
         nextTxtDisplay.SetActive(false);
         dialogueBox.SetActive(false);
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
     }
 
     private IEnumerator TypeText(string[] dialogue)

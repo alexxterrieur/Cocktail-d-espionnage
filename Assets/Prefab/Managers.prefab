@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4090874995769195703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666184471093350408}
+  - component: {fileID: 2819077185920426899}
+  - component: {fileID: 5362073231455536804}
+  - component: {fileID: 1276059871277624687}
+  - component: {fileID: 3316735422167066313}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &666184471093350408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090874995769195703}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 626.7576, y: 913.33875, z: -3.4764202}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2819077185920426899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090874995769195703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176c93256b23445408f1f02ecac26947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openButton: {fileID: 0}
+  cluesPanel: {fileID: 0}
+  objectsPanel: {fileID: 0}
+  proofPanel: {fileID: 0}
+  itemIcones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  clueDescriptionTMP: {fileID: 0}
+  proofDescriptionTMP: {fileID: 0}
+  clueNb: 10
+--- !u!114 &5362073231455536804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090874995769195703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a308dc768e44aef48a91236bd5491298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  images:
+  - {fileID: 21300000, guid: 3a051ee8afc7e7a4088086a7dccff561, type: 3}
+  - {fileID: 21300000, guid: b96a64688384cff42b8754ac748a95a6, type: 3}
+  - {fileID: 21300000, guid: 677f37e60e7c0d3449df2ac3e82e130d, type: 3}
+  imageObject: {fileID: 0}
+  clock: {fileID: 0}
+--- !u!114 &1276059871277624687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090874995769195703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90aa4c01c911ec41aa880beb2e33586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activatedObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  computerPanel: {fileID: 0}
+  lockedPanel: {fileID: 0}
+  wrongPasswordPanel: {fileID: 0}
+  webPanel: {fileID: 0}
+  youtubePanel: {fileID: 0}
+  qrCodePanel: {fileID: 0}
+  correctPassword: Zizi33_Xx
+  passwordInputField: {fileID: 0}
+  remainingAttemps: {fileID: 0}
+--- !u!114 &3316735422167066313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090874995769195703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9437955a2ef699c40b0cf72cb4c51dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qrCodePanel: {fileID: 0}
+  repeatedImage: {fileID: 6885341110854575112, guid: a0a9a5081a6e664418fa04ffbd0636ba, type: 3}
+  singleImage: {fileID: 111245742631361001, guid: 24a064675118afc488377bb7e48f5f40, type: 3}

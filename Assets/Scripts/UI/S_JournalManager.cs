@@ -8,7 +8,7 @@ public class JournalManager : MonoBehaviour
     [SerializeField] Button openButton;
     [SerializeField] GameObject cluesPanel;
     [SerializeField] GameObject objectsPanel;
-    [SerializeField] GameObject historyPanel;
+    [SerializeField] GameObject proofPanel;
     [SerializeField] Image[] itemIcones;
     [SerializeField] TextMeshProUGUI clueDescriptionTMP;
     [SerializeField] TextMeshProUGUI proofDescriptionTMP;
@@ -47,7 +47,7 @@ public class JournalManager : MonoBehaviour
     {
         cluesPanel.SetActive(false);
         objectsPanel.SetActive(false);
-        historyPanel.SetActive(false);
+        proofPanel.SetActive(false);
         openButton.gameObject.SetActive(true);
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
     }
@@ -55,14 +55,14 @@ public class JournalManager : MonoBehaviour
     public void OpenCluesPanel()
     {
         objectsPanel.SetActive(false);
-        historyPanel.SetActive(false);
+        proofPanel.SetActive(false);
         cluesPanel.SetActive(true);
     }
 
     public void OpenObjectsPanel()
     {
         cluesPanel.SetActive(false);
-        historyPanel.SetActive(false);
+        proofPanel.SetActive(false);
         objectsPanel.SetActive(true);
     }
 
@@ -70,7 +70,7 @@ public class JournalManager : MonoBehaviour
     {
         cluesPanel.SetActive(false);
         objectsPanel.SetActive(false);
-        historyPanel.SetActive(true);
+        proofPanel.SetActive(true);
     }
 
     //Update icones sprite in objectPanel
