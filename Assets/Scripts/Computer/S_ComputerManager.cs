@@ -9,6 +9,8 @@ public class S_ComputerManager : MonoBehaviour
     [SerializeField] GameObject lockedPanel;
     [SerializeField] GameObject wrongPasswordPanel;
     [SerializeField] GameObject webPanel;
+    [SerializeField] GameObject youtubePanel;
+    [SerializeField] GameObject qrCodePanel;
 
     [SerializeField] string correctPassword;
     [SerializeField] TMP_InputField passwordInputField;
@@ -77,7 +79,17 @@ public class S_ComputerManager : MonoBehaviour
         Application.OpenURL(url);
     }
 
+    public void OpenYoutubePanel()
+    {
+        youtubePanel.SetActive(true);
+        qrCodePanel.SetActive(false);
+    }
 
+    public void OpenQrCode()
+    {
+        qrCodePanel.SetActive(true);
+        youtubePanel.SetActive(false);
+    }
 
 
     //boite mail
