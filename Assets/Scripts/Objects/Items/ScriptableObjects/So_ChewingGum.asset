@@ -16,4 +16,6 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 42ab8294334c4ec4b9a05e1349cd5979, type: 3}
   itemFinding:
   - "Vous avez trouv\xE9 quelque chose au fond !"
-  itemDescription: "C'est un chewing-gum \xE0 la fraise d\xE9j\xE0 m\xE2ch\xE9."
+  itemDescription: "C'est un chewing-gum \xE0 la fraise d\xE9j\xE0 m\xE2ch\xE9. C'est
+    un chewing-gum \xE0 la fraise d\xE9j\xE0 m\xE2ch\xE9. C'est un chewing-gum \xE0
+    la fraise d\xE9j\xE0 m\xE2ch\xE9."

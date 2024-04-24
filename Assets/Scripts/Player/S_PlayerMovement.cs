@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 1000f;
     private Vector2 mouvementInput;
+    private Vector2 direction;
 
     [SerializeField] private Vector2 boxSize;
     [SerializeField] private float castDistance;
@@ -20,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Sprite spriteFront;
     [SerializeField] private Sprite spriteSide;
     [SerializeField] private Sprite spriteBack;
-    
+
+    private bool canMove = true;
 
     private void Start()
     {
@@ -39,7 +38,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void PerformMouvement()
     {
-        rb2D.AddForce(new Vector3(mouvementInput.x, mouvementInput.y, 0) * Time.deltaTime * speed);
+        if (canMove)
+        {
+            rb2D.AddForce(new Vector3(mouvementInput.x, mouvementInput.y, 0) * Time.deltaTime * speed);
+        }
         animator.SetFloat("Velocity", rb2D.velocity.magnitude);
     }
 
@@ -47,24 +49,33 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            mouvementInput = context.ReadValue<Vector2>();
-            if (mouvementInput.x == 1)
+            if (canMove)
             {
-                spriteRenderer.sprite = spriteSide;
-                spriteRenderer.flipX = false;
-            }
-            else if(mouvementInput.x == -1)
-            {
-                spriteRenderer.sprite = spriteSide;
-                spriteRenderer.flipX = true;
-            }
-            else if (mouvementInput.y == 1)
-            {
-                spriteRenderer.sprite = spriteBack;
-            }
-            else if (mouvementInput.y == -1)
-            {
-                spriteRenderer.sprite = spriteFront;
+                mouvementInput = context.ReadValue<Vector2>();
+                if (mouvementInput != Vector2.zero)
+                {
+                    //Keep the last direction set
+                    direction = mouvementInput.normalized;
+                }
+
+                if (mouvementInput.x == 1)
+                {
+                    spriteRenderer.sprite = spriteSide;
+                    spriteRenderer.flipX = false;
+                }
+                else if (mouvementInput.x == -1)
+                {
+                    spriteRenderer.sprite = spriteSide;
+                    spriteRenderer.flipX = true;
+                }
+                else if (mouvementInput.y == 1)
+                {
+                    spriteRenderer.sprite = spriteBack;
+                }
+                else if (mouvementInput.y == -1)
+                {
+                    spriteRenderer.sprite = spriteFront;
+                }
             }
         }
     }
@@ -79,6 +90,16 @@ public class PlayerMovement : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public Vector2 GetDirection()
+    {
+        return direction;
+    }
+
+    public void SetCanMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 
     /*private void OnDrawGizmos()
