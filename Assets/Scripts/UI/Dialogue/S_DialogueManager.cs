@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class S_DialogueManager : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class S_DialogueManager : MonoBehaviour
     private Queue<string[]> dialogueQueue = new Queue<string[]>();
     private bool isDialogueActive = false;
 
+    private InputAction skipAction;
+    public InputActionReference skipReference;
+
     private void Awake()
     {
         if (Instance == null)
@@ -31,6 +35,14 @@ public class S_DialogueManager : MonoBehaviour
         }
 
         currentCharPerSec = characterPerSeconds;
+
+        skipAction = skipReference.action;
+        skipAction.Enable();
+    }
+
+    private void OnDestroy()
+    {
+        skipAction.Disable();
     }
 
     // Start is called before the first frame update
@@ -39,19 +51,6 @@ public class S_DialogueManager : MonoBehaviour
         dialogueBox.SetActive(false);
         nextTxtDisplay.SetActive(false);
         dialogueTxt.text = null;
-    }
-
-    private void Update()
-    {
-        //TODO REMOVE THIS AND ADD AN INPUT WITH THE NEW INPUT SYSTEM
-        if (Input.GetKeyDown(KeyCode.Space) && isDialogueActive)
-        {
-            currentCharPerSec = maxCharPerSec;
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            currentCharPerSec = characterPerSeconds;
-        }
     }
 
     public void StartDialogue(string[] dialogue)
@@ -78,7 +77,7 @@ public class S_DialogueManager : MonoBehaviour
         dialogueTxt.text = null;
         nextTxtDisplay.SetActive(false);
         dialogueBox.SetActive(false);
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
     }
 
     private IEnumerator TypeText(string[] dialogue)
@@ -95,8 +94,9 @@ public class S_DialogueManager : MonoBehaviour
 
                 yield return new WaitForSeconds(1 / currentCharPerSec);
             }
+
             // We wait for the player to press a key to display the next string
-            while (!Input.GetKeyDown(KeyCode.Space))
+            while (!skipAction.triggered)
             {
                 nextTxtDisplay.SetActive(true);
                 yield return null;

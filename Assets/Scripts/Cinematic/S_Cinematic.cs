@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class S_Cinematic : MonoBehaviour
 {
     [SerializeField] private List<Sprite> images = new List<Sprite>();
     [SerializeField] private GameObject imageObject;
     [SerializeField] private Clock clock;
+
+    public InputActionReference skipReference;
+    private InputAction skipAction;
+
     private Sprite currentImage;
 
     private const float frameDuration = 4f;
     private float frameTimer = 0f;
 
     private Coroutine transitionCoroutine; //We store the coroutine inside a variable to check if it's running
+
+    private void Awake()
+    {
+        skipAction = skipReference.action;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,21 +36,6 @@ public class S_Cinematic : MonoBehaviour
         else
         {
             Debug.LogWarning("No images available for cinematic !");
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Display the next image imediately
-        if (Input.GetMouseButtonUp(0) && transitionCoroutine != null)
-        {
-            frameTimer = frameDuration;
-        }
-        //Test button to check if we can launch the coroutine again
-        else if (Input.GetMouseButtonDown(1))
-        {
-            StartTimerTransition();
         }
     }
 
@@ -96,6 +91,10 @@ public class S_Cinematic : MonoBehaviour
                     currentImage = images[frameIndex];
                     UpdateImage(currentImage);
                 }
+            }
+            if (skipAction.triggered)
+            {
+                frameTimer = frameDuration;
             }
             yield return null;
         }
