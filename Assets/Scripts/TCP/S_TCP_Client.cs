@@ -21,12 +21,13 @@ public class S_TCP_Client : MonoBehaviour
     private Dictionary<string, Action> _functionMap = new Dictionary<string, Action>();
     private string _loadSceneName = null;
     [SerializeField] private List<string> _hostsIP;
+    [SerializeField] private int _joltScore = 0;
+    [SerializeField] private S_Interactable _interactable = null;
     public static S_TCP_Client _TCP_Instance { get; private set; }
 
     public List<string> HostsList => _hostsIP;
-    private bool _masterMindWin = false;
-    
-    public bool MegamindWin { get { return _masterMindWin;} set { _masterMindWin = value; } }
+    public int JoltScore { get { return _joltScore; } set { _joltScore = value; } }
+    public S_Interactable Interactable { get { return _interactable; } set { _interactable = value; } }
 
     void Awake()
     {
@@ -46,7 +47,7 @@ public class S_TCP_Client : MonoBehaviour
     private void Start()
     {
         _functionMap.Add("MegaMindWin", MegaMindWin);
-        _functionMap.Add("ShakerWin", ShakerWin);
+        _functionMap.Add("ShakerWin", Shaker);
 
 
         DontDestroyOnLoad(this.gameObject);
@@ -256,7 +257,8 @@ public class S_TCP_Client : MonoBehaviour
     private void MegaMindWin()
     {
         Debug.Log("MegaMind WIN");
-        _masterMindWin = true;
+        _interactable.UnlockWithDigicode();
+        _interactable = null;
     }
 
     public void LoadShaker()
@@ -264,9 +266,9 @@ public class S_TCP_Client : MonoBehaviour
         SenderLoadScene("Shaker");
     }
 
-    private void ShakerWin()
+    private void Shaker()
     {
-        Debug.Log("Shaker WIN");
+        _joltScore++;
     }
 
     void OnDestroy()
