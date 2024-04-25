@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: 
   interactableDescription:
-  - Ceci est mon bureau.
-  - "Vous r\xE9cup\xE9rez votre outil de d\xE9verrouillage."
+  - C'est mon bureau.
+  - "C'est vraiment bord\xE9lique !"
+  - Mais je trouve toujours ce dont j'ai besoin, pourquoi ranger ?
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 11400000, guid: 72b5bdb1d53e6dd439b378100cad885a, type: 2}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}

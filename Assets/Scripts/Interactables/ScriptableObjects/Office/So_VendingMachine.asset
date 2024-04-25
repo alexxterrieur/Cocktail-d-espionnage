@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_VendingMachine
   m_EditorClassIdentifier: 
-  interactableName: Vending Machine
+  interactableName: Distributeur de snacks
   interactableDescription:
   - "Les barres de chocolat Morse ont du succ\xE8s !"
+  - Par contre les Bonty...
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}

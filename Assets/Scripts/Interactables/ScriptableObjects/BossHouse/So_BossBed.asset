@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: Boss Bed
   interactableDescription:
-  - Woah, il est bien ranger.
+  - "Woah, il est fait au carr\xE9 !"
+  - Il n'y a rien sous le coussin.
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}

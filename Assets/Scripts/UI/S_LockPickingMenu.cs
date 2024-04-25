@@ -28,10 +28,5 @@ public class S_LockPickingMenu : MonoBehaviour
     public void OpenCloseMenu(bool isOpen)
     {
         gameObject.SetActive(isOpen);
-
-        if (!isOpen)
-        {
-            S_TCP_Client._TCP_Instance.SenderLoadScene("HubScene");//close the mastermind
-        }
     }
 }
