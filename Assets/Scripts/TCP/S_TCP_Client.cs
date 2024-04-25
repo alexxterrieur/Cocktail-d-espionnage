@@ -15,12 +15,16 @@ public class S_TCP_Client : MonoBehaviour
     public int _discoveryPort = 8888;
     private Thread _serverlistenerThread;
     private Thread _discoveryThread;
+    private Thread _multiDiscoveryThread;
     private Thread _connectionThread;
     private string _hostIP;
     private Dictionary<string, Action> _functionMap = new Dictionary<string, Action>();
     private string _loadSceneName = null;
-
+    [SerializeField] private List<string> _hostsIP;
     public static S_TCP_Client _TCP_Instance { get; private set; }
+
+    public List<string> HostsList => _hostsIP;
+
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -39,6 +43,7 @@ public class S_TCP_Client : MonoBehaviour
     private void Start()
     {
         _functionMap.Add("MegaMindWin", MegaMindWin);
+        _functionMap.Add("ShakerWin", ShakerWin);
 
 
         DontDestroyOnLoad(this.gameObject);
@@ -52,6 +57,39 @@ public class S_TCP_Client : MonoBehaviour
         {
             SceneManager.LoadScene(_loadSceneName);
             _loadSceneName = null;
+        }
+    }
+
+    void StartMultiDiscovery()
+    {
+        UdpClient udpClient = new UdpClient();
+        udpClient.EnableBroadcast = true;
+
+        Debug.Log("Recherche de services sur le réseau local...");
+
+        // Envoyer une demande de découverte en diffusion
+        byte[] discoverData = Encoding.UTF8.GetBytes("DISCOVER_MY_SERVICE");
+        udpClient.Send(discoverData, discoverData.Length, new IPEndPoint(IPAddress.Broadcast, _discoveryPort));
+
+        _hostsIP.Clear();
+
+        while (true)
+        {
+            // Attendre la réponse du serveur de découverte
+            IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Any, 0);
+            byte[] responseData = udpClient.Receive(ref serverEndPoint);
+            string response = Encoding.UTF8.GetString(responseData);
+
+            // Analyser la réponse pour obtenir l'adresse IP de l'hôte
+            if (response.StartsWith("HOST_IP:"))
+            {
+                _hostsIP.Add(response.Substring("HOST_IP:".Length));   
+            }
+            //else
+            //{
+            //    Debug.Log("pas d'IP trouver");
+            //    Debug.Log(response.Substring("HOST_IP:".Length));
+            //}
         }
     }
 
@@ -75,14 +113,38 @@ public class S_TCP_Client : MonoBehaviour
         if (response.StartsWith("HOST_IP:"))
         {
             _hostIP = response.Substring("HOST_IP:".Length);
-            _connectionThread = new Thread(new ThreadStart(ConnectToServer));
-            _connectionThread.Start();
         }
         else
         {
             Debug.Log("pas d'IP trouver");
             Debug.Log(response.Substring("HOST_IP:".Length));
         }
+    }
+
+    public void ConnectToServer(string ip)
+    {
+        _hostIP = ip;
+        _connectionThread = new Thread(new ThreadStart(ConnectToServer));
+        _connectionThread.Start();
+
+        if (_discoveryThread != null)
+        {
+            _discoveryThread.Abort();
+        }
+        if (_multiDiscoveryThread != null)
+        {
+            _multiDiscoveryThread.Abort();
+        }
+    }
+
+    public void SearchServer()
+    {
+        if (_discoveryThread != null)
+        {
+            _discoveryThread.Abort();
+        }
+        _multiDiscoveryThread = new Thread(new ThreadStart(StartMultiDiscovery));
+        _multiDiscoveryThread.Start();
     }
 
     private void ConnectToServer()
@@ -205,10 +267,38 @@ public class S_TCP_Client : MonoBehaviour
         Debug.Log("MegaMind WIN");
     }
 
+    public void LoadShaker()
+    {
+        SenderLoadScene("Shaker");
+    }
+
+    private void ShakerWin()
+    {
+        Debug.Log("Shaker WIN");
+    }
+
     void OnDestroy()
     {
         // Fermeture de la connexion
-        _stream.Close();
-        _client.Close();
+        if(_stream != null)
+        {
+            _stream.Close();
+        }
+        if (_client != null)
+        {
+            _client.Close();
+        }
+        if (_discoveryThread != null)
+        {
+            _discoveryThread.Abort();
+        }
+        if (_multiDiscoveryThread != null)
+        {
+            _multiDiscoveryThread.Abort();
+        }
+        if (_serverlistenerThread != null)
+        {
+            _serverlistenerThread.Abort();
+        }
     }
 }
