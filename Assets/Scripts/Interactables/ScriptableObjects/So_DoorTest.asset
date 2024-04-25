@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: 
   interactableDescription:
-  - 'test
-
-'
+  - test
   lockedInteractableDescription:
-  - "Cette porte est ferm\xE9."
+  - "La porte est ferm\xE9e."
   unlockedInteractableDescription:
   - Cool la porte est ouverte.
   item: {fileID: 0}
