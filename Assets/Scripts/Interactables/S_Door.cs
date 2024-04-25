@@ -12,6 +12,12 @@ public class S_Door : S_Interactable
                 OpenDoor();
             }
         }
+
+        if (S_TCP_Client._TCP_Instance.MegamindWin)
+        {
+            S_TCP_Client._TCP_Instance.MegamindWin = false;
+            UnlockWithDigicode();
+        }
     }
 
     public override void Unlock(JournalManager journalManager, S_ItemData key)
