@@ -16,7 +16,5 @@ MonoBehaviour:
   interactableDescription:
   - C'est une poubelle.
   - "Elle ne sent pas tr\xE8s bon..."
-  hasItem: 1
   item: {fileID: 11400000, guid: 6bec903f442df3b48a41ee2dceb7e0ce, type: 2}
-  itemFoundDescription:
-  - Vous trouvez quelque chose au fond !
+  clue: {fileID: 11400000, guid: 572854cff49fcd8409cdc86bcbdc2f19, type: 2}

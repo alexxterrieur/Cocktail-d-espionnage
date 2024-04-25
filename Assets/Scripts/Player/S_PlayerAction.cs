@@ -1,0 +1,81 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(PlayerMovement))]
+public class S_PlayerAction : MonoBehaviour
+{
+    public LayerMask layer; //interactable layer
+    public float range = 0.5f;
+    private S_Interactable lastHitInteractable;
+
+    [SerializeField] private JournalManager journalManager;
+
+    private PlayerMovement playerMovement;
+
+    private void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
+
+    private void Update()
+    {
+        LookAtInteractable();
+    }
+
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Vector2 direction = playerMovement.GetDirection();
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, range, layer);
+
+            if (hit.collider != null)
+            {
+                if (hit.collider.TryGetComponent(out S_Interactable interactable))
+                {
+                    if (!S_DialogueManager.Instance.GetIsDialogueActive())
+                    {
+                        interactable.Interact(journalManager);
+                        playerMovement.SetCanMove(false);
+                    }
+                }
+            }
+        }
+    }
+
+    public void SkipDialogue(InputAction.CallbackContext context)
+    {
+        if (context.started && S_DialogueManager.Instance.GetIsDialogueActive())
+        {
+            S_DialogueManager.Instance.ChangeTextSpeed(true);
+        }
+        else if (context.canceled && S_DialogueManager.Instance.GetIsDialogueActive())
+        {
+            S_DialogueManager.Instance.ChangeTextSpeed(false);
+        }
+    }
+
+    public void LookAtInteractable()
+    {
+        Vector2 direction = playerMovement.GetDirection();
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, range, layer);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.TryGetComponent(out S_Interactable interactable))
+            {
+                lastHitInteractable = interactable;
+                interactable.DisplayPopup(true);
+            }
+        }
+        else
+        {
+            if (lastHitInteractable != null)
+            {
+                lastHitInteractable.DisplayPopup(false);
+                lastHitInteractable = null;
+            }
+        }
+    }
+}
