@@ -21,6 +21,9 @@ public class S_TCP_Client : MonoBehaviour
     private Dictionary<string, Action> _functionMap = new Dictionary<string, Action>();
     private string _loadSceneName = null;
     [SerializeField] private List<string> _hostsIP;
+
+    private bool _megamindWin = false;
+    public bool MegamindWin { get { return _megamindWin; } set { _megamindWin = value; } }
     public static S_TCP_Client _TCP_Instance { get; private set; }
 
     public List<string> HostsList => _hostsIP;
@@ -265,6 +268,7 @@ public class S_TCP_Client : MonoBehaviour
     private void MegaMindWin()
     {
         Debug.Log("MegaMind WIN");
+        _megamindWin = true;
     }
 
     public void LoadShaker()

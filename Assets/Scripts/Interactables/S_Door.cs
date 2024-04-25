@@ -28,7 +28,7 @@ public class S_Door : S_Interactable
             if (key.itemName == "Unlocking Tool")
             {
                 S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");
-                //S_TCP_Client._TCP_Instance.LoadMegaMind(/* Interactable this*/);
+                S_TCP_Client._TCP_Instance.LoadMegaMind();
             }
             else
             {
