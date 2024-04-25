@@ -1,34 +1,50 @@
-using UnityEngine;
-
+// Doors can be destroyed to show they are open
 public class S_Door : S_Interactable
 {
-    [SerializeField] private GameObject lockpickingMenu;
-    public bool isLocked;
+    private bool waitForDialogue = false;
 
-    protected override void Start()
+    private void Update()
     {
-        interactableName = interactableData.interactableName;
-
-        interactableStruct.isLocked = isLocked;
-
-        //Initialization of the boolean at every scene change
-        interactableStruct = S_SaveDataExternal.LoadData(interactableName, interactableStruct);
-
-        popUpPos = transform.position + (Vector3.up * GetComponent<SpriteRenderer>().bounds.size.y);
-    }
-
-    public override void Interact(JournalManager journalManager)
-    {
-        
+        if (waitForDialogue) //brute force wait before door open
+        {
+            if (!S_DialogueManager.Instance.GetIsDialogueActive())
+            {
+                OpenDoor();
+            }
+        }
     }
 
     public override void Unlock(JournalManager journalManager, S_ItemData key)
     {
-        
+        S_DialogueManager.Instance.StartDialogue(interactableData.lockedInteractableDescription);
+        if (journalManager.SearchKey(key))
+        {
+            if (key.itemName == "Unlocking Tool")
+            {
+                S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");
+                //S_TCP_Client._TCP_Instance.LoadMegaMind(/* Interactable this*/);
+            }
+            else
+            {
+                S_DialogueManager.Instance.StartDialogue("Vous déverrouillez la porte avec : " + key.itemName);
+                S_DialogueManager.Instance.StartDialogue(interactableData.unlockedInteractableDescription);
+                interactableStruct.isLocked = false;
+                S_SaveDataExternal.SaveData(interactableName, interactableStruct);
+
+                waitForDialogue = true;
+            }
+        }
     }
 
-    public void CloseLockpickingMenu()
+    public override void UnlockWithDigicode()
     {
-        lockpickingMenu.SetActive(false);
+        base.UnlockWithDigicode();
+
+        waitForDialogue = true;
+    }
+
+    public void OpenDoor()
+    {
+        Destroy(gameObject);
     }
 }

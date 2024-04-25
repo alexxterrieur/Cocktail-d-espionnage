@@ -1,10 +1,10 @@
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class S_Interactable : MonoBehaviour
 {
     [SerializeField] protected S_InteractableData interactableData;
     [SerializeField] private GameObject popUp;
+    [SerializeField] private GameObject lockpickingMenu;
 
     protected Vector2 popUpPos;
 
@@ -41,7 +41,11 @@ public class S_Interactable : MonoBehaviour
 
     public virtual void Interact(JournalManager journalManager)
     {
-        S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
+        if (interactableData.interactableDescription[0] != string.Empty)
+        {
+            S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
+        }
+
         if (!interactableStruct.isLocked)
         {
             if (interactableStruct.HasItem)
@@ -117,21 +121,44 @@ public class S_Interactable : MonoBehaviour
         S_SaveDataExternal.SaveData(interactableName, interactableStruct);
     }
 
+    //Unlock the interactable if the key is found
     public virtual void Unlock(JournalManager journalManager, S_ItemData key)
     {
         S_DialogueManager.Instance.StartDialogue(interactableData.lockedInteractableDescription);
         if (journalManager.SearchKey(key))
         {
-            S_DialogueManager.Instance.StartDialogue("Vous déverrouillez la porte avec : " + key.itemName);
-            S_DialogueManager.Instance.StartDialogue(interactableData.unlockedInteractableDescription);
-            interactableStruct.isLocked = false;
-            S_SaveDataExternal.SaveData(interactableName, interactableStruct);
+            if (key.itemName == "Unlocking Tool")
+            {
+                S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");
+                //S_TCP_Client._TCP_Instance.LoadMegaMind(/* Interactable this*/);
+            }
+            else
+            {
+                S_DialogueManager.Instance.StartDialogue("Vous déverrouillez la porte avec : " + key.itemName);
+                S_DialogueManager.Instance.StartDialogue(interactableData.unlockedInteractableDescription);
+                interactableStruct.isLocked = false;
+                S_SaveDataExternal.SaveData(interactableName, interactableStruct);
+            }
         }
+    }
+
+    // If the interactable has to be opened with the digicode
+    public virtual void UnlockWithDigicode()
+    {
+        S_DialogueManager.Instance.StartDialogue(interactableData.unlockedInteractableDescription);
+
+        interactableStruct.isLocked = false;
+        S_SaveDataExternal.SaveData(interactableName, interactableStruct);
     }
 
     public void DisplayPopup(bool isDisplayed)
     {
         popUp.SetActive(isDisplayed);
         popUp.transform.position = popUpPos;
+    }
+
+    public void OpenCloseLockPickingMenu(bool open)
+    {
+        lockpickingMenu.SetActive(open);
     }
 }
