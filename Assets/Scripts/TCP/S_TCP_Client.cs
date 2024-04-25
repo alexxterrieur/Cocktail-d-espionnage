@@ -19,6 +19,8 @@ public class S_TCP_Client : MonoBehaviour
     private Thread _connectionThread;
     private string _hostIP;
     private Dictionary<string, Action> _functionMap = new Dictionary<string, Action>();
+    private List<Action> _functionStack = new List<Action>();
+    private object _stackLock = new object();
     private string _loadSceneName = null;
     [SerializeField] private List<string> _hostsIP;
     [SerializeField] private int _joltScore = 0;
@@ -61,6 +63,17 @@ public class S_TCP_Client : MonoBehaviour
         {
             SceneManager.LoadScene(_loadSceneName);
             _loadSceneName = null;
+        }
+        if(_functionStack.Count > 0)
+        {
+            lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+            {
+                foreach(Action function in _functionStack)
+                {
+                    function.Invoke();
+                }
+                _functionStack.Clear(); // Effacer la liste après avoir exécuté toutes les actions
+            }
         }
     }
 
@@ -211,7 +224,10 @@ public class S_TCP_Client : MonoBehaviour
         Debug.Log(parts[1]);
         if(parts[0] == "FUNCTION_NAME" && _functionMap.ContainsKey(parts[1]))
         {
-            _functionMap[parts[1]].Invoke();
+            lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+            {
+                _functionStack.Add(_functionMap[parts[1]]);
+            }
         }
         if (parts[0] == "LOAD_SCENE")
         {
