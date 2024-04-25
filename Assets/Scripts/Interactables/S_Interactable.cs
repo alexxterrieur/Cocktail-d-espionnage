@@ -139,6 +139,7 @@ public class S_Interactable : MonoBehaviour
             {
                 lockpickingMenu.OpenCloseMenu(true);
                 S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");
+                S_TCP_Client._TCP_Instance.Interactable = this;
                 S_TCP_Client._TCP_Instance.LoadMegaMind(); //We launch the mastermind game
             }
             else //If it's just a regular key

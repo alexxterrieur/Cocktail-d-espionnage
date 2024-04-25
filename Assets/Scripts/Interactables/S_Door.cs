@@ -22,12 +22,6 @@ public class S_Door : S_Interactable
                 OpenDoor();
             }
         }
-
-        if (S_TCP_Client._TCP_Instance.MegamindWin)
-        {
-            S_TCP_Client._TCP_Instance.MegamindWin = false;
-            UnlockWithDigicode();
-        }
     }
 
     public override void Interact(JournalManager journalManager)
@@ -51,6 +45,7 @@ public class S_Door : S_Interactable
             {
                 lockpickingMenu.OpenCloseMenu(true);
                 S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");
+                S_TCP_Client._TCP_Instance.Interactable = this;
                 S_TCP_Client._TCP_Instance.LoadMegaMind(); //We launch the mastermind game
             }
             else //If it's just a regular key
