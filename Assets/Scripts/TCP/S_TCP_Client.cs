@@ -88,11 +88,6 @@ public class S_TCP_Client : MonoBehaviour
             {
                 _hostsIP.Add(response.Substring("HOST_IP:".Length));   
             }
-            //else
-            //{
-            //    Debug.Log("pas d'IP trouver");
-            //    Debug.Log(response.Substring("HOST_IP:".Length));
-            //}
         }
     }
 
@@ -261,10 +256,7 @@ public class S_TCP_Client : MonoBehaviour
     private void MegaMindWin()
     {
         Debug.Log("MegaMind WIN");
-<<<<<<< Updated upstream
-=======
         _masterMindWin = true;
->>>>>>> Stashed changes
     }
 
     public void LoadShaker()
