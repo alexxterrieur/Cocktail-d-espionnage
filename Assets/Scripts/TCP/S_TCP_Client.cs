@@ -49,7 +49,7 @@ public class S_TCP_Client : MonoBehaviour
     private void Start()
     {
         _functionMap.Add("MegaMindWin", MegaMindWin);
-        _functionMap.Add("ShakerWin", Shaker);
+        _functionMap.Add("Shaker", Shaker);
 
 
         DontDestroyOnLoad(this.gameObject);
@@ -181,6 +181,7 @@ public class S_TCP_Client : MonoBehaviour
 
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
+        LoadShaker();
     }
 
     private void Listener()
@@ -284,6 +285,7 @@ public class S_TCP_Client : MonoBehaviour
 
     private void Shaker()
     {
+        Debug.Log("shake + 1");
         _joltScore++;
     }
 
