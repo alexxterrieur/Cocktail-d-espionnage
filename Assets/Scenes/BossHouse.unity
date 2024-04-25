@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 26534324}
   - component: {fileID: 26534326}
   - component: {fileID: 26534325}
+  - component: {fileID: 26534327}
   m_Layer: 5
   m_Name: LockpickingScreen
   m_TagString: Untagged
@@ -703,6 +704,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26534323}
   m_CullTransparentMesh: 1
+--- !u!114 &26534327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26534323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc164401aec6abd488986d04fbee369a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &54397935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2792,6 +2805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: d7da0401cabaa4245925d8f3c625d7c1, type: 2}
   popUp: {fileID: 384390842}
+  lockpickingMenu: {fileID: 0}
 --- !u!58 &386821641
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3966,6 +3980,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 496527988}
   m_CullTransparentMesh: 1
+--- !u!1 &501326835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 501326836}
+  m_Layer: 0
+  m_Name: TeleportPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &501326836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501326835}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1282205060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511258815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5510,7 +5555,8 @@ GameObject:
   - component: {fileID: 773658854}
   - component: {fileID: 773658853}
   - component: {fileID: 773658852}
-  - component: {fileID: 773658851}
+  - component: {fileID: 773658856}
+  - component: {fileID: 773658855}
   m_Layer: 9
   m_Name: BossHouseFrontDoor
   m_TagString: Untagged
@@ -5518,20 +5564,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &773658851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773658850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e0a4b5055c2805408b984b9c953005a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableData: {fileID: 11400000, guid: 4ce863d928aa862439ba3e7e80b81c86, type: 2}
-  popUp: {fileID: 384390842}
 --- !u!61 &773658852
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5644,6 +5676,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1065840602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &773658855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773658850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a480161d87f65584bb788ec61d3f3046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableData: {fileID: 11400000, guid: 4ce863d928aa862439ba3e7e80b81c86, type: 2}
+  popUp: {fileID: 384390842}
+  lockpickingMenu: {fileID: 26534327}
+  doesTeleport: 1
+  teleport: {fileID: 773658856}
+--- !u!114 &773658856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773658850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63cb52326b2337d43be576ce3eb3a1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRef: {fileID: 2066447415}
+  teleportPoint: {fileID: 501326835}
 --- !u!1 &774345840
 GameObject:
   m_ObjectHideFlags: 0
@@ -5859,6 +5922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: 237da42d4140cf74daa6a082f360da41, type: 2}
   popUp: {fileID: 384390842}
+  lockpickingMenu: {fileID: 0}
 --- !u!212 &780443240
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6826,6 +6890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: d7da0401cabaa4245925d8f3c625d7c1, type: 2}
   popUp: {fileID: 384390842}
+  lockpickingMenu: {fileID: 0}
 --- !u!58 &989065830
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9388,6 +9453,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 501326836}
   - {fileID: 432175165}
   - {fileID: 2076625180}
   - {fileID: 1690499917}
@@ -10807,6 +10873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: d7da0401cabaa4245925d8f3c625d7c1, type: 2}
   popUp: {fileID: 384390842}
+  lockpickingMenu: {fileID: 0}
 --- !u!58 &1464409291
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13255,6 +13322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: acbffaebd87752843a4d0cde4a530ac8, type: 2}
   popUp: {fileID: 384390842}
+  lockpickingMenu: {fileID: 0}
 --- !u!61 &1774897402
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -5,12 +5,14 @@ public class S_Door : S_Interactable
 {
     private bool waitForDialogue = false;
     private bool isOpen;
+    [SerializeField] private bool doesTeleport;
+    [SerializeField] private S_Teleport teleport;
 
     protected override void Start()
     {
         base.Start();
 
-        isOpen = interactableStruct.isLocked;
+        isOpen = !interactableStruct.isLocked;
     }
 
     private void Update()
@@ -21,12 +23,6 @@ public class S_Door : S_Interactable
             {
                 OpenDoor();
             }
-        }
-
-        if (S_TCP_Client._TCP_Instance.MegamindWin)
-        {
-            S_TCP_Client._TCP_Instance.MegamindWin = false;
-            UnlockWithDigicode();
         }
     }
 
@@ -78,6 +74,10 @@ public class S_Door : S_Interactable
 
     public void OpenDoor()
     {
+        if (doesTeleport)
+        {
+            teleport.Teleport();
+        }
         Destroy(gameObject);
     }
 }

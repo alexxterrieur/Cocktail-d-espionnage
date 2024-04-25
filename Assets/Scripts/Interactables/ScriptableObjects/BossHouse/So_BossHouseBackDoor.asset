@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_BossHouseBackDoor
   m_EditorClassIdentifier: 
-  interactableName: "Porte arri\xE8re de la maison de la patronne"
-  interactableDescription:
-  - test
+  interactableName: "La porte arri\xE8re"
+  interactableDescription: []
   lockedInteractableDescription:
   - "Cette porte est ferm\xE9e avec un digicode."
   unlockedInteractableDescription:
