@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_Digicode
   m_EditorClassIdentifier: 
-  interactableName: Digicode
-  interactableDescription: []
+  interactableName: Digicode1
+  interactableDescription:
+  - 
+  lockedInteractableDescription:
+  - "La porte est ferm\xE9e."
+  unlockedInteractableDescription:
+  - La porte s'ouvre.
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 11400000, guid: 72b5bdb1d53e6dd439b378100cad885a, type: 2}

@@ -39,7 +39,7 @@ public class JournalManager : MonoBehaviour
     {
         openButton.gameObject.SetActive(false);
         cluesPanel.SetActive(true);
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
     }
 
     public void CloseJournal()
@@ -48,7 +48,7 @@ public class JournalManager : MonoBehaviour
         objectsPanel.SetActive(false);
         proofPanel.SetActive(false);
         openButton.gameObject.SetActive(true);
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
     }
 
     public void OpenCluesPanel()
@@ -75,7 +75,8 @@ public class JournalManager : MonoBehaviour
     //Update icones sprite in objectPanel
     public void UpdateItemsIcones(int cluesIndex)
     {
-        S_ItemDescription itemIcon = itemIcones[cluesIndex].GetComponent<S_ItemDescription>();
+         Debug.Log(itemIcones[cluesIndex].name);
+         S_ItemDescription itemIcon = itemIcones[cluesIndex].GetComponent<S_ItemDescription>();
 
         //call the function when a new item is find
         itemIcones[cluesIndex].sprite = journal.Items[cluesIndex].itemSprite;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4571215148612501552}
   - component: {fileID: 5030950586320398837}
   m_Layer: 0
-  m_Name: S_TCP_Controller
+  m_Name: GO_TCP_Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

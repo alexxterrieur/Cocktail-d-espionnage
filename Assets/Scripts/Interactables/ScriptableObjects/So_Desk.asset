@@ -16,6 +16,9 @@ MonoBehaviour:
   interactableDescription:
   - C'est un bureau.
   - "Il y a beaucoup de documents \xE9parpill\xE9s."
-  item: {fileID: 0}
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
+  item: {fileID: 11400000, guid: 72b5bdb1d53e6dd439b378100cad885a, type: 2}
   clue: {fileID: 0}
   proof: {fileID: 11400000, guid: 4a2131e637b94e24db049baab6464c7d, type: 2}
+  key: {fileID: 0}
