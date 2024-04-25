@@ -72,6 +72,12 @@ public class S_Interactable : MonoBehaviour
                 else
                     Debug.LogWarning("No proof has been referenced in this interactable !");
             }
+
+            if (interactableData.interactableDescription[0] == string.Empty && !interactableStruct.HasItem &&
+                !interactableStruct.HasClue && !interactableStruct.HasProof)
+            {
+                GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
+            }
         }
         else
         {

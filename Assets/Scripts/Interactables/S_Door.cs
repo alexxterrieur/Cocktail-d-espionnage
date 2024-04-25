@@ -10,7 +10,7 @@ public class S_Door : S_Interactable
     {
         base.Start();
 
-        isOpen = interactableStruct.isLocked;
+        isOpen = !interactableStruct.isLocked;
     }
 
     private void Update()
