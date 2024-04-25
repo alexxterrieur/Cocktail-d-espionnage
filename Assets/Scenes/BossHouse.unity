@@ -13285,7 +13285,8 @@ GameObject:
   - component: {fileID: 1774897400}
   - component: {fileID: 1774897403}
   - component: {fileID: 1774897402}
-  - component: {fileID: 1774897401}
+  - component: {fileID: 1774897405}
+  - component: {fileID: 1774897404}
   m_Layer: 9
   m_Name: BossHouseBackDoor
   m_TagString: Untagged
@@ -13308,21 +13309,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1065840602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1774897401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774897399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e0a4b5055c2805408b984b9c953005a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableData: {fileID: 11400000, guid: acbffaebd87752843a4d0cde4a530ac8, type: 2}
-  popUp: {fileID: 384390842}
-  lockpickingMenu: {fileID: 0}
 --- !u!61 &1774897402
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13420,6 +13406,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1774897404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774897399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a480161d87f65584bb788ec61d3f3046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableData: {fileID: 11400000, guid: acbffaebd87752843a4d0cde4a530ac8, type: 2}
+  popUp: {fileID: 384390842}
+  lockpickingMenu: {fileID: 26534327}
+  doesTeleport: 1
+  teleport: {fileID: 1774897405}
+--- !u!114 &1774897405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774897399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63cb52326b2337d43be576ce3eb3a1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRef: {fileID: 2066447415}
+  teleportPoint: {fileID: 501326835}
 --- !u!1 &1790123990
 GameObject:
   m_ObjectHideFlags: 0
