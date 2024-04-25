@@ -24,6 +24,9 @@ public class S_TCP_Client : MonoBehaviour
     public static S_TCP_Client _TCP_Instance { get; private set; }
 
     public List<string> HostsList => _hostsIP;
+    private bool _masterMindWin = false;
+    
+    public bool MegamindWin { get { return _masterMindWin;} set { _masterMindWin = value; } }
 
     void Awake()
     {
@@ -167,15 +170,8 @@ public class S_TCP_Client : MonoBehaviour
         byte[] messageBytes = Encoding.UTF8.GetBytes(message);
         _stream.Write(messageBytes, 0, messageBytes.Length);
 
-        // Lecture de la réponse du serveur
-        byte[] buffer = new byte[1024];
-        int bytesRead = _stream.Read(buffer, 0, buffer.Length);
-        string dataReceived = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-        Debug.Log("Réponse du serveur : " + dataReceived);
-
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
-        LoadMegaMind();
     }
 
     private void Listener()
@@ -197,7 +193,7 @@ public class S_TCP_Client : MonoBehaviour
                     string dataReceived = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     Debug.Log("Message perso reçu du serveur : " + dataReceived);
                     if(dataReceived.StartsWith("FUNCTION_NAME:") || dataReceived.StartsWith("LOAD_SCENE:"))
-                        Interpreter(dataReceived);
+                        Interpreter(dataReceived);  
                 }
             }
             catch (Exception ex)
@@ -265,6 +261,10 @@ public class S_TCP_Client : MonoBehaviour
     private void MegaMindWin()
     {
         Debug.Log("MegaMind WIN");
+<<<<<<< Updated upstream
+=======
+        _masterMindWin = true;
+>>>>>>> Stashed changes
     }
 
     public void LoadShaker()
