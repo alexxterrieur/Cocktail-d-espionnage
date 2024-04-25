@@ -18,7 +18,7 @@ MonoBehaviour:
   - "Elle ne sent pas tr\xE8s bon..."
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
-  item: {fileID: 11400000, guid: 72b5bdb1d53e6dd439b378100cad885a, type: 2}
+  item: {fileID: 11400000, guid: 6bec903f442df3b48a41ee2dceb7e0ce, type: 2}
   clue: {fileID: 0}
   proof: {fileID: 0}
   key: {fileID: 0}

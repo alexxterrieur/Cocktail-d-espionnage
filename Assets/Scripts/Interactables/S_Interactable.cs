@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class S_Interactable : MonoBehaviour
 {
     [SerializeField] protected S_InteractableData interactableData;
     [SerializeField] private GameObject popUp;
-    [SerializeField] private GameObject lockpickingMenu;
+    [SerializeField] protected S_LockPickingMenu lockpickingMenu;
 
     protected Vector2 popUpPos;
 
@@ -125,20 +126,26 @@ public class S_Interactable : MonoBehaviour
     public virtual void Unlock(JournalManager journalManager, S_ItemData key)
     {
         S_DialogueManager.Instance.StartDialogue(interactableData.lockedInteractableDescription);
-        if (journalManager.SearchKey(key))
+
+        if (journalManager.SearchKey(key)) //player have the key
         {
-            if (key.itemName == "Unlocking Tool")
+            if (key.itemName == "Unlocking Tool") //If it has to be opened with a digicode
             {
+                lockpickingMenu.OpenCloseMenu(true);
                 S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");
-                S_TCP_Client._TCP_Instance.LoadMegaMind();
+                S_TCP_Client._TCP_Instance.LoadMegaMind(); //We launch the mastermind game
             }
-            else
+            else //If it's just a regular key
             {
-                S_DialogueManager.Instance.StartDialogue("Vous déverrouillez la porte avec : " + key.itemName);
+                S_DialogueManager.Instance.StartDialogue("Vous déverrouillez " + interactableName + " avec : " + key.itemName);
                 S_DialogueManager.Instance.StartDialogue(interactableData.unlockedInteractableDescription);
                 interactableStruct.isLocked = false;
                 S_SaveDataExternal.SaveData(interactableName, interactableStruct);
             }
+        }
+        else //player doesnt have key
+        {
+            S_DialogueManager.Instance.StartDialogue("Je n'ai pas l'objet nécessaire pour déverouiller.");
         }
     }
 
@@ -149,16 +156,13 @@ public class S_Interactable : MonoBehaviour
 
         interactableStruct.isLocked = false;
         S_SaveDataExternal.SaveData(interactableName, interactableStruct);
+
+        lockpickingMenu.OpenCloseMenu(false);
     }
 
     public void DisplayPopup(bool isDisplayed)
     {
         popUp.SetActive(isDisplayed);
         popUp.transform.position = popUpPos;
-    }
-
-    public void OpenCloseLockPickingMenu(bool open)
-    {
-        lockpickingMenu.SetActive(open);
     }
 }
