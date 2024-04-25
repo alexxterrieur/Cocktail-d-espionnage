@@ -40,7 +40,6 @@ public class S_ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         if (!isEmpty)
         {
-            Debug.Log("exit");
             itemDescriptionBox.SetActive(false);
         }
     }
