@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12fb2a27671fbd44babe5eaf075f1ccf, type: 3}
   m_Name: So_BossHouseKeys
   m_EditorClassIdentifier: 
-  itemName: Boss House Keys
+  itemName: "Cl\xE9 de la maison de la patronne"
   itemSprite: {fileID: 0}
   itemFinding:
   - "J'ai trouv\xE9 une cl\xE9. Elles n'\xE9taient pas tr\xE8s bien cach\xE9es."

@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_BossHousePlant
+  m_Name: So_BossHouseBackDoor
   m_EditorClassIdentifier: 
-  interactableName: Boss House Plant
+  interactableName: "Porte arri\xE8re de la maison de la patronne"
   interactableDescription:
-  - Cette plante est encore plus verte que celle dans le bureau.
-  - "Vous voyez un objet brillant \xE0 nouveau."
-  item: {fileID: 11400000, guid: f9d0a1322e2fa484c97db7a42fd5949a, type: 2}
+  - test
+  lockedInteractableDescription:
+  - "Cette porte est ferm\xE9e avec un digicode."
+  unlockedInteractableDescription:
+  - Cool la porte est ouverte mais j'ai perdu pas mal de temps.
+  item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 11400000, guid: 72b5bdb1d53e6dd439b378100cad885a, type: 2}
