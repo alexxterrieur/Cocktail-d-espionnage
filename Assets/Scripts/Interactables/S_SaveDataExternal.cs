@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public static class S_SaveDataExternal
 {
     public struct Interactable
-    {
+    {//Why not just use the item and clue objects and check if they're null?
         public bool HasItem;
         public bool HasClue;
         public bool HasProof;

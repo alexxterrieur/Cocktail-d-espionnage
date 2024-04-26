@@ -48,7 +48,7 @@ public class S_Interactable : MonoBehaviour
             S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
         }
 
-        if (!interactableStruct.isLocked)
+        if (!interactableStruct.isLocked) //Would be better to just check if there is an item and set it to null when retrieved than using booleans
         {
             if (interactableStruct.HasItem)
             {

@@ -1,45 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Buttons : MonoBehaviour
+public class S_MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _options;
-    [SerializeField] private GameObject _credits;
-
     public void StartGame()
     {
         SceneManager.LoadScene("LukaTestScene");
     }
 
-    public void OpenOptions()
+    public void OpenMenu(GameObject menu)
     {
-        _options.SetActive(true);
+        menu.SetActive(true);
     }
 
-    public void CloseOptions()
+    public void CloseMenu(GameObject menu)
     {
-        _options.SetActive(false);
-    }
-
-    public void OpenCredits()
-    {
-        _credits.SetActive(true);
-    }
-
-    public void CloseCredits()
-    {
-        _credits.SetActive(false);
+        menu.SetActive(false);
     }
 
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    public void MainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
     }
 }
