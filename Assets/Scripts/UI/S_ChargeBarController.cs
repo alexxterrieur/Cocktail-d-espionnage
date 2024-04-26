@@ -8,7 +8,7 @@ public class S_ChargeBarController : MonoBehaviour
     private Slider _slider; 
     void Start()
     {
-        _slider.GetComponent<Slider>();
+        _slider = GetComponent<Slider>();
     }
 
     // Update is called once per frame
