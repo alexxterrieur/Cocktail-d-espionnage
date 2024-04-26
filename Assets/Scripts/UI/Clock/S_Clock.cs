@@ -10,11 +10,13 @@ public class Clock : MonoBehaviour
     public bool onPause = false;
 
     private Scene scene;
+    
     private const float realSecondsPerIngameDay = 86400f;       //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
     private float day = 0f;                                     //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
+    public GameObject gameoverScreen;
     public float remainingSeconds;
 
     private void Awake()
@@ -23,6 +25,7 @@ public class Clock : MonoBehaviour
         clockHourHandTransform = transform.Find("HourHand");
         clockMinuteHandTransform = transform.Find("MinuteHand");
         timeText = transform.Find("TimeText").GetComponent<TextMeshProUGUI>();
+        gameoverScreen.SetActive(false);
     }
 
     private void Update()
@@ -56,15 +59,15 @@ public class Clock : MonoBehaviour
         {
             if(scene.name == "Office")
             {
-                Debug.Log("GameOverOffice");
+                gameoverScreen.SetActive(true);
             }
             else if (scene.name == "BossHouse")
             {
-                Debug.Log("GameOverBossHouse");
+                gameoverScreen.SetActive(true);
             }
             else if (scene.name == "SecretBase")
             {
-                Debug.Log("GameOverSecretBase");
+                gameoverScreen.SetActive(true);
             }
         }
     }
