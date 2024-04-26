@@ -6212,7 +6212,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPause: 0
-  gameoverScreen: {fileID: 1684051859}
+  gameoverTimerImages: []
+  gameoverTimerCinematic: {fileID: 1807800420}
+  day: 0
   remainingSeconds: 600
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

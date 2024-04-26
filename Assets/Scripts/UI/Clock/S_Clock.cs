@@ -17,7 +17,7 @@ public class Clock : MonoBehaviour
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
-    private float day = 0f;                                     //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
+    public float day = 0f;                                      //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
     public float remainingSeconds;
 
     private void Awake()

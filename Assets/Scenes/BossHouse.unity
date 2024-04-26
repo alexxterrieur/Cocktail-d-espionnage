@@ -1654,8 +1654,8 @@ MonoBehaviour:
   onPause: 0
   gameoverTimerImages: []
   gameoverTimerCinematic: {fileID: 306831189}
-  day: 0.5
-  remainingSeconds: 5
+  day: 0.375
+  remainingSeconds: 600
 --- !u!224 &191775691
 RectTransform:
   m_ObjectHideFlags: 0

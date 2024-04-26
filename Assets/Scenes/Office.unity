@@ -4118,6 +4118,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c04ec5fe-cb74-4584-9bdb-783d5d164962
     m_ActionName: PlayerMouvement/ZQSD[/Keyboard/z,/Keyboard/s,/Keyboard/q,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9a7862f4-c517-454a-a2aa-6bd1358d8575
+    m_ActionName: PlayerMouvement/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 70b7edbe-24e8-4804-be71-5414b67563ca
+    m_ActionName: PlayerMouvement/SkipDialogue[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dd4d210a-367e-4bad-9f5e-30fd1aa853e1
+    m_ActionName: Enter/Enter[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMouvement
@@ -5813,8 +5825,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPause: 0
-  gameoverScreen: {fileID: 584221542}
-  remainingSeconds: 5
+  gameoverTimerImages: []
+  gameoverTimerCinematic: {fileID: 581891787}
+  day: 0.125
+  remainingSeconds: 600
 --- !u!1 &1982845763
 GameObject:
   m_ObjectHideFlags: 0
