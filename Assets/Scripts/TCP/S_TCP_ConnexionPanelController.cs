@@ -17,7 +17,6 @@ public class S_TCP_ConnexionPanelController : MonoBehaviour
 
     private void InstantiateButtons()
     {
-        Debug.Log(_previousIpList != S_TCP_Client._TCP_Instance.HostsList);
         if(_previousIpList != S_TCP_Client._TCP_Instance.HostsList || S_TCP_Client._TCP_Instance.HostsList.Count != _buttonList.Count)
         {
             foreach (GameObject bt in _buttonList)

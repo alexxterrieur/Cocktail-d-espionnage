@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: Tiroir
   interactableDescription:
-  - "Ceci est un tiroir et il est ferm\xE9."
+  - Ceci est un tiroir.
+  lockedInteractableDescription:
+  - "Il est ferm\xE9."
   - "La cl\xE9 doit \xEAtre dans cette pi\xE8ce."
+  unlockedInteractableDescription:
+  - Le tiroir s'est ouvert !
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 11400000, guid: a0eb4cfed53edcb43b4afb90913cd14f, type: 2}
+  key: {fileID: 11400000, guid: 365e195388a79674fb5d62ac01b88380, type: 2}
