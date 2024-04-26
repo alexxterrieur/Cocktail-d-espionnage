@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
-public class S_Computer : MonoBehaviour
+public class S_Computer : S_Interactable
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] List<GameObject> activatedObjects;
+    [SerializeField] GameObject computerPanel;
+
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Interact(JournalManager journalManager)
     {
-        
+        OpenComputerPanel();
+    }
+
+    public void OpenComputerPanel()
+    {
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+
+        foreach (GameObject obj in activatedObjects)
+        {
+            obj.SetActive(false);
+        }
+
+        computerPanel.SetActive(true);
     }
 }
