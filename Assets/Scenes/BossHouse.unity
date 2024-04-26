@@ -1652,7 +1652,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPause: 0
-  gameoverScreen: {fileID: 1494513805}
+  gameoverTimerImages: []
+  gameoverTimerCinematic: {fileID: 306831189}
+  day: 0.5
   remainingSeconds: 5
 --- !u!224 &191775691
 RectTransform:
@@ -2331,6 +2333,17 @@ MonoBehaviour:
   characterPerSeconds: 20
   maxCharPerSec: 100
   skipReference: {fileID: -6746274216294736291, guid: 11d0ef0f1d9580942a88e50f6add4362, type: 3}
+--- !u!114 &306831189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5362073231455536804, guid: d965e6196280c2a4793821878a8ed74a, type: 3}
+  m_PrefabInstance: {fileID: 306831184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306831187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a308dc768e44aef48a91236bd5491298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &312909300
 GameObject:
   m_ObjectHideFlags: 0

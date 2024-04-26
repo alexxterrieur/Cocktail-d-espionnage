@@ -10,7 +10,7 @@ public class Buttons : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("LukaTestScene");
+        SceneManager.LoadScene("Office");
     }
 
     public void OpenOptions()
