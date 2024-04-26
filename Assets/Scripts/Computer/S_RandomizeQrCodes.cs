@@ -10,7 +10,7 @@ public class S_RandomizeQrCodes : MonoBehaviour
     [SerializeField] private GameObject singleImage;
     private int image1Count = 20;
     private List<Vector3> takenPositions = new List<Vector3>();
-    private float minDistance = 50f; // Ajustez cette valeur selon vos besoins
+    private float minDistance = 100f;
 
     void Start()
     {
