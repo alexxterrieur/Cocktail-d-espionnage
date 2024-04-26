@@ -15,6 +15,7 @@ public class S_Interactable : MonoBehaviour
 
     protected virtual void Start()
     {
+        this.gameObject.layer = LayerMask.NameToLayer("Interactable");
         interactableName = interactableData.interactableName;
 
         if (interactableData.item != null )

@@ -49,7 +49,7 @@ public class S_TCP_Client : MonoBehaviour
     private void Start()
     {
         _functionMap.Add("MegaMindWin", MegaMindWin);
-        _functionMap.Add("ShakerWin", Shaker);
+        _functionMap.Add("Shaker", Shaker);
 
 
         DontDestroyOnLoad(this.gameObject);
@@ -181,6 +181,7 @@ public class S_TCP_Client : MonoBehaviour
 
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
+        LoadShaker();
     }
 
     private void Listener()
@@ -222,16 +223,19 @@ public class S_TCP_Client : MonoBehaviour
         string[] parts = commande.Split(':');
         Debug.Log(parts[0]);
         Debug.Log(parts[1]);
-        if(parts[0] == "FUNCTION_NAME" && _functionMap.ContainsKey(parts[1]))
+        for (int i = 0; i < parts.Length; i++)
         {
-            lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+            if (parts[i] == "FUNCTION_NAME" && _functionMap.ContainsKey(parts[i + 1]))
             {
-                _functionStack.Add(_functionMap[parts[1]]);
+                lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+                {
+                    _functionStack.Add(_functionMap[parts[i + 1]]);
+                }
             }
-        }
-        if (parts[0] == "LOAD_SCENE")
-        {
-            _loadSceneName = parts[1];
+            if (parts[i] == "LOAD_SCENE")
+            {
+                _loadSceneName = parts[i + 1];
+            }
         }
     }
 
@@ -240,7 +244,7 @@ public class S_TCP_Client : MonoBehaviour
         if (_stream != null && _client != null && _client.Connected)
         {
             string message = "FUNCTION_NAME:";
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message+functionName);
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message+functionName + ":");
             _stream.Write(messageBytes, 0, messageBytes.Length);
             Debug.Log("Message envoyé au client : " + message+functionName);
         }
@@ -255,7 +259,7 @@ public class S_TCP_Client : MonoBehaviour
         if (_stream != null && _client != null && _client.Connected)
         {
             string message = "LOAD_SCENE:";
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message + sceneName);
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message + sceneName + ":");
             _stream.Write(messageBytes, 0, messageBytes.Length);
             Debug.Log("Message envoyé au client : " + message + sceneName);
         }
@@ -284,6 +288,7 @@ public class S_TCP_Client : MonoBehaviour
 
     private void Shaker()
     {
+        Debug.Log("shake + 1");
         _joltScore++;
     }
 
