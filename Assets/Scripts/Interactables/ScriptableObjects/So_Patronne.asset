@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: So_Patronne
   m_EditorClassIdentifier: 
   interactableName: 
-  interactableDescription: []
+  interactableDescription:
+  - La patronne!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
-  key: {fileID: 0}
+  key: {fileID: 11400000, guid: e7554379d1f0dec408449ac283c36437, type: 2}
