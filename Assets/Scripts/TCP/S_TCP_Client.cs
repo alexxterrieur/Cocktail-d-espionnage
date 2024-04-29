@@ -200,7 +200,11 @@ public class S_TCP_Client : MonoBehaviour
 
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
-        LoadShaker();
+
+        if (SceneManager.GetActiveScene().Equals("FinalFight"))
+        {
+            LoadShaker();
+        }
     }
 
     private void Listener()
