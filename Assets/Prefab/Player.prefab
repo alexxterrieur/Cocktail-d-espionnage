@@ -303,6 +303,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 70b7edbe-24e8-4804-be71-5414b67563ca
     m_ActionName: PlayerMouvement/SkipDialogue[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8939030858782449768}
+        m_TargetAssemblyTypeName: S_PlayerAction, Assembly-CSharp
+        m_MethodName: OpenPauseMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b56e13eb-adff-4e9c-95de-23fda1dcaa76
+    m_ActionName: PlayerMouvement/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMouvement
@@ -325,3 +341,4 @@ MonoBehaviour:
     m_Bits: 512
   range: 0.5
   journalManager: {fileID: 0}
+  menuManager: {fileID: 0}

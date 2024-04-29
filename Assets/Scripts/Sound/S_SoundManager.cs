@@ -5,7 +5,7 @@ public class S_SoundManager : MonoBehaviour
     public static S_SoundManager Instance { get; private set; }
     [SerializeField] private AudioSource musicSource;
 
-    public float MasterVolume = 1f;
+    public float masterVolume = 1f;
 
     //private List<AudioClip> soundsEffects = new List<AudioClip>();
 
@@ -31,7 +31,7 @@ public class S_SoundManager : MonoBehaviour
         {
             AudioSource source = gameObject.AddComponent<AudioSource>();
             source.clip = clip;
-            source.volume = volume * MasterVolume;
+            source.volume = volume * masterVolume;
             source.PlayOneShot(clip);
             Destroy(source, clip.length);
         }
