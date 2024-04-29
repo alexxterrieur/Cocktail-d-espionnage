@@ -10,8 +10,10 @@ public class S_PlayerAction : MonoBehaviour
     private CircleCollider2D playerCollider;
 
     [SerializeField] private JournalManager journalManager;
+    [SerializeField] private S_MenuManager menuManager;
 
     private PlayerMovement playerMovement;
+    private bool onPause;
 
     private void Awake()
     {
@@ -55,6 +57,21 @@ public class S_PlayerAction : MonoBehaviour
         else if (context.canceled && S_DialogueManager.Instance.GetIsDialogueActive())
         {
             S_DialogueManager.Instance.ChangeTextSpeed(false);
+        }
+    }
+
+    public void OpenPauseMenu(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (!menuManager.GetOnPause())
+            {
+                menuManager.OpenClosePause(true);
+            }
+            else
+            {
+                menuManager.OpenClosePause(false);
+            }
         }
     }
 
