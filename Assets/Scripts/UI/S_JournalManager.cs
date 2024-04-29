@@ -34,6 +34,8 @@ public class JournalManager : MonoBehaviour
         journal = S_SaveDataExternal.LoadJournalData(journal);
 
         RefreshJournal(); //Refresh the visuals at every scene start
+
+        journalObj.SetActive(false);
     }
 
     public void OpenJournal()
