@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_DeskCan
   m_EditorClassIdentifier: 
-  interactableName: 
+  interactableName: Can
   interactableDescription:
-  - je farfouille Prout c==3
+  - je farfouille
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 11400000, guid: e7554379d1f0dec408449ac283c36437, type: 2}
