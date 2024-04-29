@@ -23,6 +23,7 @@ public class S_TCP_Client : MonoBehaviour
     private List<Action> _functionStack = new List<Action>();
     private object _stackLock = new object();
     private object _PanelLock = new object();
+    private object _respondConnectLock = new object();
     private string _loadSceneName = null;
     [SerializeField] private List<string> _hostsIP;
     [SerializeField] private int _joltScore = 0;
@@ -63,7 +64,7 @@ public class S_TCP_Client : MonoBehaviour
         _discoveryThread = new Thread(new ThreadStart(StartDiscovery));
         _discoveryThread.Start();
         
-        InvokeRepeating("CheckConnection", 20.0f, 20.0f);
+        InvokeRepeating("CheckConnection", 10.0f, 10.0f);
     }
 
     private void FixedUpdate()
@@ -190,7 +191,8 @@ public class S_TCP_Client : MonoBehaviour
         _stream = _client.GetStream();
 
         _TCP_ActiveConnexionPanel = false;
-        _respondConnected = true;
+        lock (_respondConnectLock)
+            _respondConnected = true;
 
         Debug.Log("Connecté au serveur !");
 
@@ -226,11 +228,11 @@ public class S_TCP_Client : MonoBehaviour
             catch (Exception ex)
             {
                 // Gérer toute exception survenue pendant la lecture
+                Disconnected();
                 Debug.LogError("Erreur lors de la lecture des données du serveur : " + ex.Message);
                 break; // Sortir de la boucle si une erreur survient
             }
         }
-        Disconnected();
         // Une fois la connexion fermée, afficher un message
         Debug.Log("Connexion au serveur fermée. Arrêt de l'écoute.");
     }
@@ -238,8 +240,8 @@ public class S_TCP_Client : MonoBehaviour
     private void Interpreter(string commande)
     {
         string[] parts = commande.Split(':');
-        Debug.Log(parts[0]);
-        Debug.Log(parts[1]);
+        //Debug.Log(parts[0]);
+        //Debug.Log(parts[1]);
         for (int i = 0; i < parts.Length; i++)
         {
             if (parts[i] == "FUNCTION_NAME" && _functionMap.ContainsKey(parts[i + 1]))
@@ -339,6 +341,7 @@ public class S_TCP_Client : MonoBehaviour
         lock (_PanelLock)
         {
             _TCP_ActiveConnexionPanel = true;
+            SearchServer();
         }
         Debug.Log("Disconnected");
     }
@@ -346,23 +349,24 @@ public class S_TCP_Client : MonoBehaviour
     private void CheckConnection()
     {
         Debug.Log("CheckConnection");
-        if(_client == null || !_client.Connected)
+        lock (_respondConnectLock)
         {
-            return;
-        }
-        if (!_respondConnected)
-        {
-            Disconnected();
+            if (!_respondConnected)
+            {
+                Debug.Log("Echec CheckConnection");
+                Disconnected();
+            }
         }
         SenderCallFunction("RespondConnected");
-        
-        _respondConnected = false;
+        lock (_respondConnectLock)
+            _respondConnected = false;
     }
 
     private void ReceiveConnection()
     {
         Debug.Log("ReceiveConnection");
-        _respondConnected = true;
+        lock (_respondConnectLock)
+            _respondConnected = true;
     }
 
     void OnDestroy()
