@@ -66,6 +66,10 @@ public class Clock : MonoBehaviour
             {
                 Debug.Log("GameOverSecretBase");
             }
+            else if (scene.name == "MVP")
+            {
+                SceneManager.LoadScene("MVP");
+            }
         }
     }
 
