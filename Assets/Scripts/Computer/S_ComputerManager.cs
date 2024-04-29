@@ -19,7 +19,7 @@ public class S_ComputerManager : MonoBehaviour
 
     public void OpenComputer()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
 
         foreach (GameObject obj in activatedObjects) 
         {
@@ -31,7 +31,7 @@ public class S_ComputerManager : MonoBehaviour
 
     public void CloseComputer()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
 
         foreach (GameObject obj in activatedObjects)
         {

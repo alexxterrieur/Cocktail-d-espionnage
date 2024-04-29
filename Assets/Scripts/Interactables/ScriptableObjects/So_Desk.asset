@@ -19,6 +19,6 @@ MonoBehaviour:
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 11400000, guid: 72b5bdb1d53e6dd439b378100cad885a, type: 2}
-  clue: {fileID: 0}
+  clue: {fileID: 11400000, guid: 8a9cd492ef4f4324ba3d8b0597d55eb3, type: 2}
   proof: {fileID: 11400000, guid: 4a2131e637b94e24db049baab6464c7d, type: 2}
   key: {fileID: 0}

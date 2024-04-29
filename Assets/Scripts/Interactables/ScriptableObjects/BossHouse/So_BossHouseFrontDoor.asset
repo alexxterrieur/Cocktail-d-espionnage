@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_BossHouseFrontDoor
   m_EditorClassIdentifier: 
-  interactableName: "Porte d'entr\xE9e de la maison de la patronne"
+  interactableName: "La porte d'entr\xE9e"
   interactableDescription:
-  - 'test
-
-'
+  - 
   lockedInteractableDescription:
   - "Cette porte est ferm\xE9."
   unlockedInteractableDescription:
