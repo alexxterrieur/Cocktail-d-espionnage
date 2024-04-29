@@ -15,6 +15,10 @@ MonoBehaviour:
   interactableName: Fridge
   interactableDescription:
   - "Il n'y a que du lait p\xE9rim\xE9 dans le frigo."
+  - "Je connais un coll\xE8gue qui serait capable d'en boire."
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}

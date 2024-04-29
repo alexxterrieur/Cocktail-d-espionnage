@@ -15,6 +15,7 @@ public class S_Interactable : MonoBehaviour
 
     protected virtual void Start()
     {
+        this.gameObject.layer = LayerMask.NameToLayer("Interactable");
         interactableName = interactableData.interactableName;
 
         if (interactableData.item != null )
@@ -71,6 +72,12 @@ public class S_Interactable : MonoBehaviour
                     FoundProof(journalManager, interactableData.proof);
                 else
                     Debug.LogWarning("No proof has been referenced in this interactable !");
+            }
+
+            if (interactableData.interactableDescription[0] == string.Empty && !interactableStruct.HasItem &&
+                !interactableStruct.HasClue && !interactableStruct.HasProof)
+            {
+                GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
             }
         }
         else
@@ -133,6 +140,7 @@ public class S_Interactable : MonoBehaviour
             {
                 lockpickingMenu.OpenCloseMenu(true);
                 S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");
+                S_TCP_Client._TCP_Instance.Interactable = this;
                 S_TCP_Client._TCP_Instance.LoadMegaMind(); //We launch the mastermind game
             }
             else //If it's just a regular key

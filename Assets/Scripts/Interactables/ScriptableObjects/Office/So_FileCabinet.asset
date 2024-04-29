@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: File cabinet
   interactableDescription:
-  - "Il n'y a rien d'int\xE9ressant dedans.\r"
+  - "C'est remplit d'archives sur les ventes de l'entreprise.\r"
+  - "Mais il n'y \xE0 rien de vraiment int\xE9ressant.\r"
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}

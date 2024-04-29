@@ -105,8 +105,4 @@ public class PlayerMovement : MonoBehaviour
         this.canMove = canMove;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(playerCollider.bounds.center + (Vector3) mouvementInput * castDistance, boxSize);
-    }
 }

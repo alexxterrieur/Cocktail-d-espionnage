@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_BossBed
+  m_Name: So_DeskCan
   m_EditorClassIdentifier: 
-  interactableName: Boss Bed
-  interactableDescription:
-  - "Woah, il est fait au carr\xE9 !"
-  - Il n'y a rien sous le coussin.
+  interactableName: 
+  interactableDescription: []
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: e7554379d1f0dec408449ac283c36437, type: 2}
   clue: {fileID: 0}
   proof: {fileID: 0}
   key: {fileID: 0}

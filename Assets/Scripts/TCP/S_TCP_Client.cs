@@ -19,14 +19,17 @@ public class S_TCP_Client : MonoBehaviour
     private Thread _connectionThread;
     private string _hostIP;
     private Dictionary<string, Action> _functionMap = new Dictionary<string, Action>();
+    private List<Action> _functionStack = new List<Action>();
+    private object _stackLock = new object();
     private string _loadSceneName = null;
     [SerializeField] private List<string> _hostsIP;
-
-    private bool _megamindWin = false;
-    public bool MegamindWin { get { return _megamindWin; } set { _megamindWin = value; } }
+    [SerializeField] private int _joltScore = 0;
+    [SerializeField] private S_Interactable _interactable = null;
     public static S_TCP_Client _TCP_Instance { get; private set; }
 
     public List<string> HostsList => _hostsIP;
+    public int JoltScore { get { return _joltScore; } set { _joltScore = value; } }
+    public S_Interactable Interactable { get { return _interactable; } set { _interactable = value; } }
 
     void Awake()
     {
@@ -46,7 +49,7 @@ public class S_TCP_Client : MonoBehaviour
     private void Start()
     {
         _functionMap.Add("MegaMindWin", MegaMindWin);
-        _functionMap.Add("ShakerWin", ShakerWin);
+        _functionMap.Add("Shaker", Shaker);
 
 
         DontDestroyOnLoad(this.gameObject);
@@ -60,6 +63,17 @@ public class S_TCP_Client : MonoBehaviour
         {
             SceneManager.LoadScene(_loadSceneName);
             _loadSceneName = null;
+        }
+        if(_functionStack.Count > 0)
+        {
+            lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+            {
+                foreach(Action function in _functionStack)
+                {
+                    function.Invoke();
+                }
+                _functionStack.Clear(); // Effacer la liste après avoir exécuté toutes les actions
+            }
         }
     }
 
@@ -88,11 +102,6 @@ public class S_TCP_Client : MonoBehaviour
             {
                 _hostsIP.Add(response.Substring("HOST_IP:".Length));   
             }
-            //else
-            //{
-            //    Debug.Log("pas d'IP trouver");
-            //    Debug.Log(response.Substring("HOST_IP:".Length));
-            //}
         }
     }
 
@@ -170,14 +179,9 @@ public class S_TCP_Client : MonoBehaviour
         byte[] messageBytes = Encoding.UTF8.GetBytes(message);
         _stream.Write(messageBytes, 0, messageBytes.Length);
 
-        // Lecture de la réponse du serveur
-        byte[] buffer = new byte[1024];
-        int bytesRead = _stream.Read(buffer, 0, buffer.Length);
-        string dataReceived = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-        Debug.Log("Réponse du serveur : " + dataReceived);
-
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
+        LoadShaker();
     }
 
     private void Listener()
@@ -199,7 +203,7 @@ public class S_TCP_Client : MonoBehaviour
                     string dataReceived = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     Debug.Log("Message perso reçu du serveur : " + dataReceived);
                     if(dataReceived.StartsWith("FUNCTION_NAME:") || dataReceived.StartsWith("LOAD_SCENE:"))
-                        Interpreter(dataReceived);
+                        Interpreter(dataReceived);  
                 }
             }
             catch (Exception ex)
@@ -219,13 +223,19 @@ public class S_TCP_Client : MonoBehaviour
         string[] parts = commande.Split(':');
         Debug.Log(parts[0]);
         Debug.Log(parts[1]);
-        if(parts[0] == "FUNCTION_NAME" && _functionMap.ContainsKey(parts[1]))
+        for (int i = 0; i < parts.Length; i++)
         {
-            _functionMap[parts[1]].Invoke();
-        }
-        if (parts[0] == "LOAD_SCENE")
-        {
-            _loadSceneName = parts[1];
+            if (parts[i] == "FUNCTION_NAME" && _functionMap.ContainsKey(parts[i + 1]))
+            {
+                lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+                {
+                    _functionStack.Add(_functionMap[parts[i + 1]]);
+                }
+            }
+            if (parts[i] == "LOAD_SCENE")
+            {
+                _loadSceneName = parts[i + 1];
+            }
         }
     }
 
@@ -234,7 +244,7 @@ public class S_TCP_Client : MonoBehaviour
         if (_stream != null && _client != null && _client.Connected)
         {
             string message = "FUNCTION_NAME:";
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message+functionName);
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message+functionName + ":");
             _stream.Write(messageBytes, 0, messageBytes.Length);
             Debug.Log("Message envoyé au client : " + message+functionName);
         }
@@ -249,7 +259,7 @@ public class S_TCP_Client : MonoBehaviour
         if (_stream != null && _client != null && _client.Connected)
         {
             string message = "LOAD_SCENE:";
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message + sceneName);
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message + sceneName + ":");
             _stream.Write(messageBytes, 0, messageBytes.Length);
             Debug.Log("Message envoyé au client : " + message + sceneName);
         }
@@ -267,7 +277,8 @@ public class S_TCP_Client : MonoBehaviour
     private void MegaMindWin()
     {
         Debug.Log("MegaMind WIN");
-        _megamindWin = true;
+        _interactable.UnlockWithDigicode();
+        _interactable = null;
     }
 
     public void LoadShaker()
@@ -275,9 +286,10 @@ public class S_TCP_Client : MonoBehaviour
         SenderLoadScene("Shaker");
     }
 
-    private void ShakerWin()
+    private void Shaker()
     {
-        Debug.Log("Shaker WIN");
+        Debug.Log("shake + 1");
+        _joltScore++;
     }
 
     void OnDestroy()
