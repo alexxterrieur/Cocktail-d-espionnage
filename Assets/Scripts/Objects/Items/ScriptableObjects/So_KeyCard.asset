@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: So_KeyCard
   m_EditorClassIdentifier: 
   itemName: Key Card
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 098f730694ef58f46a7bfb611e6fbb60, type: 3}
   itemFinding:
   - "Oh, une carte d'acc\xE8s."
   itemDescription: 
