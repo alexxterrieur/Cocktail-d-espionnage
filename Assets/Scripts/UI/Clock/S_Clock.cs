@@ -10,11 +10,14 @@ public class Clock : MonoBehaviour
     public bool onPause = false;
 
     private Scene scene;
+
+    [SerializeField] private List<Sprite> gameoverTimerImages = new List<Sprite>();
+    [SerializeField] private S_Cinematic gameoverTimerCinematic;
     private const float realSecondsPerIngameDay = 86400f;       //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
-    private float day = 0f;                                     //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
+    public float day = 0f;                                      //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
     public float remainingSeconds;
 
     private void Awake()
@@ -54,22 +57,7 @@ public class Clock : MonoBehaviour
     {
         if (remainingSeconds <= 0f)
         {
-            if(scene.name == "Office")
-            {
-                Debug.Log("GameOverOffice");
-            }
-            else if (scene.name == "BossHouse")
-            {
-                Debug.Log("GameOverBossHouse");
-            }
-            else if (scene.name == "SecretBase")
-            {
-                Debug.Log("GameOverSecretBase");
-            }
-            else if (scene.name == "MVP")
-            {
-                SceneManager.LoadScene("MVP");
-            }
+            gameoverTimerCinematic.SetImages(gameoverTimerImages);
         }
     }
 

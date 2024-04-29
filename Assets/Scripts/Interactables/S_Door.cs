@@ -5,6 +5,8 @@ public class S_Door : S_Interactable
 {
     private bool waitForDialogue = false;
     private bool isOpen;
+    [SerializeField] private bool doesTeleport;
+    [SerializeField] private S_Teleport teleport;
 
     protected override void Start()
     {
@@ -73,6 +75,10 @@ public class S_Door : S_Interactable
 
     public void OpenDoor()
     {
+        if (doesTeleport)
+        {
+            teleport.Teleport();
+        }
         Destroy(gameObject);
     }
 }
