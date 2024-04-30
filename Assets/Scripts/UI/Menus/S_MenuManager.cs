@@ -1,5 +1,7 @@
+using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -101,6 +103,7 @@ public class S_MenuManager : MonoBehaviour
             {
                 GameObject.Find("Player").GetComponent<PlayerMovement>().SetCanMove(false);
                 pauseMenu.transform.GetChild(0).gameObject.SetActive(true);
+                Camera.main.GetComponent<PostProcessVolume>().enabled = true;
             }
             else
             {
@@ -109,6 +112,7 @@ public class S_MenuManager : MonoBehaviour
                 {
                     child.gameObject.SetActive(false);
                 }
+                Camera.main.GetComponent<PostProcessVolume>().enabled = false;
             }
         }
         else

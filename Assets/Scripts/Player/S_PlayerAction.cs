@@ -13,7 +13,6 @@ public class S_PlayerAction : MonoBehaviour
     [SerializeField] private S_MenuManager menuManager;
 
     private PlayerMovement playerMovement;
-    private bool onPause;
 
     private void Awake()
     {
@@ -66,11 +65,28 @@ public class S_PlayerAction : MonoBehaviour
         {
             if (!menuManager.GetOnPause())
             {
-                menuManager.OpenClosePause(true);
+                if (!journalManager.GetJournalObj().activeSelf)
+                    menuManager.OpenClosePause(true);
             }
             else
             {
                 menuManager.OpenClosePause(false);
+            }
+        }
+    }
+
+    public void OpenJournal(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (!journalManager.GetJournalObj().activeSelf)
+            {
+                if (!menuManager.GetOnPause())
+                    journalManager.OpenJournal();
+            }
+            else
+            {
+                journalManager.CloseJournal();
             }
         }
     }
