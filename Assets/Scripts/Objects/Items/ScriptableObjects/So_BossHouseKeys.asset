@@ -16,4 +16,5 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 5ee1cd27d86cb2740b0e08f723076a42, type: 3}
   itemFinding:
   - "J'ai trouv\xE9 une cl\xE9. Elles n'\xE9taient pas tr\xE8s bien cach\xE9es."
-  itemDescription: 
+  - "Personnellement je les aurais laiss\xE9 sous le tapis !"
+  itemDescription: "Cl\xE9 de maison, peut ouvrir la maison de la patronne."
