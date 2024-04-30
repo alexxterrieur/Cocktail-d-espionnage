@@ -317,7 +317,7 @@ public class S_TCP_Client : MonoBehaviour
         _joltScore++;
     }
 
-    private void Disconnected()
+    public void Disconnected()
     {
         if (_stream != null)
         {
