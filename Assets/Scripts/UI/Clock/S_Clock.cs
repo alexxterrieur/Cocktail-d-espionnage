@@ -11,7 +11,7 @@ public class Clock : MonoBehaviour
 
     private Scene scene;
 
-    [SerializeField] private List<Sprite> gameoverTimerImages = new List<Sprite>();
+    [SerializeField] private List<S_FrameData> gameoverTimerImages = new List<S_FrameData>();
     [SerializeField] private S_Cinematic gameoverTimerCinematic;
     private const float realSecondsPerIngameDay = 86400f;       //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;

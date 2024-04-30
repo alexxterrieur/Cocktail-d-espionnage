@@ -43,7 +43,7 @@ public class S_Interactable : MonoBehaviour
 
     public virtual void Interact(JournalManager journalManager)
     {
-        if (interactableData.interactableDescription[0] != string.Empty)
+        if (interactableData.interactableDescription[0] != string.Empty || interactableData.interactableDescription != null)
         {
             S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
         }

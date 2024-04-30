@@ -41,11 +41,22 @@ public class S_SoundManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(AudioClip musicClip, float volume = 1, bool loop = true)
+    public void PlayMusic(string musicClipName, float volume = 1, bool loop = true)
     {
-        musicSource.clip = musicClip;
+        musicSource.clip = Resources.Load<AudioClip>("Sounds/" + musicClipName);
         musicSource.volume = volume;
         musicSource.loop = loop;
         musicSource.Play();
+    }
+
+    public void StopAllSoundsEffects()
+    {
+        foreach (AudioSource source in FindObjectsOfType<AudioSource>())
+        {
+            if (source.clip != null && source.isPlaying && source.gameObject.name != musicSource.name)
+            {
+                source.Stop();
+            }
+        }
     }
 }

@@ -6,9 +6,11 @@ using UnityEngine.InputSystem;
 
 public class S_Cinematic : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> images = new List<Sprite>();
+    [SerializeField] private List<S_FrameData> images = new List<S_FrameData>();
     [SerializeField] private GameObject imageObject;
     [SerializeField] private Clock clock;
+
+    public bool playAtStart = false;
 
     public InputActionReference skipReference;
     private InputAction skipAction;
@@ -28,8 +30,7 @@ public class S_Cinematic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Remove this if we don't need to start the cinematic at the start of the gameobject's life
-        if (images.Count > 0)
+        if (images.Count > 0 && playAtStart)
         {
             StartTimerTransition();
         }
@@ -40,7 +41,7 @@ public class S_Cinematic : MonoBehaviour
     }
 
     //If needed we can change the list with this
-    public void SetImages(List<Sprite> pictures)
+    public void SetImages(List<S_FrameData> pictures)
     {
         pictures.Clear();
         images = pictures;
@@ -61,9 +62,18 @@ public class S_Cinematic : MonoBehaviour
         if (transitionCoroutine == null)
         {
             clock.SetPause(true);
-            currentImage = images[0];
+            currentImage = images[0].frameSprite;
             UpdateImage(currentImage);
             imageObject.SetActive(true);
+
+            //disable some player action for the duration of the cinematic
+            GameObject player = GameObject.Find("Player");
+            player.GetComponent<PlayerMovement>().SetCanMove(false);
+            player.GetComponent<PlayerInput>().actions.FindAction("OpenJournal").Disable();
+            player.GetComponent<PlayerInput>().actions.FindAction("Pause").Disable();
+
+            if (images[0].frameClip != null)
+                S_SoundManager.Instance.PlaySoundEffect(images[0].frameClip.name);
 
             transitionCoroutine = StartCoroutine(ImageTimerTransition()); //Set the coroutine variable
         }
@@ -88,12 +98,17 @@ public class S_Cinematic : MonoBehaviour
 
                 if (frameIndex < images.Count)
                 {
-                    currentImage = images[frameIndex];
+                    currentImage = images[frameIndex].frameSprite;
+
+                    if (images[frameIndex].frameClip != null)
+                        S_SoundManager.Instance.PlaySoundEffect(images[frameIndex].frameClip.name);
+
                     UpdateImage(currentImage);
                 }
             }
             if (skipAction.triggered)
             {
+                S_SoundManager.Instance.StopAllSoundsEffects();
                 frameTimer = frameDuration;
             }
             yield return null;
@@ -101,5 +116,11 @@ public class S_Cinematic : MonoBehaviour
         imageObject.SetActive(false);
         transitionCoroutine = null; //Set the coroutine variable to null because it's not running anymore
         clock.SetPause(false);
+
+        //enable the actions again after the cinematic
+        GameObject player = GameObject.Find("Player");
+        player.GetComponent<PlayerMovement>().SetCanMove(true);
+        player.GetComponent<PlayerInput>().actions.FindAction("OpenJournal").Enable();
+        player.GetComponent<PlayerInput>().actions.FindAction("Pause").Enable();
     }
 }

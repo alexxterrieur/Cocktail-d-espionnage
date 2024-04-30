@@ -21,6 +21,7 @@ public class S_Door : S_Interactable
         {
             if (!S_DialogueManager.Instance.GetIsDialogueActive())
             {
+                DisplayPopup(false);
                 OpenDoor();
             }
         }
@@ -75,6 +76,7 @@ public class S_Door : S_Interactable
 
     public void OpenDoor()
     {
+        GameObject.Find("Player").GetComponent<PlayerMovement>().SetCanMove(true);
         if (doesTeleport)
         {
             teleport.Teleport();

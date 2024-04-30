@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_PlayerBed
   m_EditorClassIdentifier: 
-  interactableName: Player Bed
+  interactableName: Lit joueur
   interactableDescription:
-  - Il faudrait que je fasse mon lit un jour.
+  - C'est mon lit.
+  - "Je dormirais bien mais j'ai encore beaucoup de travail \xE0 faire."
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}
