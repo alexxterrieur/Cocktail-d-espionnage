@@ -37,8 +37,6 @@ public class PlayerMovement : MonoBehaviour
         {
             PerformMouvement();
         }
-
-        Debug.Log(canMove);
     }
 
     private void PerformMouvement()

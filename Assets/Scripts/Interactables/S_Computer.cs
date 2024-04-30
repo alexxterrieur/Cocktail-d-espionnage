@@ -18,7 +18,7 @@ public class S_Computer : S_Interactable
 
     public void OpenComputerPanel()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
 
         foreach (GameObject obj in activatedObjects)
         {
