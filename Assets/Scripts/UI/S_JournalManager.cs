@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class JournalManager : MonoBehaviour
 {
     [SerializeField] Button openButton;
+    [SerializeField] GameObject journalObj;
     [SerializeField] GameObject cluesPanel;
     [SerializeField] GameObject objectsPanel;
     [SerializeField] GameObject proofPanel;
@@ -33,17 +34,21 @@ public class JournalManager : MonoBehaviour
         journal = S_SaveDataExternal.LoadJournalData(journal);
 
         RefreshJournal(); //Refresh the visuals at every scene start
+
+        journalObj.SetActive(false);
     }
 
     public void OpenJournal()
     {
         openButton.gameObject.SetActive(false);
+        journalObj.SetActive(true);
         cluesPanel.SetActive(true);
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
     }
 
     public void CloseJournal()
     {
+        journalObj.SetActive(false);
         cluesPanel.SetActive(false);
         objectsPanel.SetActive(false);
         proofPanel.SetActive(false);
@@ -173,5 +178,10 @@ public class JournalManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public GameObject GetJournalObj()
+    {
+        return journalObj;
     }
 }
