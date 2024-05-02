@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: So_IntroFrame3
   m_EditorClassIdentifier: 
   frameSprite: {fileID: 21300000, guid: aabc43aecc792b042b5404f0170262da, type: 3}
-  frameClip: {fileID: 0}
+  frameClip: {fileID: 8300000, guid: 6dc9f60f56d766d42906f5b32d881aa7, type: 3}
