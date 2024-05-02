@@ -216,6 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd89490cc05e77439f061aa6f1769bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bossSlider: {fileID: 4137780903670712382}
+  _chance: 8
 --- !u!1 &1574016244583486744
 GameObject:
   m_ObjectHideFlags: 0
@@ -5418,7 +5420,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1865129354194687562}
   - component: {fileID: 4137780903670712382}
-  - component: {fileID: 9164664426730264567}
   m_Layer: 5
   m_Name: BossChargeBar
   m_TagString: Untagged
@@ -5499,18 +5500,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9164664426730264567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3405792684867783398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17cec43f1d1dc5f4281d060c3b25d048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3691390765664749321
 GameObject:
   m_ObjectHideFlags: 0
