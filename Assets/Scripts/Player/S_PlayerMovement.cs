@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         {
             PerformMouvement();
         }
+        // Debug.Log(SceneManager.GetSceneByName());
     }
 
     private void PerformMouvement()

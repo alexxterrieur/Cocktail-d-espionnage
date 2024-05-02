@@ -9,6 +9,7 @@ public class S_EnemyAI : MonoBehaviour
     public float closeRange;
     public float sightRange;
     public Transform[] waypoints;
+    public Transform playerWaypoint;
     public Node start;
 
     void Start()
@@ -23,7 +24,7 @@ public class S_EnemyAI : MonoBehaviour
         S_SeePlayer seePlayer = new S_SeePlayer(agent, player, sightRange);
         S_ChasePlayer chasePlayer = new S_ChasePlayer(agent, player);
         S_CloseEnough closeEnough = new S_CloseEnough(agent, player, closeRange);
-        S_DoSomething doSomething = new S_DoSomething();
+        S_DoSomething doSomething = new S_DoSomething(playerWaypoint,player);
 
         Sequence sequence1 = new Sequence( new List<Node> { closeEnough, doSomething });
         Selector selector1 = new Selector( new List<Node> { sequence1, chasePlayer });
