@@ -5,6 +5,7 @@ public class S_ItemData : ScriptableObject
 {
     public string itemName;
     public Sprite itemSprite;
+    public AudioClip itemSound;
 
     [field: TextArea]
     public string[] itemFinding;
