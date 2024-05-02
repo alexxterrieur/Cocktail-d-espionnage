@@ -37,7 +37,7 @@ public class S_MenuManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("No instance of SoundManager has been found !");
+                /*Debug.LogError("No instance of SoundManager has been found !");*/
             }
         }
         else
@@ -72,7 +72,7 @@ public class S_MenuManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("No instance of SoundManager has been found !");
+                /*Debug.LogError("No instance of SoundManager has been found !");*/
             }
         }
         else
