@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12fb2a27671fbd44babe5eaf075f1ccf, type: 3}
-  m_Name: So_KeyCard
+  m_Script: {fileID: 11500000, guid: 0f0dc99c412c7634b83de78f44722991, type: 3}
+  m_Name: So_IntroFrame1
   m_EditorClassIdentifier: 
-  itemName: Key Card
-  itemSprite: {fileID: 21300000, guid: 098f730694ef58f46a7bfb611e6fbb60, type: 3}
-  itemFinding:
-  - "Oh, une carte d'acc\xE8s."
-  itemDescription: 
+  frameSprite: {fileID: 21300000, guid: 6a9e98490861c7848bc55b2bfdecc57b, type: 3}
+  frameClip: {fileID: 0}

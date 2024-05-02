@@ -515,6 +515,10 @@ MonoBehaviour:
     m_GlyphIndex: 70
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 233
+    m_GlyphIndex: 70
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 244
     m_GlyphIndex: 80
     m_Scale: 1

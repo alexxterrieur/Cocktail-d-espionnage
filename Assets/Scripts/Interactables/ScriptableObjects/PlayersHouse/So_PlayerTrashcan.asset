@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_PlayerTrashcan
   m_EditorClassIdentifier: 
-  interactableName: Player Trashcan
+  interactableName: Poubelle cuisine
   interactableDescription:
-  - "Elle est remplit de papiers froiss\xE9s et de gobelets en papier."
-  - Il faudrait que je la vide un jour.
+  - "Cette poubelle est remplie \xE0 ras bord."
+  - Et elle sent vraiment mauvais POUAH !
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}

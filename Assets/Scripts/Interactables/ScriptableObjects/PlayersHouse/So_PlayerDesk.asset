@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_PlayerDesk
   m_EditorClassIdentifier: 
-  interactableName: PlayerDesk
+  interactableName: Bureau joueur
   interactableDescription:
   - Tous mon travail est dessus.
+  - ...
+  - "Et beaucoup de jeux vid\xE9o aussi, il faut que je fasse le tri."
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}

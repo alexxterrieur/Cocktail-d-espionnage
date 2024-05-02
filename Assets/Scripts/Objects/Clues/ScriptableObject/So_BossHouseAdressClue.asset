@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac13f48c109342458c713f69062f34d, type: 3}
   m_Name: So_BossHouseAdressClue
   m_EditorClassIdentifier: 
-  clueFinding: []
+  clueFinding:
+  - 
   clueDescription: '- l''adresse de la maison de la patronne.'

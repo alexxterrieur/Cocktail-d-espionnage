@@ -13,8 +13,5 @@ MonoBehaviour:
   m_Name: So_ChemicalComponentProof
   m_EditorClassIdentifier: 
   clueFinding:
-  - "Vous avez trouv\xE9 un plan tr\xE8s d\xE9taill\xE9 de la recette de la myst\xE9rieuse
-    boisson."
-  - Cela fait une preuve de plus a utiliser contre la patronne.
-  clueDescription: "- Les composants chimiques utilis\xE9s dans cette boisson vous
-    semblent tr\xE8s familier."
+  - Avec cette recette je peux incriminer la patronne
+  clueDescription: '- Modification de la recette de BlueSloth.'

@@ -43,7 +43,7 @@ public class S_Interactable : MonoBehaviour
 
     public virtual void Interact(JournalManager journalManager)
     {
-        if (interactableData.interactableDescription[0] != string.Empty)
+        if (interactableData.interactableDescription[0] != string.Empty || interactableData.interactableDescription != null)
         {
             S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
         }
@@ -136,7 +136,7 @@ public class S_Interactable : MonoBehaviour
 
         if (journalManager.SearchKey(key)) //player have the key
         {
-            if (key.itemName == "Unlocking Tool") //If it has to be opened with a digicode
+            if (key.itemName == "Locky McLockface") //If it has to be opened with a digicode
             {
                 lockpickingMenu.OpenCloseMenu(true);
                 S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");

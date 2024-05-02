@@ -39,8 +39,8 @@ public class S_PlayerAction : MonoBehaviour
                 {
                     if (!S_DialogueManager.Instance.GetIsDialogueActive())
                     {
-                        interactable.Interact(journalManager);
                         playerMovement.SetCanMove(false);
+                        interactable.Interact(journalManager);
                     }
                 }
             }
