@@ -23,3 +23,4 @@ MonoBehaviour:
   clue: {fileID: 0}
   proof: {fileID: 0}
   key: {fileID: 11400000, guid: 6bec903f442df3b48a41ee2dceb7e0ce, type: 2}
+  interactableSound: {fileID: 8300000, guid: cdd443a1062659d4eb996622fff39248, type: 3}
