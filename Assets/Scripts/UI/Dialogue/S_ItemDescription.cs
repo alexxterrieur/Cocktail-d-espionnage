@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 public class S_ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject itemDescriptionBox;
-    [SerializeField] private RectTransform background;
     [SerializeField] private TextMeshProUGUI itemDescriptionTxt;
 
     private Vector2 boxPos;
@@ -30,9 +29,9 @@ public class S_ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerEx
             itemDescriptionBox.SetActive(true);
             itemDescriptionTxt.SetText(itemData.itemDescription);
 
-            AdjustSize();
+            //AdjustSize();
 
-            itemDescriptionBox.transform.position = boxPos;
+            //itemDescriptionBox.transform.position = boxPos;
         }
     }
 
@@ -62,6 +61,6 @@ public class S_ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
         // Adjust the size of the background panel to match the text size
         Vector2 newSize = new Vector2(textWidth/2, textHeight/2);
-        background.sizeDelta = newSize;
+        //background.sizeDelta = newSize;
     }
 }

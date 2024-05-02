@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class S_Computer : S_Interactable
@@ -20,7 +18,7 @@ public class S_Computer : S_Interactable
 
     public void OpenComputerPanel()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
 
         foreach (GameObject obj in activatedObjects)
         {

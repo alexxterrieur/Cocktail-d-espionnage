@@ -18,4 +18,5 @@ public class S_InteractableData : ScriptableObject
     public S_ClueData clue;
     public S_ClueData proof;
     public S_ItemData key;
+    public AudioClip interactableSound;
 }

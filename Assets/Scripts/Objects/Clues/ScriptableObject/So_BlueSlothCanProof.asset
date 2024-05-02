@@ -13,8 +13,5 @@ MonoBehaviour:
   m_Name: So_BlueSlothCanProof
   m_EditorClassIdentifier: 
   clueFinding:
-  - "J'ai r\xE9cup\xE9r\xE9 une canette de BlueSloth."
-  - Cela fait une preuve de plus a utiliser contre la patronne.
-  clueDescription: '- Une canette de BlueSloth, vous ne voulez pas tenter de la boire.
-
-'
+  - "La canette peut \xE9galement servir de preuve pour incriminer la patronne."
+  clueDescription: "- BlueSloth modifi\xE9.\n"

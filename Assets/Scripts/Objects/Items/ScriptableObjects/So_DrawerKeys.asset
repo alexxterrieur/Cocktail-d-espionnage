@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12fb2a27671fbd44babe5eaf075f1ccf, type: 3}
   m_Name: So_DrawerKeys
   m_EditorClassIdentifier: 
-  itemName: Drawer Key
+  itemName: "Cl\xE9 de tiroir"
   itemSprite: {fileID: 21300000, guid: eefbf661688c4d746ba71ea0af13241a, type: 3}
   itemFinding:
   - "J'ai trouv\xE9 une cl\xE9."
-  itemDescription: 
+  - Qu'est ce qu'elle peut bien ouvrir ?
+  itemDescription: "Une cl\xE9, elle plut\xF4t petite."

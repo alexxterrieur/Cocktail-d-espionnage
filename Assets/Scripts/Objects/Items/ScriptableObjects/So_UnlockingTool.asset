@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12fb2a27671fbd44babe5eaf075f1ccf, type: 3}
   m_Name: So_UnlockingTool
   m_EditorClassIdentifier: 
-  itemName: Unlocking Tool
-  itemSprite: {fileID: 21300000, guid: 42ab8294334c4ec4b9a05e1349cd5979, type: 3}
+  itemName: Locky McLockface
+  itemSprite: {fileID: 21300000, guid: fd00cf0c99fed6c46b3e6da7e522dd68, type: 3}
   itemFinding:
   - "Ah ! Mon outil de d\xE9verouillage."
   - "Avec lui je pourrais tout d\xE9verrouiller."

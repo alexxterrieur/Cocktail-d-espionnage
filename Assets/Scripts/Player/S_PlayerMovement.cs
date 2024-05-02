@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -23,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canMove = true;
 
+    private Coroutine walkSfx;
+
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -46,6 +49,11 @@ public class PlayerMovement : MonoBehaviour
             rb2D.AddForce(new Vector3(mouvementInput.x, mouvementInput.y, 0) * Time.deltaTime * speed);
         }
         animator.SetFloat("Velocity", rb2D.velocity.magnitude);
+
+        if (rb2D.velocity.magnitude >= 0.1 && walkSfx == null)
+        {
+            walkSfx = StartCoroutine(WalkingAudio());
+        }
     }
 
     public void Mouvement(InputAction.CallbackContext context)
@@ -105,4 +113,10 @@ public class PlayerMovement : MonoBehaviour
         this.canMove = canMove;
     }
 
+    private IEnumerator WalkingAudio()
+    {
+        S_SoundManager.Instance.PlaySoundEffect("Walking_SFX");
+        yield return new WaitForSeconds(0.75f);
+        walkSfx = null;
+    }
 }
