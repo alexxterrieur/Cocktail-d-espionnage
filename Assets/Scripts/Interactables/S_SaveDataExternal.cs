@@ -77,4 +77,12 @@ public static class S_SaveDataExternal
 
         return JournalData;
     }
+
+    public static void Reset()
+    {
+        InteractableMap.Clear();
+        JournalData = new Journal();
+        IsJournalDataInit = false;
+    }
+
 }

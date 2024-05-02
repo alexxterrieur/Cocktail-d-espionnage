@@ -33,6 +33,7 @@ public class S_TCP_Client : MonoBehaviour
     [SerializeField] private bool _respondConnected = false;
 
     public static S_TCP_Client _TCP_Instance { get; private set; }
+    public bool Connected { get { return !_TCP_ActiveConnexionPanel; } }
 
     public List<string> HostsList => _hostsIP;
     public int JoltScore { get { return _joltScore; } set { _joltScore = value; } }
@@ -200,11 +201,11 @@ public class S_TCP_Client : MonoBehaviour
 
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
-        LoadShaker();
-        //if (SceneManager.GetActiveScene().Equals("FinalFight"))
-        //{
-        //    LoadShaker();
-        //}
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("FinalFight"))
+        {
+            LoadShaker();
+        }
     }
 
     private void Listener()
