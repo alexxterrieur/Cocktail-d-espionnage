@@ -38,7 +38,7 @@ public class S_Interactable : MonoBehaviour
         //Initialization of the boolean at every scene change
         interactableStruct = S_SaveDataExternal.LoadData(interactableName, interactableStruct);
 
-        popUpPos = transform.position + (Vector3.up * GetComponent<SpriteRenderer>().bounds.size.y);
+        popUpPos = transform.position + (Vector3.up * GetComponent<Collider2D>().bounds.size.y);
     }
 
     public virtual void Interact(JournalManager journalManager)

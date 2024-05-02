@@ -80,7 +80,6 @@ public class JournalManager : MonoBehaviour
     //Update icones sprite in objectPanel
     public void UpdateItemsIcones(int cluesIndex)
     {
-         Debug.Log(itemIcones[cluesIndex].name);
          S_ItemDescription itemIcon = itemIcones[cluesIndex].GetComponent<S_ItemDescription>();
 
         //call the function when a new item is find
@@ -165,6 +164,8 @@ public class JournalManager : MonoBehaviour
             journal.ProofIndex++;
 
             S_SaveDataExternal.SaveJournalData(journal);
+
+            S_GameManager.Instance.CheckIfEnoughProof(this);
         }
     }
 
@@ -178,6 +179,11 @@ public class JournalManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public int GetNbOfProof()
+    {
+        return journal.ProofIndex;
     }
 
     public GameObject GetJournalObj()
