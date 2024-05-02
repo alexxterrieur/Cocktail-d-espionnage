@@ -6,6 +6,7 @@ using System.Threading;
 using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class S_TCP_Client : MonoBehaviour
 {
@@ -21,10 +22,16 @@ public class S_TCP_Client : MonoBehaviour
     private Dictionary<string, Action> _functionMap = new Dictionary<string, Action>();
     private List<Action> _functionStack = new List<Action>();
     private object _stackLock = new object();
+    private object _PanelLock = new object();
+    private object _respondConnectLock = new object();
     private string _loadSceneName = null;
     [SerializeField] private List<string> _hostsIP;
     [SerializeField] private int _joltScore = 0;
     [SerializeField] private S_Interactable _interactable = null;
+    [SerializeField] private GameObject _TCP_ConnexionPanel;
+    [SerializeField] private bool _TCP_ActiveConnexionPanel;
+    [SerializeField] private bool _respondConnected = false;
+
     public static S_TCP_Client _TCP_Instance { get; private set; }
 
     public List<string> HostsList => _hostsIP;
@@ -50,11 +57,14 @@ public class S_TCP_Client : MonoBehaviour
     {
         _functionMap.Add("MegaMindWin", MegaMindWin);
         _functionMap.Add("Shaker", Shaker);
+        _functionMap.Add("ReceiveConnection", ReceiveConnection);
 
 
         DontDestroyOnLoad(this.gameObject);
         _discoveryThread = new Thread(new ThreadStart(StartDiscovery));
         _discoveryThread.Start();
+        
+        InvokeRepeating("CheckConnection", 10.0f, 10.0f);
     }
 
     private void FixedUpdate()
@@ -75,6 +85,14 @@ public class S_TCP_Client : MonoBehaviour
                 _functionStack.Clear(); // Effacer la liste après avoir exécuté toutes les actions
             }
         }
+        lock (_PanelLock)
+        {
+            if (_TCP_ConnexionPanel.activeInHierarchy != _TCP_ActiveConnexionPanel)
+            {
+                _TCP_ConnexionPanel.SetActive(_TCP_ActiveConnexionPanel);
+            }
+        }
+            
     }
 
     void StartMultiDiscovery()
@@ -171,17 +189,22 @@ public class S_TCP_Client : MonoBehaviour
         _client = new TcpClient();
         _client.Connect(_hostIP, _discoveryPort);
         _stream = _client.GetStream();
-        
+
+        _TCP_ActiveConnexionPanel = false;
+        lock (_respondConnectLock)
+            _respondConnected = true;
+
         Debug.Log("Connecté au serveur !");
 
-        // Envoi de données au serveur
-        string message = "Bonjour serveur !";
-        byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-        _stream.Write(messageBytes, 0, messageBytes.Length);
+        
 
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
         LoadShaker();
+        //if (SceneManager.GetActiveScene().Equals("FinalFight"))
+        //{
+        //    LoadShaker();
+        //}
     }
 
     private void Listener()
@@ -209,11 +232,11 @@ public class S_TCP_Client : MonoBehaviour
             catch (Exception ex)
             {
                 // Gérer toute exception survenue pendant la lecture
+                Disconnected();
                 Debug.LogError("Erreur lors de la lecture des données du serveur : " + ex.Message);
                 break; // Sortir de la boucle si une erreur survient
             }
         }
-
         // Une fois la connexion fermée, afficher un message
         Debug.Log("Connexion au serveur fermée. Arrêt de l'écoute.");
     }
@@ -221,8 +244,8 @@ public class S_TCP_Client : MonoBehaviour
     private void Interpreter(string commande)
     {
         string[] parts = commande.Split(':');
-        Debug.Log(parts[0]);
-        Debug.Log(parts[1]);
+        //Debug.Log(parts[0]);
+        //Debug.Log(parts[1]);
         for (int i = 0; i < parts.Length; i++)
         {
             if (parts[i] == "FUNCTION_NAME" && _functionMap.ContainsKey(parts[i + 1]))
@@ -251,6 +274,7 @@ public class S_TCP_Client : MonoBehaviour
         else
         {
             Debug.LogWarning("Impossible d'envoyer le message. La connexion client est fermée.");
+            Disconnected();
         }
     }
 
@@ -266,6 +290,7 @@ public class S_TCP_Client : MonoBehaviour
         else
         {
             Debug.LogWarning("Impossible d'envoyer le message. La connexion client est fermée.");
+            Disconnected();
         }
     }
 
@@ -290,6 +315,62 @@ public class S_TCP_Client : MonoBehaviour
     {
         Debug.Log("shake + 1");
         _joltScore++;
+    }
+
+    public void Disconnected()
+    {
+        if (_stream != null)
+        {
+            _stream.Close();
+        }
+        if (_client != null)
+        {
+            _client.Close();
+        }
+        if (_discoveryThread != null)
+        {
+            _discoveryThread.Abort();
+        }
+        if (_multiDiscoveryThread != null)
+        {
+            _multiDiscoveryThread.Abort();
+        }
+        if (_serverlistenerThread != null)
+        {
+            _serverlistenerThread.Abort();
+        }
+
+        _discoveryThread = new Thread(new ThreadStart(StartDiscovery));
+        _discoveryThread.Start();
+        lock (_PanelLock)
+        {
+            _TCP_ActiveConnexionPanel = true;
+            SearchServer();
+        }
+        Debug.Log("Disconnected");
+    }
+
+    private void CheckConnection()
+    {
+        Debug.Log("CheckConnection");
+        lock (_respondConnectLock)
+        {
+            if (!_respondConnected)
+            {
+                Debug.Log("Echec CheckConnection");
+                Disconnected();
+            }
+        }
+        SenderCallFunction("RespondConnected");
+        lock (_respondConnectLock)
+            _respondConnected = false;
+    }
+
+    private void ReceiveConnection()
+    {
+        Debug.Log("ReceiveConnection");
+        lock (_respondConnectLock)
+            _respondConnected = true;
     }
 
     void OnDestroy()
