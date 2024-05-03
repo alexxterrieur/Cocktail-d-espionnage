@@ -8,11 +8,18 @@ public class S_PlayerAction : MonoBehaviour
     public float range = 0.5f;
     private S_Interactable lastHitInteractable;
     private CircleCollider2D playerCollider;
+    private bool _onPanel = false;
 
     [SerializeField] private JournalManager journalManager;
     [SerializeField] private S_MenuManager menuManager;
 
     private PlayerMovement playerMovement;
+
+    public bool OnPanel
+    {
+        get { return _onPanel; }
+        set { _onPanel = value; }
+    }
 
     private void Awake()
     {
@@ -37,7 +44,7 @@ public class S_PlayerAction : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent(out S_Interactable interactable))
                 {
-                    if (!S_DialogueManager.Instance.GetIsDialogueActive())
+                    if (!S_DialogueManager.Instance.GetIsDialogueActive() && !_onPanel)
                     {
                         playerMovement.SetCanMove(false);
                         interactable.Interact(journalManager);

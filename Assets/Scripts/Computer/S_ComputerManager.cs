@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class S_ComputerManager : MonoBehaviour
 {
@@ -21,22 +22,33 @@ public class S_ComputerManager : MonoBehaviour
     [SerializeField] S_ClueData qrCodeClue;
     private int remainingPasswordAttemps = 3;
     public TMP_Text remainingAttemps;
+    private PlayerMovement playerMovement;
+    private S_PlayerAction playerAction;
+
+    private void Start()
+    {
+        playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        playerAction = GameObject.FindWithTag("Player").GetComponent<S_PlayerAction>();
+    }
 
     public void OpenComputer()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
-        
-        foreach (GameObject obj in activatedObjects) 
+        foreach (GameObject obj in activatedObjects)
         {
             obj.SetActive(false);
         }
+
+        playerMovement.SetCanMovePanel(false);
+        playerAction.OnPanel = true;
 
         computerPanel.SetActive(true);
     }
 
     public void CloseComputer()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
+        PlayerMovement playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        playerMovement.SetCanMovePanel(true);
+        playerAction.OnPanel = false;
 
         foreach (GameObject obj in activatedObjects)
         {
@@ -53,7 +65,7 @@ public class S_ComputerManager : MonoBehaviour
             Debug.Log("Mot de passe correct !");
             lockedPanel.SetActive(false);
             webPanel.SetActive(true);
-            S_DialogueManager.Instance.StartDialogue("Ok j'ai supprimï¿½ le mail ... tiens ? C'est quoi ces onglets ?");
+            S_DialogueManager.Instance.StartDialogue("Ok j'ai supprimé le mail ... tiens ? C'est quoi ces onglets ?");
         }
         else
         {
@@ -99,6 +111,7 @@ public class S_ComputerManager : MonoBehaviour
             S_DialogueManager.Instance.StartDialogue(youtubeProof.clueFinding);
             journalManager.AddProof(youtubeProof);
         }
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OpenYoutubePanel()
