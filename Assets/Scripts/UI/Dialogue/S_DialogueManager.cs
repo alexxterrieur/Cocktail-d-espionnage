@@ -95,6 +95,11 @@ public class S_DialogueManager : MonoBehaviour
                 yield return new WaitForSeconds(1 / currentCharPerSec);
             }
 
+            if(skipAction == null)
+            {
+                yield return null;
+            }
+
             // We wait for the player to press a key to display the next string
             while (!skipAction.triggered)
             {

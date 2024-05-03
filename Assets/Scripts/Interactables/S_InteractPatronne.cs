@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class S_InteractPatronne : S_Interactable
 {
@@ -12,6 +13,9 @@ public class S_InteractPatronne : S_Interactable
         if (journalManager.SearchKey(interactableData.key))
         {
             Debug.Log("load Combat Scene");
+
+            S_TCP_Client._TCP_Instance.LoadShaker();
+            SceneManager.LoadScene("FinalFight");
         }
         else
         {
