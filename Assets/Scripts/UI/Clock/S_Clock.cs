@@ -1,9 +1,11 @@
 using JetBrains.Annotations;
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Clock : MonoBehaviour
 {
@@ -13,10 +15,12 @@ public class Clock : MonoBehaviour
 
     [SerializeField] private List<S_FrameData> gameoverTimerImages = new List<S_FrameData>();
     [SerializeField] private S_Cinematic gameoverTimerCinematic;
+    [SerializeField] private UnityEngine.UI.Image clockBackground;
     private const float realSecondsPerIngameDay = 86400f;       //Allow to change the real seconds (in real life) as in game day time
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
     private TextMeshProUGUI timeText;
+    private bool switchColor = false;
     public float day = 0f;                                      //Allows to initiate the hours of the clock (exemple: 0.5f = 12:00)
     public float remainingSeconds;
 
@@ -26,6 +30,7 @@ public class Clock : MonoBehaviour
         clockHourHandTransform = transform.Find("HourHand");
         clockMinuteHandTransform = transform.Find("MinuteHand");
         timeText = transform.Find("TimeText").GetComponent<TextMeshProUGUI>();
+        
     }
 
     private void Update()
@@ -49,7 +54,24 @@ public class Clock : MonoBehaviour
 
             timeText.text = minutesString + ":" + secondsString;
 
+            if (remainingSeconds >= 30f && remainingSeconds <= 30.5f)
+            {
+                switchColor = true;
+                StartCoroutine(TimerIsAlmostOver());
+            }
+
             TimerIsOver();
+        }
+    }
+
+    private IEnumerator TimerIsAlmostOver()
+    {
+        while (switchColor == true)
+        {
+            clockBackground.color = Color.red;
+            yield return new WaitForSeconds(1f);
+            clockBackground.color = Color.white;
+            yield return new WaitForSeconds(1f);
         }
     }
 
