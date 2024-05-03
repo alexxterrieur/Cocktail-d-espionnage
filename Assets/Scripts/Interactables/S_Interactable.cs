@@ -41,6 +41,11 @@ public class S_Interactable : MonoBehaviour
         popUpPos = transform.position + (Vector3.up * GetComponent<Collider2D>().bounds.size.y);
     }
 
+    protected virtual void Update()
+    {
+
+    }
+
     public virtual void Interact(JournalManager journalManager)
     {
         if (S_SoundManager.Instance != null)

@@ -202,10 +202,7 @@ public class S_TCP_Client : MonoBehaviour
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("FinalFight"))
-        {
-            LoadShaker();
-        }
+        _functionStack.Add(CheckShakeScene);
     }
 
     private void Listener()
@@ -372,6 +369,15 @@ public class S_TCP_Client : MonoBehaviour
         Debug.Log("ReceiveConnection");
         lock (_respondConnectLock)
             _respondConnected = true;
+    }
+    
+
+    private void CheckShakeScene()
+    {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("FinalFight"))
+        {
+            LoadShaker();
+        }
     }
 
     void OnDestroy()

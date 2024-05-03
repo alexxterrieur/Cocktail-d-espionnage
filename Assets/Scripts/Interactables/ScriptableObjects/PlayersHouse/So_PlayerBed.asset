@@ -15,10 +15,11 @@ MonoBehaviour:
   interactableName: Lit joueur
   interactableDescription:
   - C'est mon lit.
-  - "Je dormirais bien mais j'ai encore beaucoup de travail \xE0 faire."
+  - Avant de me coucher est ce que je me rappelle de l'adresse de la patronne ?
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
   key: {fileID: 0}
+  interactableSound: {fileID: 0}
