@@ -14,6 +14,8 @@ public class S_ComputerManager : MonoBehaviour
 
     [SerializeField] string correctPassword;
     [SerializeField] TMP_InputField passwordInputField;
+
+    [SerializeField] S_ClueData youtubeProof;
     private int remainingPasswordAttemps = 3;
     public TMP_Text remainingAttemps;
 
@@ -48,6 +50,7 @@ public class S_ComputerManager : MonoBehaviour
             Debug.Log("Mot de passe correct !");
             lockedPanel.SetActive(false);
             webPanel.SetActive(true);
+            S_DialogueManager.Instance.StartDialogue("Ok j'ai supprimé le mail ... tiens ? C'est quoi ces onglets ?");
         }
         else
         {
@@ -77,6 +80,13 @@ public class S_ComputerManager : MonoBehaviour
     public void OpenLink(string url)
     {
         Application.OpenURL(url);
+        JournalManager journalManager = GetComponent<JournalManager>();
+
+        if (youtubeProof != null && !journalManager.CheckProofInJournal(youtubeProof))
+        {
+            S_DialogueManager.Instance.StartDialogue(youtubeProof.clueFinding);
+            journalManager.AddProof(youtubeProof);
+        }
     }
 
     public void OpenYoutubePanel()

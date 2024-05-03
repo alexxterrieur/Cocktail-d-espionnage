@@ -44,7 +44,7 @@ public class S_Door : S_Interactable
         S_DialogueManager.Instance.StartDialogue(interactableData.lockedInteractableDescription);
         if (journalManager.SearchKey(key)) //player have the key
         {
-            if (key.itemName == "Unlocking Tool") //If it has to be opened with a digicode
+            if (key.itemName == "Locky McLockface") //If it has to be opened with a digicode
             {
                 lockpickingMenu.OpenCloseMenu(true);
                 S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");

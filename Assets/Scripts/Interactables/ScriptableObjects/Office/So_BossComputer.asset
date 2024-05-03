@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: Boss Computer
   interactableDescription:
-  - "C'est le PC de la patronne.\r"
+  - C'est le PC de la patronne.
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
-  proof: {fileID: 0}
+  proof: {fileID: 11400000, guid: f96dfbfb6fb79ac45894195bc76b0f5c, type: 2}
   key: {fileID: 0}
+  interactableSound: {fileID: 0}

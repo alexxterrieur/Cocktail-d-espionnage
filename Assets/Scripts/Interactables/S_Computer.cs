@@ -13,6 +13,20 @@ public class S_Computer : S_Interactable
 
     public override void Interact(JournalManager journalManager)
     {
+        if (S_SoundManager.Instance != null)
+        {
+            if (interactableData.interactableSound != null)
+            {
+                S_SoundManager.Instance.PlaySoundEffect(interactableData.interactableSound.name);
+                print(interactableData.interactableSound.name);
+            }
+        }
+
+        if (interactableData.interactableDescription[0] != string.Empty)
+        {
+            S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
+        }
+
         OpenComputerPanel();
     }
 

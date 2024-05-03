@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_PlayerOfficeDesk
   m_EditorClassIdentifier: 
-  interactableName: 
+  interactableName: Bureau technicien
   interactableDescription:
   - C'est mon bureau.
   - "C'est vraiment bord\xE9lique !"
@@ -23,3 +23,4 @@ MonoBehaviour:
   clue: {fileID: 0}
   proof: {fileID: 0}
   key: {fileID: 0}
+  interactableSound: {fileID: 0}

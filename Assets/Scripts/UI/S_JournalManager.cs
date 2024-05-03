@@ -186,6 +186,17 @@ public class JournalManager : MonoBehaviour
         return journal.ProofIndex;
     }
 
+    public bool CheckProofInJournal(S_ClueData proof)
+    {
+        foreach(S_ClueData p in journal.Proofs)
+        {
+            if (p == proof)
+                return true;
+        }
+
+        return false;
+    }
+
     public GameObject GetJournalObj()
     {
         return journalObj;

@@ -35,7 +35,7 @@ public class S_GameManager : MonoBehaviour
     {
         if (journalManager.GetNbOfProof() >= maxProof)
         {
-            S_DialogueManager.Instance.StartDialogue("J'ai trouvé assez de preuves, je peux sortir d'ici.");
+            S_DialogueManager.Instance.StartDialogue("J'ai tout ce qu'il me faut, je peux sortir d'ici.");
             return true;
         }
 
