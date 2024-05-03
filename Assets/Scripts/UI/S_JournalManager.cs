@@ -197,6 +197,17 @@ public class JournalManager : MonoBehaviour
         return false;
     }
 
+    public bool CheckClueInJournal(S_ClueData clue)
+    {
+        foreach (S_ClueData c in journal.Clues)
+        {
+            if (c == clue)
+                return true;
+        }
+
+        return false;
+    }
+
     public GameObject GetJournalObj()
     {
         return journalObj;

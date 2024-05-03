@@ -1,9 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class S_ExitDoor : S_Interactable
+public class S_PlayerHouseDoor : S_ExitDoor
 {
-    [SerializeField][TextArea] protected string exitDialogue;
-
+    public S_ClueData clue;
     public override void Interact(JournalManager journalManager)
     {
         if (interactableData.interactableDescription[0] != string.Empty || interactableData.interactableDescription != null)
@@ -11,7 +12,7 @@ public class S_ExitDoor : S_Interactable
             S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
         }
 
-        if (S_GameManager.Instance.CheckIfEnoughProof(journalManager))
+        if (!journalManager.CheckClueInJournal(clue))
         {
             S_GameManager.Instance.ExitLevel();
         }

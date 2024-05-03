@@ -1,25 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class S_InteractPatronne : S_Interactable
 {
+    private bool isInteractible = false;
+    private bool journalHaveKey;
+
+    protected override void Update()
+    {
+        if (isInteractible && !S_DialogueManager.Instance.GetIsDialogueActive())
+        {
+            if (journalHaveKey)
+            {
+                Debug.Log("load Combat Scene");
+
+                S_TCP_Client._TCP_Instance.LoadShaker();
+                SceneManager.LoadScene("FinalFight");
+            }
+            else
+            {
+                S_GameOverManager.Instance.GameOverType = S_GameOverManager.GameOver.BossHouse;
+                SceneManager.LoadScene("GameOver");
+
+                Debug.Log("load defeat Scene");
+            }
+        }
+    }
+
     public override void Interact(JournalManager journalManager)
     {
-        Debug.Log("Prout");
-        if (journalManager.SearchKey(interactableData.key))
-        {
-            Debug.Log("load Combat Scene");
+        journalHaveKey = journalManager.SearchKey(interactableData.key);
 
-            S_TCP_Client._TCP_Instance.LoadShaker();
-            SceneManager.LoadScene("FinalFight");
+        isInteractible = true;
+
+        if (!journalHaveKey)
+        {
+            S_DialogueManager.Instance.StartDialogue(interactableData.lockedInteractableDescription);
         }
         else
         {
-            Debug.Log("load defeat Scene");
+            S_DialogueManager.Instance.StartDialogue(interactableData.unlockedInteractableDescription);
         }
     }
 }

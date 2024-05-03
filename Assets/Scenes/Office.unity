@@ -3365,11 +3365,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3303602913193455123, guid: 79fa77430cf247b4ebc7d9ac927bd469, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.58
+      value: -31.51
       objectReference: {fileID: 0}
     - target: {fileID: 3303602913193455123, guid: 79fa77430cf247b4ebc7d9ac927bd469, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.26
+      value: 23.33
       objectReference: {fileID: 0}
     - target: {fileID: 3303602913193455123, guid: 79fa77430cf247b4ebc7d9ac927bd469, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3807,6 +3807,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: https://www.youtube.com/watch?v=ClLxaPk99lg
       objectReference: {fileID: 0}
+    - target: {fileID: 4062186378871115511, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
+      propertyPath: qrCodeClue
+      value: 
+      objectReference: {fileID: 11400000, guid: c35f6510b2ae84d459b1240d72ca84df, type: 2}
     - target: {fileID: 4062186378871115511, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
       propertyPath: youtubeProof
       value: 

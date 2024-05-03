@@ -16,6 +16,7 @@ public class S_ComputerManager : MonoBehaviour
     [SerializeField] TMP_InputField passwordInputField;
 
     [SerializeField] S_ClueData youtubeProof;
+    [SerializeField] S_ClueData qrCodeClue;
     private int remainingPasswordAttemps = 3;
     public TMP_Text remainingAttemps;
 
@@ -97,6 +98,14 @@ public class S_ComputerManager : MonoBehaviour
 
     public void OpenQrCode()
     {
+        JournalManager journalManager = GetComponent<JournalManager>();
+
+        if (qrCodeClue != null && !journalManager.CheckClueInJournal(qrCodeClue))
+        {
+            S_DialogueManager.Instance.StartDialogue(qrCodeClue.clueFinding);
+            journalManager.AddClue(qrCodeClue);
+        }
+
         qrCodePanel.SetActive(true);
         youtubePanel.SetActive(false);
     }
