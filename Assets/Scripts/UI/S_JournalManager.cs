@@ -44,6 +44,7 @@ public class JournalManager : MonoBehaviour
         journalObj.SetActive(true);
         cluesPanel.SetActive(true);
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
+        S_SoundManager.Instance.PlaySoundEffect("Book_Opening_SFX");
     }
 
     public void CloseJournal()
@@ -54,13 +55,15 @@ public class JournalManager : MonoBehaviour
         proofPanel.SetActive(false);
         openButton.gameObject.SetActive(true);
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
+        S_SoundManager.Instance.PlaySoundEffect("Book_Closing_SFX");
     }
 
     public void OpenCluesPanel()
     {
         objectsPanel.SetActive(false);
         proofPanel.SetActive(false);
-        cluesPanel.SetActive(true);
+        cluesPanel.SetActive(true); 
+        S_SoundManager.Instance.PlaySoundEffect("Turning_Page_SFX");
     }
 
     public void OpenObjectsPanel()
@@ -68,6 +71,7 @@ public class JournalManager : MonoBehaviour
         cluesPanel.SetActive(false);
         proofPanel.SetActive(false);
         objectsPanel.SetActive(true);
+        S_SoundManager.Instance.PlaySoundEffect("Turning_Page_SFX");
     }
 
     public void OpenHistoryPanel()
@@ -75,6 +79,7 @@ public class JournalManager : MonoBehaviour
         cluesPanel.SetActive(false);
         objectsPanel.SetActive(false);
         proofPanel.SetActive(true);
+        S_SoundManager.Instance.PlaySoundEffect("Turning_Page_SFX");
     }
 
     //Update icones sprite in objectPanel
