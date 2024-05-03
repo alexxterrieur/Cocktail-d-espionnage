@@ -3251,7 +3251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: d7da0401cabaa4245925d8f3c625d7c1, type: 2}
-  popUp: {fileID: 0}
+  popUp: {fileID: 194455621}
   lockpickingMenu: {fileID: 0}
 --- !u!58 &386821641
 CircleCollider2D:
@@ -17307,7 +17307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: 4ce863d928aa862439ba3e7e80b81c86, type: 2}
-  popUp: {fileID: 0}
+  popUp: {fileID: 194455621}
   lockpickingMenu: {fileID: 0}
   doesTeleport: 1
   teleport: {fileID: 773658856}
@@ -17392,7 +17392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: 237da42d4140cf74daa6a082f360da41, type: 2}
-  popUp: {fileID: 0}
+  popUp: {fileID: 194455621}
   lockpickingMenu: {fileID: 0}
 --- !u!212 &780443240
 SpriteRenderer:
@@ -18032,7 +18032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: d7da0401cabaa4245925d8f3c625d7c1, type: 2}
-  popUp: {fileID: 0}
+  popUp: {fileID: 194455621}
   lockpickingMenu: {fileID: 0}
 --- !u!58 &989065830
 CircleCollider2D:
@@ -18432,7 +18432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: cba57ea7df1478b428e798904ac81645, type: 2}
-  popUp: {fileID: 0}
+  popUp: {fileID: 194455621}
   lockpickingMenu: {fileID: 0}
   exitDialogue: Oh je n'ai pas encore toutes les preuves!
 --- !u!61 &1355362522
@@ -18613,7 +18613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: d7da0401cabaa4245925d8f3c625d7c1, type: 2}
-  popUp: {fileID: 0}
+  popUp: {fileID: 194455621}
   lockpickingMenu: {fileID: 0}
 --- !u!58 &1464409291
 CircleCollider2D:
@@ -21921,7 +21921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: acbffaebd87752843a4d0cde4a530ac8, type: 2}
-  popUp: {fileID: 0}
+  popUp: {fileID: 194455621}
   lockpickingMenu: {fileID: 0}
   doesTeleport: 1
   teleport: {fileID: 1774897405}
