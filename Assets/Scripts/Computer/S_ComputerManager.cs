@@ -11,6 +11,8 @@ public class S_ComputerManager : MonoBehaviour
     [SerializeField] GameObject webPanel;
     [SerializeField] GameObject youtubePanel;
     [SerializeField] GameObject qrCodePanel;
+    [SerializeField] S_LockPickingMenu lockpickingMenu;
+    [SerializeField] GameObject computerObj;
 
     [SerializeField] string correctPassword;
     [SerializeField] TMP_InputField passwordInputField;
@@ -58,6 +60,10 @@ public class S_ComputerManager : MonoBehaviour
             Debug.Log("Mot de passe incorrect !");
             wrongPasswordPanel.SetActive(true);
             remainingPasswordAttemps -= 1;
+            if (remainingPasswordAttemps < 0)
+            {
+                remainingPasswordAttemps = 0;
+            }
             CheckComputerLock();
         }
     }
@@ -73,6 +79,11 @@ public class S_ComputerManager : MonoBehaviour
 
         if (remainingPasswordAttemps <= 0)
         {
+            S_DialogueManager.Instance.StartDialogue("Je n'ai pas le choix, je dois utiliser mon outil de deverrouillage sur le PC.");
+            lockpickingMenu.OpenCloseMenu(true);
+            S_DialogueManager.Instance.StartDialogue("Veuillez entrer le code.");
+            S_TCP_Client._TCP_Instance.Interactable = computerObj.GetComponent<S_Interactable>();
+            S_TCP_Client._TCP_Instance.LoadMegaMind(); //We launch the mastermind game
             Debug.Log("computer locked");
         }
     }
