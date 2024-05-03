@@ -53,7 +53,14 @@ public class S_Door : S_Interactable
             }
             else //If it's just a regular key
             {
-                S_DialogueManager.Instance.StartDialogue("Vous déverrouillez la porte avec : " + key.itemName);
+                if (key.itemName == "Canette")
+                {
+                    S_DialogueManager.Instance.StartDialogue("Je suis prêt a confronter la patronne avec ma canette");
+                }
+                else
+                {
+                    S_DialogueManager.Instance.StartDialogue("Vous déverrouillez la porte avec : " + key.itemName);
+                }
                 S_DialogueManager.Instance.StartDialogue(interactableData.unlockedInteractableDescription);
                 interactableStruct.isLocked = false;
                 S_SaveDataExternal.SaveData(interactableName, interactableStruct);
@@ -63,7 +70,14 @@ public class S_Door : S_Interactable
         }
         else //player doesnt have key
         {
-            S_DialogueManager.Instance.StartDialogue("Je n'ai pas l'objet nécessaire pour déverouiller.");
+            if (key.itemName == "Canette")
+            {
+                S_DialogueManager.Instance.StartDialogue("Je ne suis pas prêt a confronter la patronne");
+            }
+            else
+            {
+                S_DialogueManager.Instance.StartDialogue("Je n'ai pas l'objet nécessaire pour déverouiller.");
+            }
         }
     }
 

@@ -77,13 +77,13 @@ public class S_TCP_Client : MonoBehaviour
         }
         if(_functionStack.Count > 0)
         {
-            lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+            lock (_stackLock) // AcquÃ©rir le verrou mutex avant d'accÃ©der Ã  _functionStack
             {
                 foreach(Action function in _functionStack)
                 {
                     function.Invoke();
                 }
-                _functionStack.Clear(); // Effacer la liste après avoir exécuté toutes les actions
+                _functionStack.Clear(); // Effacer la liste aprÃ¨s avoir exÃ©cutÃ© toutes les actions
             }
         }
         lock (_PanelLock)
@@ -101,9 +101,9 @@ public class S_TCP_Client : MonoBehaviour
         UdpClient udpClient = new UdpClient();
         udpClient.EnableBroadcast = true;
 
-        Debug.Log("Recherche de services sur le réseau local...");
+        Debug.Log("Recherche de services sur le rÃ©seau local...");
 
-        // Envoyer une demande de découverte en diffusion
+        // Envoyer une demande de dÃ©couverte en diffusion
         byte[] discoverData = Encoding.UTF8.GetBytes("DISCOVER_MY_SERVICE");
         udpClient.Send(discoverData, discoverData.Length, new IPEndPoint(IPAddress.Broadcast, _discoveryPort));
 
@@ -111,12 +111,12 @@ public class S_TCP_Client : MonoBehaviour
 
         while (true)
         {
-            // Attendre la réponse du serveur de découverte
+            // Attendre la rÃ©ponse du serveur de dÃ©couverte
             IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Any, 0);
             byte[] responseData = udpClient.Receive(ref serverEndPoint);
             string response = Encoding.UTF8.GetString(responseData);
 
-            // Analyser la réponse pour obtenir l'adresse IP de l'hôte
+            // Analyser la rÃ©ponse pour obtenir l'adresse IP de l'hÃ´te
             if (response.StartsWith("HOST_IP:"))
             {
                 _hostsIP.Add(response.Substring("HOST_IP:".Length));   
@@ -129,18 +129,18 @@ public class S_TCP_Client : MonoBehaviour
         UdpClient udpClient = new UdpClient();
         udpClient.EnableBroadcast = true;
 
-        Debug.Log("Recherche de services sur le réseau local...");
+        Debug.Log("Recherche de services sur le rÃ©seau local...");
 
-        // Envoyer une demande de découverte en diffusion
+        // Envoyer une demande de dÃ©couverte en diffusion
         byte[] discoverData = Encoding.UTF8.GetBytes("DISCOVER_MY_SERVICE");
         udpClient.Send(discoverData, discoverData.Length, new IPEndPoint(IPAddress.Broadcast, _discoveryPort));
 
-        // Attendre la réponse du serveur de découverte
+        // Attendre la rÃ©ponse du serveur de dÃ©couverte
         IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Any, 0);
         byte[] responseData = udpClient.Receive(ref serverEndPoint);
         string response = Encoding.UTF8.GetString(responseData);
 
-        // Analyser la réponse pour obtenir l'adresse IP de l'hôte
+        // Analyser la rÃ©ponse pour obtenir l'adresse IP de l'hÃ´te
         if (response.StartsWith("HOST_IP:"))
         {
             _hostIP = response.Substring("HOST_IP:".Length);
@@ -181,10 +181,10 @@ public class S_TCP_Client : MonoBehaviour
     private void ConnectToServer()
     {
         
-        Debug.Log("Service trouvé à l'adresse IP : " + _hostIP);
+        Debug.Log("Service trouvÃ© Ã  l'adresse IP : " + _hostIP);
 
-        // Connectez-vous à l'hôte en utilisant l'adresse IP trouvée
-        // Implémentez votre code de connexion ici
+        // Connectez-vous Ã  l'hÃ´te en utilisant l'adresse IP trouvÃ©e
+        // ImplÃ©mentez votre code de connexion ici
 
         // Connexion au serveur TCP
         _client = new TcpClient();
@@ -195,51 +195,48 @@ public class S_TCP_Client : MonoBehaviour
         lock (_respondConnectLock)
             _respondConnected = true;
 
-        Debug.Log("Connecté au serveur !");
+        Debug.Log("ConnectÃ© au serveur !");
 
         
 
         _serverlistenerThread = new Thread(new ThreadStart(Listener));
         _serverlistenerThread.Start();
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("FinalFight"))
-        {
-            LoadShaker();
-        }
+        _functionStack.Add(CheckShakeScene);
     }
 
     private void Listener()
     {
-        Debug.Log("Début de l'écoute.");
-        // Tant que la connexion est ouverte, écouter les messages du serveur
+        Debug.Log("DÃ©but de l'Ã©coute.");
+        // Tant que la connexion est ouverte, Ã©couter les messages du serveur
         while (_client.Connected)
         {
             try
             {
-                // Lecture des données envoyées par le serveur
+                // Lecture des donnÃ©es envoyÃ©es par le serveur
                 byte[] buffer = new byte[1024];
                 int bytesRead = _stream.Read(buffer, 0, buffer.Length);
 
-                // Vérifier si des données ont été lues
+                // VÃ©rifier si des donnÃ©es ont Ã©tÃ© lues
                 if (bytesRead > 0)
                 {
-                    // Convertir les données en chaîne de caractères et afficher le message
+                    // Convertir les donnÃ©es en chaÃ®ne de caractÃ¨res et afficher le message
                     string dataReceived = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Debug.Log("Message perso reçu du serveur : " + dataReceived);
+                    Debug.Log("Message perso reÃ§u du serveur : " + dataReceived);
                     if(dataReceived.StartsWith("FUNCTION_NAME:") || dataReceived.StartsWith("LOAD_SCENE:"))
                         Interpreter(dataReceived);  
                 }
             }
             catch (Exception ex)
             {
-                // Gérer toute exception survenue pendant la lecture
+                // GÃ©rer toute exception survenue pendant la lecture
                 Disconnected();
-                Debug.LogError("Erreur lors de la lecture des données du serveur : " + ex.Message);
+                Debug.LogError("Erreur lors de la lecture des donnÃ©es du serveur : " + ex.Message);
                 break; // Sortir de la boucle si une erreur survient
             }
         }
-        // Une fois la connexion fermée, afficher un message
-        Debug.Log("Connexion au serveur fermée. Arrêt de l'écoute.");
+        // Une fois la connexion fermÃ©e, afficher un message
+        Debug.Log("Connexion au serveur fermÃ©e. ArrÃªt de l'Ã©coute.");
     }
 
     private void Interpreter(string commande)
@@ -251,7 +248,7 @@ public class S_TCP_Client : MonoBehaviour
         {
             if (parts[i] == "FUNCTION_NAME" && _functionMap.ContainsKey(parts[i + 1]))
             {
-                lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+                lock (_stackLock) // AcquÃ©rir le verrou mutex avant d'accÃ©der Ã  _functionStack
                 {
                     _functionStack.Add(_functionMap[parts[i + 1]]);
                 }
@@ -270,11 +267,11 @@ public class S_TCP_Client : MonoBehaviour
             string message = "FUNCTION_NAME:";
             byte[] messageBytes = Encoding.UTF8.GetBytes(message+functionName + ":");
             _stream.Write(messageBytes, 0, messageBytes.Length);
-            Debug.Log("Message envoyé au client : " + message+functionName);
+            Debug.Log("Message envoyÃ© au client : " + message+functionName);
         }
         else
         {
-            Debug.LogWarning("Impossible d'envoyer le message. La connexion client est fermée.");
+            Debug.LogWarning("Impossible d'envoyer le message. La connexion client est fermÃ©e.");
             Disconnected();
         }
     }
@@ -286,11 +283,11 @@ public class S_TCP_Client : MonoBehaviour
             string message = "LOAD_SCENE:";
             byte[] messageBytes = Encoding.UTF8.GetBytes(message + sceneName + ":");
             _stream.Write(messageBytes, 0, messageBytes.Length);
-            Debug.Log("Message envoyé au client : " + message + sceneName);
+            Debug.Log("Message envoyÃ© au client : " + message + sceneName);
         }
         else
         {
-            Debug.LogWarning("Impossible d'envoyer le message. La connexion client est fermée.");
+            Debug.LogWarning("Impossible d'envoyer le message. La connexion client est fermÃ©e.");
             Disconnected();
         }
     }
@@ -372,6 +369,15 @@ public class S_TCP_Client : MonoBehaviour
         Debug.Log("ReceiveConnection");
         lock (_respondConnectLock)
             _respondConnected = true;
+    }
+    
+
+    private void CheckShakeScene()
+    {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("FinalFight"))
+        {
+            LoadShaker();
+        }
     }
 
     void OnDestroy()

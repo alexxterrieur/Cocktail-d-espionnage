@@ -7555,6 +7555,7 @@ MonoBehaviour:
   onPause: 0
   gameoverTimerImages: []
   gameoverTimerCinematic: {fileID: 0}
+  clockBackground: {fileID: 3070281906570783663}
   day: 0
   remainingSeconds: 600
 --- !u!1 &8733774693917505936
