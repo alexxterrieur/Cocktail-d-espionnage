@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_Fridge
+  m_Name: So_PingPong
   m_EditorClassIdentifier: 
-  interactableName: Fridge
+  interactableName: ping pong table
   interactableDescription:
-  - "Il n'y a que du lait p\xE9rim\xE9 dans le frigo."
-  - "Je connais un coll\xE8gue qui serait capable d'en boire."
+  - Je ferai bien une partie si j'avais le temps !
+  - "De toute fa\xE7on je perdrais, comme d'habitude."
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
   key: {fileID: 0}
+  interactableSound: {fileID: 0}

@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_CoffeeMachine
+  m_Name: So_GameCube
   m_EditorClassIdentifier: 
-  interactableName: Coffe Machine
+  interactableName: CameCubic
   interactableDescription:
-  - "\xC7a fait des ann\xE9es qu\u2019elle est utilis\xE9e quotidiennement, comment
-    tient-elle encore debout ?"
+  - La CubicGame !
+  - "Ca fait des ann\xE9es qu'elle est la."
+  - Malheureusement je n'ai pas le temps de jouer.
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
+  key: {fileID: 0}
+  interactableSound: {fileID: 0}

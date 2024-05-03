@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class S_ExitDoor : S_Interactable
 {
-    [SerializeField] private string exitDialogue;
+    [SerializeField][TextArea] private string exitDialogue;
 
     public override void Interact(JournalManager journalManager)
     {
@@ -15,7 +15,7 @@ public class S_ExitDoor : S_Interactable
         {
             S_GameManager.Instance.ExitLevel();
         }
-        else
+        else //can't exit
         {
             S_DialogueManager.Instance.StartDialogue(exitDialogue);
         }

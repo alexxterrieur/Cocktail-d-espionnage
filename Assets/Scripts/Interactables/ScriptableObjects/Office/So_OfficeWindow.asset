@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_BossComputer
+  m_Name: So_OfficeWindow
   m_EditorClassIdentifier: 
-  interactableName: Boss Computer
+  interactableName: Fenetre bureau
   interactableDescription:
-  - C'est le PC de la patronne.
+  - La vue d'ici est magnifique !
+  - ...
+  - J'ai le vertige.
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
-  proof: {fileID: 11400000, guid: f96dfbfb6fb79ac45894195bc76b0f5c, type: 2}
+  proof: {fileID: 0}
   key: {fileID: 0}
   interactableSound: {fileID: 0}

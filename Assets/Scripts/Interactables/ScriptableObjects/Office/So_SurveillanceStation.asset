@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_BossComputer
+  m_Name: So_SurveillanceStation
   m_EditorClassIdentifier: 
-  interactableName: Boss Computer
+  interactableName: Station de surveillance
   interactableDescription:
-  - C'est le PC de la patronne.
+  - WOAH !
+  - "Il y'a vraiment une cam\xE9ra dans TOUTES les salles de l'entreprise."
+  - "Oh, j'arrive \xE0 voir mon bureau d'ici."
+  - "Oh oh \xE7a veut dire qu'elle a vu toutes les fois o\xF9 je jouais..."
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
-  proof: {fileID: 11400000, guid: f96dfbfb6fb79ac45894195bc76b0f5c, type: 2}
+  proof: {fileID: 0}
   key: {fileID: 0}
   interactableSound: {fileID: 0}
