@@ -21,9 +21,10 @@ public class S_DoSomething : Node
             player.transform.position = _checkpointPlayer.position;
 
         }
-        //Hugo doit set la scene de mort
         else
         {
+            S_GameOverManager.Instance.GameOverType = S_GameOverManager.GameOver.Guard;
+            SceneManager.LoadScene("GameOver");
             SceneManager.LoadScene("Office");
         }
 

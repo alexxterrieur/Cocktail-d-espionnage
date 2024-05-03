@@ -26,14 +26,14 @@ public class S_ChargeBarController : MonoBehaviour
         _slider.value = S_TCP_Client._TCP_Instance.JoltScore;
         if (_bossSlider.value >= 200)
         {
-            S_GameOverManager.Instance.GameOverType = S_GameOverManager.GameOver.FinalFight;
+            Lose(S_GameOverManager.GameOver.FinalFight);
             SceneManager.LoadScene("GameOver");
         }
         else if (_slider.value >= 200 && S_SaveDataExternal.JournalData.Proofs.Length != 5)
         {
-            S_GameOverManager.Instance.GameOverType = S_GameOverManager.GameOver.WinButLose;
-            SceneManager.LoadScene("GameOver");
-        }else
+            Lose(S_GameOverManager.GameOver.WinButLose);
+        }
+        else
         {
             //WIN
         }
@@ -49,4 +49,13 @@ public class S_ChargeBarController : MonoBehaviour
             _bossSlider.value = _value;
         }
     }
+
+    IEnumerator Lose(S_GameOverManager.GameOver lose)
+    {
+        yield return new WaitForSecondsRealtime(5);
+
+        S_GameOverManager.Instance.GameOverType = lose;
+        SceneManager.LoadScene("GameOver");
+    }
+
 }

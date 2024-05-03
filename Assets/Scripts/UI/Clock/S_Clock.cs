@@ -57,7 +57,9 @@ public class Clock : MonoBehaviour
     {
         if (remainingSeconds <= 0f)
         {
-            gameoverTimerCinematic.SetImages(gameoverTimerImages);
+            S_GameOverManager.Instance.GameOverType = S_GameOverManager.GameOver.OverTime;
+            SceneManager.LoadScene("GameOver");
+            //gameoverTimerCinematic.SetImages(gameoverTimerImages);
         }
     }
 
