@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Locky McLockface
   itemSprite: {fileID: 21300000, guid: fd00cf0c99fed6c46b3e6da7e522dd68, type: 3}
+  itemSound: {fileID: 0}
   itemFinding:
   - "Ah ! Mon outil de d\xE9verouillage."
   - "Avec lui je pourrais tout d\xE9verrouiller."
   - "Enfin, tout ce qui est \xE9lectronique."
+  - Dommage qu'il ne fonctionne pas sur IOS
   itemDescription: "Meilleur outil de d\xE9verrouillage depuis 1990."
