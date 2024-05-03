@@ -25,7 +25,7 @@ public class S_ComputerManager : MonoBehaviour
     public void OpenComputer()
     {
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
-
+        
         foreach (GameObject obj in activatedObjects) 
         {
             obj.SetActive(false);
@@ -53,7 +53,7 @@ public class S_ComputerManager : MonoBehaviour
             Debug.Log("Mot de passe correct !");
             lockedPanel.SetActive(false);
             webPanel.SetActive(true);
-            S_DialogueManager.Instance.StartDialogue("Ok j'ai supprimé le mail ... tiens ? C'est quoi ces onglets ?");
+            S_DialogueManager.Instance.StartDialogue("Ok j'ai supprimï¿½ le mail ... tiens ? C'est quoi ces onglets ?");
         }
         else
         {
