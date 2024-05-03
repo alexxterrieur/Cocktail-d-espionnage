@@ -24,18 +24,15 @@ public class S_ChargeBarController : MonoBehaviour
         _slider.value = S_TCP_Client._TCP_Instance.JoltScore;
         if (_bossSlider.value >= 200)
         {
-            Debug.Log("Test1");
             Load(S_GameOverManager.GameOver.FinalFight);
             
         }
         else if (_slider.value >= 200 && S_SaveDataExternal.JournalData.Proofs.Length != 5)
         {
-            Debug.Log("Test2");
             Load(S_GameOverManager.GameOver.WinButLose);
         }
         else
         {
-            Debug.Log("Test3");
             Load(S_GameOverManager.GameOver.Win);
         }
     }
