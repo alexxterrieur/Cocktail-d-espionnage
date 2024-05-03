@@ -82,7 +82,7 @@ public class S_ComputerManager : MonoBehaviour
         Application.OpenURL(url);
         JournalManager journalManager = GetComponent<JournalManager>();
 
-        if (!journalManager.CheckProofInJournal(youtubeProof))
+        if (youtubeProof != null && !journalManager.CheckProofInJournal(youtubeProof))
         {
             S_DialogueManager.Instance.StartDialogue(youtubeProof.clueFinding);
             journalManager.AddProof(youtubeProof);
