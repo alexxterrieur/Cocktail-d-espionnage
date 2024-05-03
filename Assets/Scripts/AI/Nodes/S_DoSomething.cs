@@ -25,7 +25,7 @@ public class S_DoSomething : Node
         {
             S_GameOverManager.Instance.GameOverType = S_GameOverManager.GameOver.Guard;
             SceneManager.LoadScene("GameOver");
-            SceneManager.LoadScene("Office");
+            //SceneManager.LoadScene("Office");
         }
 
         _nodeState = NodeState.SUCCESS;
