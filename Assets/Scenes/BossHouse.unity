@@ -3067,36 +3067,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1387960239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &118332848 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1238213294266818351, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
-  m_PrefabInstance: {fileID: 156358531}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &118332849 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1078029986500755467, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
   m_PrefabInstance: {fileID: 156358531}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118332848}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 176c93256b23445408f1f02ecac26947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &118332855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118332848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fcf9c58d43afe045b04edb16e052248, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxProof: 1
-  sceneToLoad: SecretBase
 --- !u!1001 &156358531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3105,6 +3086,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1536232294272487942, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
+      propertyPath: maxProof
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536232294272487942, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
+      propertyPath: sceneToLoad
+      value: SecretBase
+      objectReference: {fileID: 0}
     - target: {fileID: 2205787731411897421, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
       propertyPath: m_Name
       value: GameCanvas
@@ -3189,14 +3178,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1536232294272487942, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
+    - target: {fileID: 8528761124223119954, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
+      propertyPath: songName
+      value: BossHouseSong
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1238213294266818351, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 118332855}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
 --- !u!114 &258402213 stripped
 MonoBehaviour:
@@ -3255,7 +3244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: 48bea84d556145741ac5ca1912ac3529, type: 2}
-  popUp: {fileID: 384390842}
+  popUp: {fileID: 0}
   lockpickingMenu: {fileID: 0}
 --- !u!61 &356140279
 BoxCollider2D:
@@ -18559,19 +18548,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 202037139084791652, guid: 79fa77430cf247b4ebc7d9ac927bd469, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -43.32
       objectReference: {fileID: 0}
     - target: {fileID: 202037139084791652, guid: 79fa77430cf247b4ebc7d9ac927bd469, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.84
       objectReference: {fileID: 0}
     - target: {fileID: 3303602913193455123, guid: 79fa77430cf247b4ebc7d9ac927bd469, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 86.8
       objectReference: {fileID: 0}
     - target: {fileID: 3303602913193455123, guid: 79fa77430cf247b4ebc7d9ac927bd469, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.8
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 3303602913193455123, guid: 79fa77430cf247b4ebc7d9ac927bd469, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18781,7 +18770,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355362520}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
