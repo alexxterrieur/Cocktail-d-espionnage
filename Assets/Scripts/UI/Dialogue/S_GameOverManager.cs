@@ -21,7 +21,8 @@ public class S_GameOverManager : MonoBehaviour
         BossDesck,
         BossHouse,
         FinalFight,
-        WinButLose
+        WinButLose,
+        Win
     }
 
     private void Awake()

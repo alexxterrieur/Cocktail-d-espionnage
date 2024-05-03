@@ -32,6 +32,9 @@ public class S_GameOverDisplay : MonoBehaviour
                 break;
             case S_GameOverManager.GameOver.WinButLose:
                 gameOverTxt = "Malheureusement, votre quête de justice a été entravée par un manque de preuves. Malgré vos efforts pour rassembler des éléments incriminants, la vérité reste dissimulée dans l'ombre, et vous vous retrouvez incriminé pour vos actes.";
+                break; 
+            case S_GameOverManager.GameOver.Win:
+                gameOverTxt = "Après un combat acharné et des épreuves sans fin, vous avez enfin triomphé de la redoutable boss. Vos efforts, votre détermination et votre ingéniosité ont été récompensés par cette victoire bien méritée.";
                 break;
             default:
                 gameOverTxt = "GameOver";

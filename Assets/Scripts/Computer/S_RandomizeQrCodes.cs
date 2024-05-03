@@ -6,7 +6,7 @@ public class S_RandomizeQrCodes : MonoBehaviour
     [SerializeField] private GameObject qrCodePanel;
     [SerializeField] private GameObject repeatedImage;
     [SerializeField] private GameObject singleImage;
-    private int image1Count = 20;
+    private int image1Count = 15;
     private List<Vector3> takenPositions = new List<Vector3>();
     private float minDistance = 200f;
 
@@ -25,7 +25,7 @@ public class S_RandomizeQrCodes : MonoBehaviour
     {
         Vector3 randomPosition = GetRandomPosition(parentRectTransform.rect);
 
-        // Keep trying new positions until a non-overlapping one is found
+         //Keep trying new positions until a non-overlapping one is found
         while (IsOverlapping(randomPosition))
         {
             randomPosition = GetRandomPosition(parentRectTransform.rect);
