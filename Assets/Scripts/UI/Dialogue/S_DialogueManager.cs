@@ -91,6 +91,7 @@ public class S_DialogueManager : MonoBehaviour
             {
                 textBuffer += c;
                 dialogueTxt.text = textBuffer;
+                S_SoundManager.Instance.PlaySoundEffect("Dialogue_SFX");
 
                 yield return new WaitForSeconds(1 / currentCharPerSec);
             }
