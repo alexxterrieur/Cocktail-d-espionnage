@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class S_SoundManager : MonoBehaviour
 {
@@ -22,6 +24,8 @@ public class S_SoundManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+
+
 
     public void PlaySoundEffect(string clipName, float volume = 1)
     {
@@ -49,7 +53,7 @@ public class S_SoundManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void StopAllSoundsEffects()
+    public void StopAllSoundsEffects() //don't stop musics
     {
         foreach (AudioSource source in FindObjectsOfType<AudioSource>())
         {
@@ -58,5 +62,24 @@ public class S_SoundManager : MonoBehaviour
                 source.Stop();
             }
         }
+    }
+
+    public AudioClip GetSceneMusicClip(string sceneName)
+    {
+        switch(sceneName)
+        {
+            case "MainMenu":
+                return Resources.Load<AudioClip>("Sounds/MainMenuSong");
+            case "Office":
+                return Resources.Load<AudioClip>("Sounds/OfficeSound");
+            case "PlayerHouse":
+                return Resources.Load<AudioClip>("Sounds/MainMenuSong");
+            case "BossHouse":
+                return Resources.Load<AudioClip>("Sounds/BossHouseSong");
+            case "SecretBase":
+                return Resources.Load<AudioClip>("Sounds/BossHideoutSong");
+        }
+
+        return null;
     }
 }
