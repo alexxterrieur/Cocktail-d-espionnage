@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 416622136}
   - component: {fileID: 416622135}
   m_Layer: 5
-  m_Name: Hub_Button
+  m_Name: Retry_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2112124687}
-        m_TargetAssemblyTypeName: S_GameOverManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: S_GameOverDisplay, Assembly-CSharp
         m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
@@ -1047,9 +1047,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2112124687}
+      - m_Target: {fileID: 2112124685}
         m_TargetAssemblyTypeName: S_GameOverManager, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1145,7 +1145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2112124685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd63f039f683d154185b53eb1e4b0cd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 948eafdd35a0c3f4db81724a419a534d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gameOverType: 0
