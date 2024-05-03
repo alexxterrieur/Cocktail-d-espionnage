@@ -40,6 +40,8 @@ public class S_TravelLocationPanel : MonoBehaviour
 
     public void CloseWrongLocationPanel()
     {
+        lockedPanel.SetActive(true);
         wrongLocationPanel.SetActive(false);
+        travelPanel.SetActive(false);
     }
 }
