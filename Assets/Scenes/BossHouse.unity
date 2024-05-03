@@ -3255,7 +3255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: 48bea84d556145741ac5ca1912ac3529, type: 2}
-  popUp: {fileID: 0}
+  popUp: {fileID: 384390842}
   lockpickingMenu: {fileID: 0}
 --- !u!61 &356140279
 BoxCollider2D:
