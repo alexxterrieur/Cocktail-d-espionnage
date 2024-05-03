@@ -15,7 +15,6 @@ MonoBehaviour:
   interactableName: "Cl\xE9 cach\xE9e"
   interactableDescription:
   - "Il y a beaucoup de livres inint\xE9ressant..."
-  - Tiens, qu'est ce que c'est qui brille ici ?
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 11400000, guid: 365e195388a79674fb5d62ac01b88380, type: 2}
