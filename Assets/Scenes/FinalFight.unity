@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67676af9da47a1d4e91c7407678c24b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songName: zik_hugoval_final
+  songName: MusicBoss
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
