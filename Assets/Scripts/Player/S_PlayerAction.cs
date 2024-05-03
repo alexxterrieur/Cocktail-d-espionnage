@@ -8,7 +8,7 @@ public class S_PlayerAction : MonoBehaviour
     public float range = 0.5f;
     private S_Interactable lastHitInteractable;
     private CircleCollider2D playerCollider;
-    private bool _onPanel = false;
+    private bool _onPanel;
 
     [SerializeField] private JournalManager journalManager;
     [SerializeField] private S_MenuManager menuManager;
@@ -23,6 +23,7 @@ public class S_PlayerAction : MonoBehaviour
 
     private void Awake()
     {
+        _onPanel = false;
         playerMovement = GetComponent<PlayerMovement>();
         playerCollider = GetComponent<CircleCollider2D>();
     }

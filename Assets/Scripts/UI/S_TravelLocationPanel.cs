@@ -15,6 +15,7 @@ public class S_TravelLocationPanel : MonoBehaviour
     {
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
         travelPanel.SetActive(true);
+        GameObject.FindWithTag("Player").GetComponent<S_PlayerAction>().OnPanel = true;
     }
 
     public void CloseTravelMenu()

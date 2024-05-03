@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        canMove = true;
+        canMovePanel = true;
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();

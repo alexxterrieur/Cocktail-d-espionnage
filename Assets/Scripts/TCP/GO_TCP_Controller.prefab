@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameOverType: 0
-  dialogueTxt: {fileID: 0}
 --- !u!1 &4958363896549567033
 GameObject:
   m_ObjectHideFlags: 0
