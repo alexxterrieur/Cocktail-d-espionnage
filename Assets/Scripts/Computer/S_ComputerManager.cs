@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class S_ComputerManager : MonoBehaviour
 {
@@ -88,6 +89,7 @@ public class S_ComputerManager : MonoBehaviour
             S_DialogueManager.Instance.StartDialogue(youtubeProof.clueFinding);
             journalManager.AddProof(youtubeProof);
         }
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OpenYoutubePanel()

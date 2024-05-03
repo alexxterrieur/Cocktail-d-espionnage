@@ -13,7 +13,6 @@ public class S_InteractPatronne : S_Interactable
             if (journalHaveKey)
             {
                 Debug.Log("load Combat Scene");
-
                 S_TCP_Client._TCP_Instance.LoadShaker();
                 SceneManager.LoadScene("FinalFight");
             }
