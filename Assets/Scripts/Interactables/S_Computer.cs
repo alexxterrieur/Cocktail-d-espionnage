@@ -1,14 +1,19 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class S_Computer : S_Interactable
 {
     [SerializeField] List<GameObject> activatedObjects;
     [SerializeField] GameObject computerPanel;
+    private PlayerMovement playerMovement;
+    private S_PlayerAction playerAction;
 
     protected override void Start()
     {
         base.Start();
+        playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        playerAction = GameObject.FindWithTag("Player").GetComponent<S_PlayerAction>();
     }
 
     public override void Interact(JournalManager journalManager)
@@ -32,12 +37,13 @@ public class S_Computer : S_Interactable
 
     public void OpenComputerPanel()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
-
         foreach (GameObject obj in activatedObjects)
         {
             obj.SetActive(false);
         }
+
+        playerMovement.SetCanMovePanel(false);
+        playerAction.OnPanel = true;
 
         computerPanel.SetActive(true);
     }

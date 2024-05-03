@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Sprite spriteBack;
 
     private bool canMove = true;
+    private bool canMovePanel = true;
 
     private Coroutine walkSfx;
 
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (canMove)
+            if (canMove && canMovePanel )
             {
                 mouvementInput = context.ReadValue<Vector2>();
                 if (mouvementInput != Vector2.zero)
@@ -111,6 +112,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetCanMove(bool canMove)
     {
         this.canMove = canMove;
+    }
+
+    public void SetCanMovePanel(bool canMove)
+    {
+        this.canMovePanel = canMove;
     }
 
     private IEnumerator WalkingAudio()

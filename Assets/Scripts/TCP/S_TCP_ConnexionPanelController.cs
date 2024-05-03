@@ -25,9 +25,6 @@ public class S_TCP_ConnexionPanelController : MonoBehaviour
             }
             _buttonList.Clear();
 
-            Debug.Log("create button");
-            Debug.Log(S_TCP_Client._TCP_Instance.HostsList.Count);
-
             foreach (string ip in S_TCP_Client._TCP_Instance.HostsList)
             {
                 GameObject button = Instantiate(_buttonPrefab);

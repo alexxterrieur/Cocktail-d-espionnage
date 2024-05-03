@@ -24,16 +24,15 @@ public class S_ChargeBarController : MonoBehaviour
         _slider.value = S_TCP_Client._TCP_Instance.JoltScore;
         if (_bossSlider.value >= 200)
         {
-            Lose(S_GameOverManager.GameOver.FinalFight);
-            SceneManager.LoadScene("GameOver");
+            Load(S_GameOverManager.GameOver.FinalFight);
         }
         else if (_slider.value >= 200 && S_SaveDataExternal.JournalData.Proofs.Length != 5)
         {
-            Lose(S_GameOverManager.GameOver.WinButLose);
+            Load(S_GameOverManager.GameOver.WinButLose);
         }
         else
         {
-            //WIN
+            Load(S_GameOverManager.GameOver.Win);
         }
     }
 
@@ -48,7 +47,7 @@ public class S_ChargeBarController : MonoBehaviour
         }
     }
 
-    IEnumerator Lose(S_GameOverManager.GameOver lose)
+    IEnumerator Load(S_GameOverManager.GameOver lose)
     {
         yield return new WaitForSecondsRealtime(5);
 
