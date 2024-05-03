@@ -21,6 +21,7 @@ public class S_TravelLocationPanel : MonoBehaviour
     {
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
         travelPanel.SetActive(false);
+        GameObject.FindWithTag("Player").GetComponent<S_PlayerAction>().OnPanel = false;
     }
 
     public void CheckLocationInfo()
@@ -41,5 +42,6 @@ public class S_TravelLocationPanel : MonoBehaviour
         lockedPanel.SetActive(true);
         wrongLocationPanel.SetActive(false);
         travelPanel.SetActive(false);
+        GameObject.FindWithTag("Player").GetComponent<S_PlayerAction>().OnPanel = false;
     }
 }
