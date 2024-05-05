@@ -181,6 +181,13 @@ public class S_Interactable : MonoBehaviour
         lockpickingMenu.OpenCloseMenu(false);
     }
 
+    // If the connection is dead
+    public virtual void UnprocessUnlock()
+    {
+        interactableStruct.isLocked = false;
+        lockpickingMenu.OpenCloseMenu(false);
+    }
+
     public void DisplayPopup(bool isDisplayed)
     {
         popUp.SetActive(isDisplayed);

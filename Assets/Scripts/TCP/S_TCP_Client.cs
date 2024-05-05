@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class S_TCP_Client : MonoBehaviour
 {
@@ -29,11 +30,12 @@ public class S_TCP_Client : MonoBehaviour
     [SerializeField] private int _joltScore = 0;
     [SerializeField] private S_Interactable _interactable = null;
     [SerializeField] private GameObject _TCP_ConnexionPanel;
-    [SerializeField] private bool _TCP_ActiveConnexionPanel;
+    [SerializeField] private bool _TCP_ActiveAlert;
     [SerializeField] private bool _respondConnected = false;
+    [SerializeField] private GameObject _TCP_Alert;
 
     public static S_TCP_Client _TCP_Instance { get; private set; }
-    public bool Connected { get { return !_TCP_ActiveConnexionPanel; } }
+    public bool Connected { get { return !_TCP_ActiveAlert; } }
 
     public List<string> HostsList => _hostsIP;
     public int JoltScore { get { return _joltScore; } set { _joltScore = value; } }
@@ -77,23 +79,27 @@ public class S_TCP_Client : MonoBehaviour
         }
         if(_functionStack.Count > 0)
         {
-            lock (_stackLock) // Acquérir le verrou mutex avant d'accéder à _functionStack
+            lock (_stackLock)
             {
                 foreach(Action function in _functionStack)
                 {
                     function.Invoke();
                 }
-                _functionStack.Clear(); // Effacer la liste après avoir exécuté toutes les actions
+                _functionStack.Clear();
             }
         }
         lock (_PanelLock)
         {
-            if (_TCP_ConnexionPanel.activeInHierarchy != _TCP_ActiveConnexionPanel)
+            if (_TCP_Alert.activeInHierarchy != _TCP_ActiveAlert)
             {
-                _TCP_ConnexionPanel.SetActive(_TCP_ActiveConnexionPanel);
+                _TCP_Alert.SetActive(_TCP_ActiveAlert);
             }
         }
-            
+
+        if (_TCP_ActiveAlert && _interactable != null)
+        {
+            _interactable.UnprocessUnlock();
+        }
     }
 
     void StartMultiDiscovery()
@@ -103,7 +109,6 @@ public class S_TCP_Client : MonoBehaviour
 
         Debug.Log("Recherche de services sur le réseau local...");
 
-        // Envoyer une demande de découverte en diffusion
         byte[] discoverData = Encoding.UTF8.GetBytes("DISCOVER_MY_SERVICE");
         udpClient.Send(discoverData, discoverData.Length, new IPEndPoint(IPAddress.Broadcast, _discoveryPort));
 
@@ -111,12 +116,10 @@ public class S_TCP_Client : MonoBehaviour
 
         while (true)
         {
-            // Attendre la réponse du serveur de découverte
             IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Any, 0);
             byte[] responseData = udpClient.Receive(ref serverEndPoint);
             string response = Encoding.UTF8.GetString(responseData);
 
-            // Analyser la réponse pour obtenir l'adresse IP de l'hôte
             if (response.StartsWith("HOST_IP:"))
             {
                 _hostsIP.Add(response.Substring("HOST_IP:".Length));   
@@ -131,16 +134,16 @@ public class S_TCP_Client : MonoBehaviour
 
         Debug.Log("Recherche de services sur le réseau local...");
 
-        // Envoyer une demande de découverte en diffusion
+        // Submit a broadcast discovery request
         byte[] discoverData = Encoding.UTF8.GetBytes("DISCOVER_MY_SERVICE");
         udpClient.Send(discoverData, discoverData.Length, new IPEndPoint(IPAddress.Broadcast, _discoveryPort));
 
-        // Attendre la réponse du serveur de découverte
+        // Wait for response from discovery server
         IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Any, 0);
         byte[] responseData = udpClient.Receive(ref serverEndPoint);
         string response = Encoding.UTF8.GetString(responseData);
 
-        // Analyser la réponse pour obtenir l'adresse IP de l'hôte
+        // Parse the response to get the host IP address
         if (response.StartsWith("HOST_IP:"))
         {
             _hostIP = response.Substring("HOST_IP:".Length);
@@ -183,15 +186,13 @@ public class S_TCP_Client : MonoBehaviour
         
         Debug.Log("Service trouvé à l'adresse IP : " + _hostIP);
 
-        // Connectez-vous à l'hôte en utilisant l'adresse IP trouvée
-        // Implémentez votre code de connexion ici
-
-        // Connexion au serveur TCP
+        // Connection to TCP server
         _client = new TcpClient();
         _client.Connect(_hostIP, _discoveryPort);
         _stream = _client.GetStream();
 
-        _TCP_ActiveConnexionPanel = false;
+        _TCP_ActiveAlert = false;
+
         lock (_respondConnectLock)
             _respondConnected = true;
 
@@ -208,19 +209,15 @@ public class S_TCP_Client : MonoBehaviour
     private void Listener()
     {
         Debug.Log("Début de l'écoute.");
-        // Tant que la connexion est ouverte, écouter les messages du serveur
         while (_client.Connected)
         {
             try
             {
-                // Lecture des données envoyées par le serveur
                 byte[] buffer = new byte[1024];
                 int bytesRead = _stream.Read(buffer, 0, buffer.Length);
 
-                // Vérifier si des données ont été lues
                 if (bytesRead > 0)
                 {
-                    // Convertir les données en chaîne de caractères et afficher le message
                     string dataReceived = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     Debug.Log("Message perso reçu du serveur : " + dataReceived);
                     if(dataReceived.StartsWith("FUNCTION_NAME:") || dataReceived.StartsWith("LOAD_SCENE:"))
@@ -229,13 +226,12 @@ public class S_TCP_Client : MonoBehaviour
             }
             catch (Exception ex)
             {
-                // Gérer toute exception survenue pendant la lecture
                 Disconnected();
                 Debug.LogError("Erreur lors de la lecture des données du serveur : " + ex.Message);
-                break; // Sortir de la boucle si une erreur survient
+                break;
             }
         }
-        // Une fois la connexion fermée, afficher un message
+        // Once the connection is closed, display a message
         Debug.Log("Connexion au serveur fermée. Arrêt de l'écoute.");
     }
 
@@ -299,7 +295,6 @@ public class S_TCP_Client : MonoBehaviour
 
     private void MegaMindWin()
     {
-        Debug.Log("MegaMind WIN");
         _interactable.UnlockWithDigicode();
         _interactable = null;
     }
@@ -311,7 +306,6 @@ public class S_TCP_Client : MonoBehaviour
 
     private void Shaker()
     {
-        Debug.Log("shake + 1");
         _joltScore++;
     }
 
@@ -342,7 +336,7 @@ public class S_TCP_Client : MonoBehaviour
         _discoveryThread.Start();
         lock (_PanelLock)
         {
-            _TCP_ActiveConnexionPanel = true;
+            _TCP_ActiveAlert = true;
             SearchServer();
         }
         Debug.Log("Disconnected");
@@ -380,10 +374,16 @@ public class S_TCP_Client : MonoBehaviour
         }
     }
 
+    public void OpenCloseConnectionPanel()
+    {
+        _TCP_ConnexionPanel.SetActive(!_TCP_ConnexionPanel.activeInHierarchy);
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
     void OnDestroy()
     {
-        // Fermeture de la connexion
-        if(_stream != null)
+        // Close Connection
+        if (_stream != null)
         {
             _stream.Close();
         }
