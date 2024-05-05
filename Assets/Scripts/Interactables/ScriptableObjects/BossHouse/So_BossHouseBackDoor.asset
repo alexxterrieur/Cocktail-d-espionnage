@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_BossHouseBackDoor
   m_EditorClassIdentifier: 
-  interactableName: "La porte arri\xE8re"
+  interactableName: "la porte arri\xE8re"
   interactableDescription:
-  - 
+  - "Oh, une autre porte \xE0 l'arri\xE8re de la maison."
   lockedInteractableDescription:
   - "Cette porte est ferm\xE9e avec un digicode."
+  - "Il est temps de sortir mon outil de d\xE9verrouillage !"
+  - "Mais si besoin je suis s\xFBr qu'une cl\xE9 est cach\xE9 quelque part dans le
+    jardin !"
   unlockedInteractableDescription:
-  - Cool la porte est ouverte mais j'ai perdu pas mal de temps.
+  - "Ca m'a pris un peu de temps mais j'ai r\xE9ussit !"
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
   key: {fileID: 11400000, guid: 72b5bdb1d53e6dd439b378100cad885a, type: 2}
+  interactableSound: {fileID: 0}

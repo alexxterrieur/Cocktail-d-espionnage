@@ -16,9 +16,10 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 1e0bb9aeaca0ae8439cefbc583cd811e, type: 3}
   itemSound: {fileID: 8300000, guid: 5820bc4d573efe6449823b808d1b014b, type: 3}
   itemFinding:
-  - "Vous avez trouv\xE9 un plan tr\xE8s d\xE9taill\xE9 de la recette de la myst\xE9rieuse
-    boisson."
+  - "Tiens, il y a un papier cach\xE9 entre deux livres."
+  - "J'ai trouv\xE9 un plan tr\xE8s d\xE9taill\xE9 de la recette de la myst\xE9rieuse
+    boisson !"
   - Il y a beaucoup de mots dont je ne comprends pas le sens.
-  - "Vous voyez \xE9crit en tout petit \"ADDICTION\" \"PARESSE +++\"."
-  itemDescription: "Recette d\xE9crivant les novueaux composants chimiques du BlueSloth,
+  - "Il y a \xE9crit en tout petit \"ADDICTION\" \"PARESSE +++\"."
+  itemDescription: "Recette d\xE9crivant les nouveaux composants chimiques du BlueSloth,
     la recette de base n'\xE9tait d\xE9j\xE0 pas saine..."

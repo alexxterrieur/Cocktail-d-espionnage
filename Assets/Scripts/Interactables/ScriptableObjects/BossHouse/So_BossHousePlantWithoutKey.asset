@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: 
   interactableDescription:
-  - Cette plante est encore plus verte que celle dans le bureau.
+  - "Cette plante est tr\xE8s bien taill\xE9 !"
+  - "La patronne doit s\xFBrement embaucher des jardinniers."
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 0}

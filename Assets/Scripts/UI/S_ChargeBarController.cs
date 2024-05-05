@@ -10,6 +10,7 @@ public class S_ChargeBarController : MonoBehaviour
     private int _value;
     [SerializeField] private int _chance;
 
+    private Coroutine gameOverCoroutine;
 
     void Start()
     {
@@ -22,17 +23,18 @@ public class S_ChargeBarController : MonoBehaviour
     void Update()
     {
         _slider.value = S_TCP_Client._TCP_Instance.JoltScore;
-        if (_bossSlider.value >= 200)
+        if (_bossSlider.value >= 200 && gameOverCoroutine == null)
         {
-            Load(S_GameOverManager.GameOver.FinalFight);
+            gameOverCoroutine = StartCoroutine(Load(S_GameOverManager.GameOver.FinalFight));
+            
         }
-        else if (_slider.value >= 200 && S_SaveDataExternal.JournalData.Proofs.Length != 5)
+        else if (_slider.value >= 200 && S_SaveDataExternal.JournalData.Proofs.Length >= 3 && gameOverCoroutine == null)
         {
-            Load(S_GameOverManager.GameOver.WinButLose);
+            gameOverCoroutine = StartCoroutine(Load(S_GameOverManager.GameOver.WinButLose));
         }
-        else
+        else if (_slider.value >= 200 && gameOverCoroutine == null)
         {
-            Load(S_GameOverManager.GameOver.Win);
+            gameOverCoroutine = StartCoroutine(Load(S_GameOverManager.GameOver.Win));
         }
     }
 
@@ -49,7 +51,7 @@ public class S_ChargeBarController : MonoBehaviour
 
     IEnumerator Load(S_GameOverManager.GameOver lose)
     {
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(2);
 
         S_GameOverManager.Instance.GameOverType = lose;
         SceneManager.LoadScene("GameOver");

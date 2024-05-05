@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_DeskCan
+  m_Name: So_Bookshelf
   m_EditorClassIdentifier: 
-  interactableName: Can
+  interactableName: blbliotheque d'enfant
   interactableDescription:
-  - Il y a des canettes ici.
+  - C'est plein de livres pour enfants.
+  - Beaucoup d'histoires avec un petit loup au pull rouge !
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
-  item: {fileID: 11400000, guid: e7554379d1f0dec408449ac283c36437, type: 2}
+  item: {fileID: 11400000, guid: 0555fec72faff654ab113ac8f2ca640f, type: 2}
   clue: {fileID: 0}
-  proof: {fileID: 11400000, guid: 668627c60999287448d6d0f4d13f5fbc, type: 2}
+  proof: {fileID: 11400000, guid: a0eb4cfed53edcb43b4afb90913cd14f, type: 2}
   key: {fileID: 0}
   interactableSound: {fileID: 0}

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +20,7 @@ public class S_SoundManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         DontDestroyOnLoad(gameObject);
@@ -48,9 +49,19 @@ public class S_SoundManager : MonoBehaviour
     public void PlayMusic(string musicClipName, float volume = 1, bool loop = true)
     {
         musicSource.clip = Resources.Load<AudioClip>("Sounds/" + musicClipName);
-        musicSource.volume = volume;
+        musicSource.volume = volume * masterVolume;
         musicSource.loop = loop;
         musicSource.Play();
+    }
+
+    public void ChangeVolume(float volume)
+    {
+        masterVolume = volume;
+
+        foreach(AudioSource source in FindObjectsOfType<AudioSource>())
+        {
+            source.volume = masterVolume;
+        }
     }
 
     public void StopAllSoundsEffects() //don't stop musics

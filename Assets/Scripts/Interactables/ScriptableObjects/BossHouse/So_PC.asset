@@ -10,19 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
-  m_Name: So_BossHouseFrontDoor
+  m_Name: So_PC
   m_EditorClassIdentifier: 
-  interactableName: porte de la maison
+  interactableName: PC patronne
   interactableDescription:
-  - La porte de la maison de la patronne.
-  lockedInteractableDescription:
-  - "Elle est ferm\xE9e."
-  - "Je peux \xEAtre trouver la cl\xE9 dans le jardin ?"
-  - "D'ici je peux aussi voir une autre porte de l'autre c\xF4t\xE9 du jardin."
-  unlockedInteractableDescription:
-  - "Oui ! La cl\xE9 \xE9tait la bonne !"
+  - "Je n'arrive pas a allumer l'\xE9cran."
+  - "Normal, il n'est m\xEAme pas branch\xE9 !"
+  - Et en plus il n'y a pas de tour ...
+  lockedInteractableDescription: []
+  unlockedInteractableDescription: []
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
-  key: {fileID: 11400000, guid: f9d0a1322e2fa484c97db7a42fd5949a, type: 2}
+  key: {fileID: 0}
   interactableSound: {fileID: 0}
