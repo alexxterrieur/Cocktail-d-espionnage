@@ -2902,57 +2902,6 @@ MonoBehaviour:
   wrongLocationPanel: {fileID: 1572329523}
   correctLocation: "353 Bd du Pr\xE9sident Wilson"
   travelInputField: {fileID: 781691748}
---- !u!1 &1441336628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1441336630}
-  - component: {fileID: 1441336629}
-  m_Layer: 0
-  m_Name: DialogueStarter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1441336629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441336628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b865e55423a9fb4fbf4053094f402bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monologue:
-  - Ouf j'ai pu effacer le mail de la patronne avant qu'elle ait eu le temps de le
-    lire mais ...
-  - "C'\xE9tait quoi cette vid\xE9o ?! Je n'ai jamais appr\xE9ci\xE9 la boss mais
-    la c'est vraiment suspect !"
-  - Elle veut dominer le monde ? Je dois trouver plus de preuve.
-  - "*baille* Je verrai \xE7a demain."
---- !u!4 &1441336630
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441336628}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1572329523
 GameObject:
   m_ObjectHideFlags: 0
@@ -11215,7 +11164,6 @@ SceneRoots:
   - {fileID: 681822305}
   - {fileID: 1688761498}
   - {fileID: 2104378907}
-  - {fileID: 1441336630}
   - {fileID: 1710035993}
   - {fileID: 83757545}
   - {fileID: 1932859440}

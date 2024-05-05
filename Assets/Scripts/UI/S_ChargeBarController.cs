@@ -25,6 +25,7 @@ public class S_ChargeBarController : MonoBehaviour
         if (_bossSlider.value >= 200)
         {
             Load(S_GameOverManager.GameOver.FinalFight);
+            
         }
         else if (_slider.value >= 200 && S_SaveDataExternal.JournalData.Proofs.Length != 5)
         {

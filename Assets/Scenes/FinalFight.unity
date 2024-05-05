@@ -494,7 +494,7 @@ VideoPlayer:
   m_VideoClip: {fileID: 32900000, guid: dc4b90cfacc674045ab244efed59d759, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
+  m_TargetCamera: {fileID: 527934091}
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67676af9da47a1d4e91c7407678c24b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songName: zik_hugoval_final
+  songName: MusicBoss
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
