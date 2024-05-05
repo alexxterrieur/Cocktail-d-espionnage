@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b23056a0f209f44db835fbefb512308, type: 3}
   m_Name: So_BossDoor
   m_EditorClassIdentifier: 
-  interactableName: BossDoor
+  interactableName: "porte \xE0 digicode"
   interactableDescription:
-  - 
-  lockedInteractableDescription: []
-  unlockedInteractableDescription: []
+  - "C'est ferm\xE9."
+  - Il y a un digicode.
+  - "Je sens que la patronne est derri\xE8re..."
+  lockedInteractableDescription:
+  - Je dois utiliser mon outil de deverrouillage si je veux l'ouvrir.
+  unlockedInteractableDescription:
+  - "J'ai r\xE9ussit !"
+  - "Mais tant que je n'aurai pas bien fouill\xE9 la zone ce serait du suicide de
+    confronter la patronne maintenant."
   item: {fileID: 0}
   clue: {fileID: 0}
   proof: {fileID: 0}
-  key: {fileID: 11400000, guid: e7554379d1f0dec408449ac283c36437, type: 2}
+  key: {fileID: 11400000, guid: 72b5bdb1d53e6dd439b378100cad885a, type: 2}
   interactableSound: {fileID: 0}

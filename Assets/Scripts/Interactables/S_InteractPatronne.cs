@@ -10,6 +10,11 @@ public class S_InteractPatronne : S_Interactable
     {
         if (isInteractible && !S_DialogueManager.Instance.GetIsDialogueActive())
         {
+            if (interactableData.interactableDescription[0] != string.Empty)
+            {
+                S_DialogueManager.Instance.StartDialogue(interactableData.interactableDescription);
+            }
+
             if (journalHaveKey)
             {
                 Debug.Log("load Combat Scene");

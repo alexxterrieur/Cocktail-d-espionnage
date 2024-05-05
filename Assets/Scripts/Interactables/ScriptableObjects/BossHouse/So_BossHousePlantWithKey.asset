@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableName: Boss House Plant With Key
   interactableDescription:
-  - Cette plante est encore plus verte que celle dans le bureau.
-  - "Vous voyez un objet brillant \xE0 nouveau."
+  - "Cette plante \xE0 l'air moins bien taill\xE9 que les autres."
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 11400000, guid: f9d0a1322e2fa484c97db7a42fd5949a, type: 2}
