@@ -3247,6 +3247,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
+--- !u!114 &156358532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6436536169782118853, guid: 1b8dee32b06f95b449f70c002f9df229, type: 3}
+  m_PrefabInstance: {fileID: 156358531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc164401aec6abd488986d04fbee369a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &194455621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3910408783864535239, guid: 156e1a180faa44f41b439f251a38e524, type: 3}
@@ -22888,7 +22899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableData: {fileID: 11400000, guid: acbffaebd87752843a4d0cde4a530ac8, type: 2}
   popUp: {fileID: 194455621}
-  lockpickingMenu: {fileID: 0}
+  lockpickingMenu: {fileID: 156358532}
   doesTeleport: 1
   teleport: {fileID: 1774897405}
 --- !u!114 &1774897405

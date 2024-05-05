@@ -15,10 +15,9 @@ MonoBehaviour:
   interactableName: toilette de la patronne
   interactableDescription:
   - C'est les cabinets.
-  - Tiens, qu'est ce qu'il y a dedans ?
-  - .... !?
-  - Mais qui a mis un artichaut dans les toilettes ?!
-  - Je ne vais pas y toucher...
+  - Il n'y a rien dedans.
+  - "Pas comme si j'allais mettre la main dedans, je ne suis pas dans un jeux vid\xE9o
+    !"
   lockedInteractableDescription: []
   unlockedInteractableDescription: []
   item: {fileID: 0}

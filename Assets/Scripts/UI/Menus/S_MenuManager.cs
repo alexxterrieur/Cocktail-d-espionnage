@@ -67,7 +67,7 @@ public class S_MenuManager : MonoBehaviour
         {
             if (S_SoundManager.Instance != null)
             {
-                S_SoundManager.Instance.masterVolume = volume;
+                S_SoundManager.Instance.ChangeVolume(volume);
                 volumeSliderValue.SetText("Volume : " + Mathf.Round(S_SoundManager.Instance.masterVolume * 100));
             }
             else
