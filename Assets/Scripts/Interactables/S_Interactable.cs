@@ -184,7 +184,6 @@ public class S_Interactable : MonoBehaviour
     // If the connection is dead
     public virtual void UnprocessUnlock()
     {
-        interactableStruct.isLocked = false;
         lockpickingMenu.OpenCloseMenu(false);
     }
 
